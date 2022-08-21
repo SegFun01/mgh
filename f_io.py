@@ -2,7 +2,7 @@
 # Otras funciones varias
 import math
 # Hacer las funciones de impresión de salida aquí
-# 
+# Hacer la función de revisión topológica aquí
 
 def uso():
    print("")

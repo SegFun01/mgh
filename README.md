@@ -9,6 +9,7 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 <ol>
 <li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
 <li>Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
+<li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 <li>El formato del archivo de entrada es tal cual sigue:
 ---
 <pre>

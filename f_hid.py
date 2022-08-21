@@ -1,52 +1,56 @@
-# Archivo con las funciones hidráulicas del método
+# Archivo con las funciones hidráulicas del método MGH
+#Carlos Camacho Agosto 2022
 # 
 import math
 
 def calculaDesbalance(Q, q, t):
+    #Calcula el desbalance de caudales en cada iteración en todos los nudos
     des = 0
     for i in range(t):
         if  abs(q[i]-Q[i]) > des:
-            des = abs(q[i]-Q[i])
+            des = abs(q[i]-Q[i])      #¿esto debe ser en valor absoluto? -> no importa, se usa para parar
     return des        
         
 def area(D):
-    """Calcula el area de la tuberia en m2 con diametro en mm"""
+    #Calcula el area de la tuberia en m2 con diametro en mm
     a = D * D * math.pi / 4 / 1000 / 1000
     return a
     
 def ve(q,a):
-    """ Calcula la velocidad del flujo a partir del cauda y el area"""
+    #Calcula la velocidad del flujo a partir del caudal y el area
     v = q / a
     return v
 
 def reynolds(v,d,vis):
-    """Calcula el numero de reynolds para la condicion de flujo dada"""
+    #Calcula el numero de reynolds para la condicion de flujo dada
     re = abs( v * d / 1000 / vis )
     return re
 
 def fSJ(k, d, R):
-    """Calcula el factor de friccion con Swamee Jain"""
+    #Calcula el factor de friccion con Swamee Jain, se puede mejorar con Colebrook White
     Re = pow(abs(R),0.9)
     f = 0.25 / ( math.log10(k/d/3.7 + 5.7/Re)**2)
     return f
 
 def hfr(f,L,v,d):
-    """Calcula las perdidas por friccion en un tramo """
+    #Calcula las perdidas por friccion en un tramo
     h = f * L * (v**2) / (d/1000) / 19.62
     return h
     
 def hme(km, v):
-    """Calcula las perdidas locales de un tramo """
+    #Calcula las perdidas locales de un tramo
     h = km * (v**2) / 19.62
     return h
     
 def alf(h,q):
+   #Calcula el valor de alfa dividiendo h entre el caudal al cuadrado
    q = float(abs(q))
    a = h / (q**2)
    return a
-       
+
+# al parecer esta función reA11 no va a ser necesaria porque se usan Construir_A11I y Consrtuir_A11 ?????       
 def reA11(a,q,t):
-    """Reescribe la matriz alfa con valores de cada iteracion"""
+    #Reescribe la matriz alfa con valores de cada iteracion
     mat = []
     for i in range(t):
         mat.append([])
@@ -57,7 +61,7 @@ def reA11(a,q,t):
                 mat[i].append(0)  
     return mat
     
-##### estas están en edición
+##### estas funciones están en edición
 def construir_A11I(a,q,t):
    # devuelve una nueva matriz A11I -> sin los valores beta y gama
    m=np.zeros([t,t],dtype=float)
