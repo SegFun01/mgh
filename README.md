@@ -11,7 +11,7 @@ Características
 
 3. El formato del archivo de entrada es tal cual sigue:
 ---
-<p>
+<pre>
 Libro de Saldariaga                           TITULO
 Ing. Carlos Camacho                           AUTOR
 28/01/2019                                    FECHA
@@ -31,7 +31,7 @@ V0.01                                         VERSION
 4,  1,  4,  200,  100,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
 5,  5,  4,  600,  200,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
 6,  0,  5,  300,  250,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-<p>
+</pre>
 
 4. Tipos de nudo: 
   a) NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido
