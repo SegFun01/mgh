@@ -146,8 +146,8 @@ for i in range(t):
     hf[i]=hid.hfr(f[i], l[i], v[i], d[i]) 
     hm[i]=hid.hme(km[i],v[i])
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])
-    A11[i,i]=alfa[i]*Q[i]  # falta considerar beta & gama
-    A11I[i,i]=alfa[i]*Q[i] 
+    #A11[i,i]=alfa[i]*Q[i]  # falta considerar beta & gama
+    #A11I[i,i]=alfa[i]*Q[i] 
 
 # Revisión de la topología de nudo a tramo
 # Se debe asegurar que todos los nodos estén conectados
@@ -231,15 +231,42 @@ print(A11)
 
 # Inicia el proceso de iteración
 #-------------------------------
-dq, it = 1000, 0                      # Se denine dq en 100 e it en 0 para iniciar iteraciones
-while dq > imbalance and it < MaxIt:
+dqT, it = 1000, 0                      # Se denine dqT en 1000 e it en 0 para iniciar iteraciones
+while dqT > imbalance and it < MaxIt:
+  A11I=hid.construir_A11I(alfa,Q,t)
+  A11=hid.construir_A11(A11I,t,es,op,e,de,a,hf,hm,H,Q,modo)
   NA11I= np.matmul(N,A11I)
   NA11Iinv=np.linalg.inv(NA11I)
+  A21NA11Iinv= np.matmul(A21,NA11Iinv)
+  A21NA11IinvA12= np.matmul(A21NA11Iinv,A12)
+  A11Q= np.matmul(A11,Q)
+  A10Ho= np.matmul(A10,Ho)
+  A11QA10Ho=np.add(A11Q,A10Ho)
+  M2= np.matmul(A21NA11Iinv,A11QA10Ho)   #A21NA11IinvA11QA10Ho
+  M1= A21NA11IinvA12*(-1)                #signo negativo de la ecuación
+  A21Q=np.matmul(A21,Q)
+  A21Q=np.subtract(A21Q,q)
+  M2=np.subtract(M2-A21Q)
+  Hi=np.matmul(M1, M2)
+  A12Hi= np.matmul(A12,Hi)
+  A12HiA10Ho= np.add(A12Hi,A10Ho)
+  M3= np.matmul(NA11Iinv,A12HiA10Ho)    #NA11IinvA12HiA10Ho
+  NA11IinvA11= np.matmul(NA11Iinv,A11)
+  INA11IinvA11= np.subtract(I,NA11IinvA11)
+  M4=np.matmul(INA11IinvA11,Q)          #INA11IinvA11Q
+  Qi=np.subtract(M4, M3)
+  dq=np.subtract(np.matmul(A21,Qi),q)
+  dqT=hid.calculaDesbalance(dq, t)
   print("NA11I")
   print(NA11I)
   print("NA11Iinv")
   print(NA11Iinv)
+  print("A11QA10Ho")
+  print(A11QA10Ho)
   # se deben procesar las matrices...
   it = MaxIt  # esto es para hacer solo una iteración de prueba
-
+  #para volver a iterar se debe copiar Qi y Hi en Q y H
+  Q=Qi
+  H=Hi
+  #fin del while
 #EOF

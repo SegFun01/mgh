@@ -3,12 +3,12 @@
 # 
 import math
 
-def calculaDesbalance(Q, q, t):
-    #Calcula el desbalance de caudales en cada iteración en todos los nudos
+def calculaDesbalance(dq, t):
+    #Calcula el MAYOR desbalance de caudales en cada iteración de todos los nudos
     des = 0
     for i in range(t):
-        if  abs(q[i]-Q[i]) > des:
-            des = abs(q[i]-Q[i])      #¿esto debe ser en valor absoluto? -> no importa, se usa para parar
+        if  abs(dq[i]) > des:
+            des = abs(dq[i])      #¿esto debe ser en valor absoluto? -> no importa, se usa como criterio de fin
     return des        
         
 def area(D):
