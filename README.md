@@ -3,10 +3,10 @@
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 <br><br>
 
 <h3>Objetivos</h3>
-El objetivo de este sofware contar con una herramienta de docencia en los curso de hidráulica y mecánica de fluidos, y servir de base para modelos en tiempo real para toma desiciones a través de herramientas SCADA. <br>  No pretende ser un software poderoso y potente como EPANet, sino una herramienta liviana para integrar en SCRIPTS de python para usar con modelos diagramáticos y simples.  <br>Un objetivo adicional es podar contar con una herramienta para predecir desabastecimiento, a partir de datos en tiempo real.<br>
+El objetivo de este sofware contar con una herramienta de docencia en los curso de hidráulica y mecánica de fluidos, y servir de base para modelos en tiempo real para toma desiciones a través de herramientas SCADA. <br>  No pretende ser un software poderoso y potente como EPANet, sino una herramienta liviana para integrar en SCRIPTS de python para usar con modelos diagramáticos y simples.  <br>Un objetivo adicional es podar contar con una herramienta para predecir desabastecimiento, a partir de datos en tiempo real.<br><br>
 
-<h3>Descripción del método</h3>
-En redacción <br>
+<h3>Descripción</h3>
+En redacción <br><br>
 
 <h4>Características</h4>
 <ol>
