@@ -234,8 +234,11 @@ print(A11)
 dq, it = 1000, 0                      # Se denine dq en 100 e it en 0 para iniciar iteraciones
 while dq > imbalance and it < MaxIt:
   NA11I= np.matmul(N,A11I)
+  NA11Iinv=np.linalg.inv(NA11I)
   print("NA11I")
   print(NA11I)
+  print("NA11Iinv")
+  print(NA11Iinv)
   # se deben procesar las matrices...
   it = MaxIt  # esto es para hacer solo una iteración de prueba
 
