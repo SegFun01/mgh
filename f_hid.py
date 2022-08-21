@@ -98,7 +98,7 @@ def construir_A11(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
               LGHobj = cota1 + op[i]
               LGH1 = H[j]
               LGHv = LGH1 - 0.5*(hm[i]+hf[i])
-              if LGHv < $LGHobj: 
+              if LGHv < LGHobj: 
                   g = LGHobj-LGHv
               else: 
                  q = 0 
