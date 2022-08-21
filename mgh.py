@@ -119,7 +119,7 @@ alfa=np.zeros([t],dtype=float)     # valores alfa de cada tramo
 beta=np.zeros([t],dtype=float)     # valores beta de cada tramo para usar en A11
 gama=np.zeros([t],dtype=float)     # valores gama de cada tramo para usar en A11
 
-# Carga de los datos en las matrices a partir de los vecores de lectura
+# Carga de los datos en las matrices a partir de los vectores de lectura
 # ---------------------------------------------------------------------
 # Nota: esto se podría poner en una función en f_io.py
 #

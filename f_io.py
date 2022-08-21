@@ -1,6 +1,8 @@
 # f_var.py
 # Otras funciones varias
 import math
+# Hacer las funciones de impresión de salida aquí
+# 
 
 def uso():
    print("")
