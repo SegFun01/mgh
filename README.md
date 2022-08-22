@@ -46,7 +46,7 @@ La anterior ecuación es la de conservación de energía.<br><br>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
 <table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table><br>
 Las ecuaciones (6) y (7) que se deben resolver en el método, se pueden escribir como:<br>
-<img src="img/f08.png"></td><td>(8)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f08.png"></td><td>(8)</td></tr></table><br>
 La anterior ecuación es no-lineal y debe sesolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
 <table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr></table><br>
