@@ -3,7 +3,7 @@
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 
 <hr>
 Prof. Carlos Camacho Soto, Universidad de Costa Rica<br>
-<h4>Licencia</h4>
+<h3>Licencia</h3>
 Aún no me decido, pero seguramente GPL 3 <br><br>
 <h3>Objetivos</h3>
 <ul>
@@ -72,7 +72,7 @@ Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (
 <br>
 
 <br>
-<h4>Características</h4>
+<h3>Características</h3>
 <ol>
 <li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
 <li>Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
@@ -123,11 +123,11 @@ V0.01                                         VERSION
   <li>detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
   </ul></ol>
 
-<h4>Estado Actual</h4>
+<h3>Estado Actual</h3>
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/ <br>
 Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
 
-<h4>Por desarrollar</h4>
+<h3>Por desarrollar</h3>
 <ol>
   <li>Se debe desarrollar una interfaz de usuario para construir cada modelo, y hacer los archivos de entrada.
   <li>Se debe trabajar en el desarrollo de un tramo tipo "Válvula de retención o Check"
