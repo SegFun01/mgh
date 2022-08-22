@@ -100,7 +100,7 @@ V0.01
 5,  5,  4,  700,  200,  0.0015,  0,  TA, -    
 6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
 </pre>
-<h3>Descripción del formato</h3>
+<h4>Descripción del formato</h4>
 La descripción de cada línea se hará con base en su número:
 <ol type="1">
 <li>TÍTULO: del archivo o nombre de la red o proyecto
