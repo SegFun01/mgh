@@ -102,7 +102,7 @@ V0.01
 </pre>
 <h3>Descripción del formato</h3>
 La descripción de cada línea se hará con base en su número:
-<ol>
+<ol type="1">
 <li>TÍTULO: del archivo o nombre de la red o proyecto
 <li>AUTOR: autor del modelo
 <li>FECHA: de la modelación
