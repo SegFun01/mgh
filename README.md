@@ -8,7 +8,58 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 <h3>Descripción</h3>
 En redacción <br><br>
 El método se basa en que existe flujo permanente y se cumplen la conservación de energía en los nudos.<br>
-<img src="f01.png"><br>
+<img src="img/f01.png">(1)<br>
+Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
+<img src="img/f02.png">(2)<br>
+En cada tramo toda la energía se consume en pérdidas:<br>
+<img src="img/f03.png">(3)<br>
+Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:<br>
+<img src="img/f04.png">(4)<br>
+Por lo tanto &alpha; será:<br>
+<img src="img/f05.png">(5)<br><br>
+<h3>Definición de variables y matrices</h3><br>
+<ul>
+<li>NT: número tuberías en la red (t)
+<li>ND: número de nudos de demanda (carga desconocida) (n)
+<li>NC: número de nudos de carga fija (carga conocida: tanques y embalses) (ns)
+<li>[A12]: matriz de topología nudo a tramo para los nudos de demanda [t,n]
+<li>[A10]: matriz topológina nudo-tramo de los nudos de carga fija [t,ns]
+<li>[Q]: vector de caudales en los tramos [t,1]
+<li>[H]: vector de cargas deconocidas en los nudos de demanda [n,1]
+<li>[Ho]: vector de cargas conocidas en los nudos de carga fija [ns,1]
+<li>[A11]: matriz con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal [t,t]
+<li>[q]: vector de demandas en los nudos [n,1]
+<li>[A21]: matriz transpuesta de A12 requerida para operaciónes de multiplicación
+<li>[N]: matriz de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
+<li>[A11]': matriz con los valores &alpha;*Q en la diagonal (no inluye el efecto de &beta; y &gamma;)
+<li>[dE]: vector que representa el desbalance de energía en cada tramo de la red [t,1]
+<li>[dq]: vector que representa el desbalance de caudal en cada nudo de la red [n,1]
+<li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la siguiente
+<li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la siguiente
+<li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
+</ul>
+La pérdida de carga en cada tramo de la red es:<br>
+<img src="img/f06.pg">(6)<br>
+La anterior ecuación es la de conservación de energía.<br><br>
+La ecuación de continuidad de caudal en los nodos está dada por:<br>
+<img src="img/f07.png"> (7)<br>
+Las ecuaciones (6) y (7) que se deben resolver en el método, se pueden escribir como:<br>
+<img src="img/f08.png">(8)<br>
+La anterior ecuación es no-lineal y debe sesolverse por medio de un algoritmo de iteración. <br>
+En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
+<img src="img/f09.png">(9)<br>
+<img src="img/f10.png">(10)<br>
+En los tramos y nudos, la variación del caudal en erl tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
+<img src="img/f11.png">(11)<br>
+<img src="img/f12.png">(12)<br>
+Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
+<img src="img/f13.png">(13)<br>
+Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, en forma iterativa, siendo la iteración i+1 la sucesora de la iteración i:<br>
+<img src="img/f14.png">(14)<br>
+<img src="img/f15.png">(15)<br>
+<br>
+
+<br>
 <h4>Características</h4>
 <ol>
 <li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
