@@ -78,7 +78,7 @@ Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (
 <li>Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
 <li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 <li>Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
-<li>El formato del archivo de entrada es tal cual sigue:
+<li>El formato del archivo de entrada es el que sigue:
 <pre>
 Red de ejemplo 1                              
 Ing. Carlos Camacho                           
@@ -106,7 +106,7 @@ La descripción de cada línea se hará con base en su número:
 <li>TÍTULO: del archivo o nombre de la red o proyecto
 <li>AUTOR: autor del modelo
 <li>FECHA: de la modelación
-<li>VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturtno, etc
+<li>VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturno, etc
 <li>VISCOSIDAD, DESBALANCE, ITERACIONES: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales y Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones
 <li>NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
 <li>NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
