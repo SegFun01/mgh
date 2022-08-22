@@ -34,7 +34,7 @@ Por lo tanto &alpha; será:<br>
 <li>ND: número de nudos de demanda (carga desconocida) (n)
 <li>NC: número de nudos de carga fija (carga conocida: tanques y embalses) (ns)
 <li>[A12]: matriz de topología nudo a tramo para los nudos de demanda [t,n]
-<li>[A10]: matriz topológina nudo-tramo de los nudos de carga fija [t,ns]
+<li>[A10]: matriz topológica nudo-tramo de los nudos de carga fija [t,ns]
 <li>[Q]: vector de caudales en los tramos [t,1]
 <li>[H]: vector de cargas deconocidas en los nudos de demanda [n,1]
 <li>[Ho]: vector de cargas conocidas en los nudos de carga fija [ns,1]
@@ -77,29 +77,52 @@ Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (
 <li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
 <li>Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
 <li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
-<li>Realiza la modelacición en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
+<li>Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 <li>El formato del archivo de entrada es tal cual sigue:
 <pre>
-Libro de Saldariaga                           TITULO
-Ing. Carlos Camacho                           AUTOR
-28/01/2019                                    FECHA
-V0.01                                         VERSION
-1.141E-6,1.0E-5,40                            VISCOSIDAD DINÁMICA, TOLERANCIA, ITERACIONES
-1,5,7,1                                       NUDOS DE CARGA, NUDOS DE DEMANDA, TRAMOS, FACTOR DE DEMANDA GLOBAL
-0,100,110,*                                   NUDO DE CARGA: NUMERO, ELEVACIÓN, CARGA, DEMANDA 
-1,  90,  60,1                                 NUDO DE DEMANDA: NUMERO, ELEVACIÓN, DEMANDA, FACTOR
-2,  90,  -40,1                                NUDO DE DEMANDA: NUMERO, ELEVACIÓN, DEMANDA, FACTOR 
-3,  90,  30,1                                 NUDO DE DEMANDA: NUMERO, ELEVACIÓN, DEMANDA, FACTOR
-4,  90,  30,1                                 NUDO DE DEMANDA: NUMERO, ELEVACIÓN, DEMANDA, FACTOR
-5,  90,  40,1                                 NUDO DE DEMANDA: NUMERO, ELEVACIÓN, DEMANDA, FACTOR
-0,  0,  1,  500,  250,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-1,  1,  2,  400,  150,  0.0015,  10,  TA, -   TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-2,  3,  2,  200,  100,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-3,  4,  3,  400,  150,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-4,  1,  4,  200,  100,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-5,  5,  4,  600,  200,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
-6,  0,  5,  300,  250,  0.0015,  0,  TA, -    TRAMO: NUMERO, DESDE, HASTA, LONGITUD, DIAMETRO, Ks, KL, TIPO, OPCIONES
+Red de ejemplo 1                              
+Ing. Carlos Camacho                           
+28/01/2019                                    
+V0.01                                         
+1.007E-6,1.0E-5,40                            
+1,5,7,1                                       
+0,100,110,*                                    
+1,  90,  60,1                                 
+2,  90,  20,1                               
+3,  90,  30,1                                 
+4,  90,  30,1                                 
+5,  90,  40,1                                 
+0,  0,  1,  500,  250,  0.0015,  2,  TA, -    
+1,  1,  2,  500,  150,  0.0015,  1,  TA, -   
+2,  3,  2,  200,  100,  0.0015,  2,  TA, -    
+3,  4,  3,  400,  150,  0.0015,  3,  TA, -    
+4,  1,  4,  200,  100,  0.0015,  8,  TA, -    
+5,  5,  4,  700,  200,  0.0015,  0,  TA, -    
+6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
 </pre>
+<h3>Descripción del formato</h3>
+La descripción de cada línea se hará con base en su número:
+<ol>
+<li>TÍTULO: del archivo o nombre de la red o proyecto
+<li>AUTOR: autor del modelo
+<li>FECHA: de la modelación
+<li>VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturtno, etc
+<li>VISCOSIDAD, DESBALANCE, ITERACIONES: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales y Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones
+<li>NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
+<li>NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
+<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones 
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+</ol>
 
 <li>Tipos de nudo: <ul>
   <li> NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido.
