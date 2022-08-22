@@ -41,7 +41,7 @@ Por lo tanto &alpha; será:<br>
 <li>[M1],[M2],[M3],[M4]: matrices intermedias del cálculo 
 </ul>
 La pérdida de carga en cada tramo de la red es:<br>
-<img src="img/f06.png"></td><td>(6)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table><br>
 La anterior ecuación es la de conservación de energía.<br><br>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
 <table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table><br>
