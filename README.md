@@ -7,10 +7,10 @@ Prof. Carlos Camacho Soto, Universidad de Costa Rica<br>
 Aún no me decido, pero seguramente GPL 3 <br><br>
 <h3>Objetivos</h3>
 <ul>
-<li>El objetivo de este sofware contar con una herramienta de docencia en los curso de hidráulica y mecánica de fluidos
+<li>Implementar una herramienta de docencia sobre diseño y análisis de redes hidráulicas, específicamente en los cursos de hidráulica y mecánica de fluidos
 <li>Servir de base para modelos en tiempo real para toma desiciones a través de herramientas SCADA. 
 <li>No pretende ser un software poderoso y potente como EPANet, sino una herramienta liviana para integrar en SCRIPTS de python para usar con modelos diagramáticos y simples.
-<li>Adicionalmente, contar con una herramienta para predecir desabastecimiento, a partir de datos en tiempo real.
+<li>Poder montar SCRIPTs en un SCADA que permitan predecir el funcionamiento de un acueducto, modelado como una red diagramática a partir de datos en tiempo real: Predecir horarios de desabastecimiento, recuperación de los sistemas y resultado de posibles acciones operativas y maniobras de campo.
 <li>Contar con una herramienta para solución rápida de ejercicios de los cursos de Mecánica de Fluidos e Hidráulica
 </ul>
 <br>
