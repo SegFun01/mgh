@@ -3,7 +3,7 @@
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 <br><br>
 
 <h3>Objetivos</h3>
-El objetivo de este sofware contar con una herramienta de docencia en los curso de hidráulica y mecánica de fluidos, y servir de base para modelos en tiempo real para toma desiciones a través de herramientas SCADA. <br>  No pretende ser un software poderoso y potente como EPANet, sino una herramienta liviana para integrar en SCRIPTS de python para usar con modelos diagramáticos y simples.  <br>Un objetivo adicional es podar contar con una herramienta para predecir desabastecimiento, a partir de datos en tiempo real.<br><br>
+El objetivo de este sofware contar con una herramienta de docencia en los curso de hidráulica y mecánica de fluidos, y servir de base para modelos en tiempo real para toma desiciones a través de herramientas SCADA. <br>  No pretende ser un software poderoso y potente como EPANet, sino una herramienta liviana para integrar en SCRIPTS de python para usar con modelos diagramáticos y simples.  <br>Un objetivo adicional es contar con una herramienta para predecir desabastecimiento, a partir de datos en tiempo real.<br><br>
 
 <h3>Descripción</h3>
 <br>Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
@@ -114,6 +114,8 @@ V0.01                                         VERSION
   </ul></ol>
 
 <h4>Estado Actual</h4>
+El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/ <br>
+Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
 
 <h4>Por desarrollar</h4>
 <ol>
