@@ -2,7 +2,7 @@
 <h2>Método del Gradiente Hidráulico</h2>
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 
 <hr>
-Prof. Carlos Camacho Soto, Universidad de Costa Rica<br>
+Prof. Carlos Camacho Soto<br>
 <h3>Licencia</h3>
 Aún no me decido, pero seguramente GPL 3 <br><br>
 <h3>Objetivos</h3>
