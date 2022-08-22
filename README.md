@@ -7,7 +7,7 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 
 <h3>Descripción</h3>
 En redacción <br><br>
-El método se basa en que existe flujo permanente y se cumplen la conservación de energía en los nudos.<br>
+El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos.<br>
 <img src="img/f01.png">(1)<br>
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
 <img src="img/f02.png">(2)<br>
@@ -37,6 +37,7 @@ Por lo tanto &alpha; será:<br>
 <li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la siguiente
 <li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la siguiente
 <li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
+<li>[M1],[M2],[M3],[M4]: matrices intermedias del cálculo 
 </ul>
 La pérdida de carga en cada tramo de la red es:<br>
 <img src="img/f06.pg">(6)<br>
