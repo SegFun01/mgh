@@ -7,6 +7,7 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 
 <h3>Descripción</h3>
 En redacción <br><br>
+El método se basa en que existe flujo permanente y se cumplen la conservación de energía en los nudos.
 
 <h4>Características</h4>
 <ol>
@@ -15,7 +16,6 @@ En redacción <br><br>
 <li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 <li>Realiza la modelacición en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 <li>El formato del archivo de entrada es tal cual sigue:
----
 <pre>
 Libro de Saldariaga                           TITULO
 Ing. Carlos Camacho                           AUTOR
