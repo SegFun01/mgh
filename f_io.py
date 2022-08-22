@@ -22,5 +22,5 @@ def uso():
    print("La salida del programa va dirigida a la consola: \"stdout\".")
    print("Para redirigir la salida use entubamiento con > o con >>")
    print("")
-   print("Ejemplo: python mgh.py Ejemplo.mgh -v > Ejemplo.mgh.out")
+   print("Ejemplo: python mgh.py ./input/default.mgh -v > ./output/default.mgh.out")
    print("")
