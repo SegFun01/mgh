@@ -8,7 +8,7 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 <h3>Descripción</h3>
 En redacción <br><br>
 El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos.<br>
-<table><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
 <img src="img/f02.png">(2)<br>
 En cada tramo toda la energía se consume en pérdidas:<br>
