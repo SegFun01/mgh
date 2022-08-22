@@ -159,6 +159,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
     <li>Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
   <li>Mostrar licencia y versión por medio de una opción, ejm: mgh -lv
   <li>Entrada y salida de datos por medio de archivos JSON
+  <li>Falta revisar si el archivo de entrada existe y si se puede abrir...
   </ol>
   
  
