@@ -46,19 +46,19 @@ La anterior ecuación es la de conservación de energía.<br><br>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
 <table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table><br>
 Las ecuaciones (6) y (7) que se deben resolver en el método, se pueden escribir como:<br>
-<table border="0"><tr><td><img src="img/f08.png"></td><td>(8)</td></tr></table><br>
-La anterior ecuación es no-lineal y debe sesolverse por medio de un algoritmo de iteración. <br>
+<table border="0"><tr><td><img src="img/f08.png"></td><td>(8)</td></tr></table>
+La anterior ecuación es no-lineal y debe resolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
-<table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr></table><br>
-<table border="0"><tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table><br>
-En los tramos y nudos, la variación del caudal en erl tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
-<table border="0"><tr><td><img src="img/f11.png"></td><td>(11)</td></tr></table><br>
-<table border="0"><tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr>
+<tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table><br>
+En los tramos y nudos, la variación del caudal en el tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
+<table border="0"><tr><td><img src="img/f11.png"></td><td>(11)</td></tr>
+<tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table><br>
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
 <table border="0"><tr><td><img src="img/f13.png"></td><td>(13)</td></tr></table><br>
 Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, en forma iterativa, siendo la iteración i+1 la sucesora de la iteración i:<br>
-<table border="0"><tr><td><img src="img/f14.png"></td><td>(14)</td></tr></table><br>
-<table border="0"><tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f14.png"></td><td>(14)</td></tr>
+<tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table><br>
 <br>
 
 <br>
