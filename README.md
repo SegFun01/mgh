@@ -147,7 +147,7 @@ La descripción de cada línea se hará con base en su número:
   </ul></ol>
 
 <h3>Estado Actual</h3>
-El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/ <br>
+El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
 Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
 
 <h3>Por desarrollar</h3>
