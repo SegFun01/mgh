@@ -26,7 +26,7 @@ km= []  # coeficiente de perdidas locales del tramo
 es= []  # estado del tramo: TA abierto, TC cerrado, BO bomba, VRP válvula, etc
 tmp= [] # temporal para guardar valores de las opciones del tramo
 op=[]   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
-# En esta lista de variables globales faltaN: titulo,autor,fecha,version,viscosidad,imbalance,MaxIt,ns,n,t,factor
+# En esta lista de variables globales faltan: titulo,autor,fecha,version,viscosidad,imbalance,MaxIt,ns,n,t,factor
 #
 # Leer parametros de entrada, archivo y rellenar vectores
 # ------------------------------------------------------
@@ -270,4 +270,5 @@ while dqT > imbalance and it < MaxIt:
   Q=Qi
   H=Hi
   #fin del while
+  #io.imprime_salida_normal() / io.imprimesalida_quiet
 #EOF

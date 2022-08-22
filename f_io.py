@@ -114,3 +114,32 @@ def imprime_salida_verbose(final,i):
    else:
       print("Imprime matrices y vectotres de iteración i")
 
+def revisar_topología(fin):
+   # Revisión de la topología de nudo a tramo
+   # Se debe asegurar que todos los nodos estén conectados
+   global de,a,nn,t,n,ns,titulo,autor,fecha,version
+   notOK=[]
+   errores=0
+   for i in range(n+ns):
+      nudosOK=False
+      for j in range(t):
+         if de[j]==nn[i] or a[j]==nn[i]:
+            nudosOK=True
+      if nudosOK==False:
+         notOK.append(nn[i])
+         errores= errores+1       
+   if errores>0:
+      print("--")
+      print("MÉTODO DEL GRADIENTE HIDRÁULICO")
+      print("--")
+      print("Archivo de entrada:", fin)
+      print("Titulo:     ",titulo)
+      print("Autor:      ",autor)
+      print("Fecha:      ",fecha)
+      print("Versión:    ",version)
+      print("--")
+      print("Error en la topología de nudos y tramos: nudos sin conexión")
+      print("Revise los siguientes nudos: ",notOK)
+      print("--")
+      sys.exit()
+   #print("Topología de nudos OK")
