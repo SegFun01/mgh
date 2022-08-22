@@ -7,8 +7,8 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 
 <h3>Descripción</h3>
 En redacción <br><br>
-El método se basa en que existe flujo permanente y se cumplen la conservación de energía en los nudos.
-
+El método se basa en que existe flujo permanente y se cumplen la conservación de energía en los nudos.<br>
+<img src="f01.png"><br>
 <h4>Características</h4>
 <ol>
 <li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
