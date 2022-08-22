@@ -101,4 +101,16 @@ def cargar_desde_archivo(s_argv):
      es.append(valores[7])    
      op.append(valores[8].strip())
    #Fin de cargar_desde_archivo()  
-   
+
+def imprime_salida_quiet():
+   print("quiet: Imprime solo [Q] y [H] finales")
+
+def imprime_salida_normal():
+      print("normal: Imprime reporte final")   
+
+def imprime_salida_verbose(final,i):
+   if final:
+      io.imprime_salida_normal()
+   else:
+      print("Imprime matrices y vectotres de iteración i")
+
