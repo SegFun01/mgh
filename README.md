@@ -8,15 +8,16 @@ El objetivo de este sofware contar con una herramienta de docencia en los curso 
 <h3>Descripción</h3>
 En redacción <br><br>
 El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:<br>
-<table border="NO"><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
-<img src="img/f02.png">(2)<br>
+<table border="0"><tr><td><img src="img/f02.png"></td><td>(2)</td></tr></table><br>
 En cada tramo toda la energía se consume en pérdidas:<br>
-<img src="img/f03.png">(3)<br>
+<table border="0"><tr><td><img src="img/f03.png"></td><td>(3)</td></tr></table><br>
 Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:<br>
-<img src="img/f04.png">(4)<br>
+<table border="0"><tr><td><img src="img/f04.png"></td><td>(4)</td></tr></table><br>
 Por lo tanto &alpha; será:<br>
-<img src="img/f05.png">(5)<br><br>
+<table border="0"><tr><td><img src="img/f05.png"></td><td>(5)</td></tr></table><br><br>
+
 <h3>Definición de variables y matrices</h3><br>
 <ul>
 <li>NT: número tuberías en la red (t)
@@ -40,24 +41,24 @@ Por lo tanto &alpha; será:<br>
 <li>[M1],[M2],[M3],[M4]: matrices intermedias del cálculo 
 </ul>
 La pérdida de carga en cada tramo de la red es:<br>
-<img src="img/f06.png">(6)<br>
+<img src="img/f06.png"></td><td>(6)</td></tr></table><br>
 La anterior ecuación es la de conservación de energía.<br><br>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
-<img src="img/f07.png"> (7)<br>
+<table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table><br>
 Las ecuaciones (6) y (7) que se deben resolver en el método, se pueden escribir como:<br>
-<img src="img/f08.png">(8)<br>
+<img src="img/f08.png"></td><td>(8)</td></tr></table><br>
 La anterior ecuación es no-lineal y debe sesolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
-<img src="img/f09.png">(9)<br>
-<img src="img/f10.png">(10)<br>
+<table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table><br>
 En los tramos y nudos, la variación del caudal en erl tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
-<img src="img/f11.png">(11)<br>
-<img src="img/f12.png">(12)<br>
+<table border="0"><tr><td><img src="img/f11.png"></td><td>(11)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table><br>
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
-<img src="img/f13.png">(13)<br>
+<table border="0"><tr><td><img src="img/f13.png"></td><td>(13)</td></tr></table><br>
 Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, en forma iterativa, siendo la iteración i+1 la sucesora de la iteración i:<br>
-<img src="img/f14.png">(14)<br>
-<img src="img/f15.png">(15)<br>
+<table border="0"><tr><td><img src="img/f14.png"></td><td>(14)</td></tr></table><br>
+<table border="0"><tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table><br>
 <br>
 
 <br>
