@@ -79,19 +79,42 @@ Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (
 <li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 <li>Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 <li>El formato del archivo de entrada es el que sigue:
+<table border="0"><tr><td>
+<pre>
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td>
+ <td>
 <pre>
 Red de ejemplo 1                              
 Ing. Carlos Camacho                           
 28/01/2019                                    
 V0.01                                         
-1.007E-6,1.0E-5,40                            
-1,5,7,1                                       
-0,100,110,*                                    
-1,  90,  60,1                                 
-2,  90,  20,1                               
-3,  90,  30,1                                 
-4,  90,  30,1                                 
-5,  90,  40,1                                 
+1.007E-6, 1.0E-5, 40                            
+1, 5, 7, 1                                       
+0, 100, 110, *                                    
+1,  90,  60, 1                                 
+2,  90,  20, 1                               
+3,  90,  30, 1                                 
+4,  90,  30, 1                                 
+5,  90,  40, 1                                 
 0,  0,  1,  500,  250,  0.0015,  2,  TA, -    
 1,  1,  2,  500,  150,  0.0015,  1,  TA, -   
 2,  3,  2,  200,  100,  0.0015,  2,  TA, -    
@@ -100,6 +123,7 @@ V0.01
 5,  5,  4,  700,  200,  0.0015,  0,  TA, -    
 6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
 </pre>
+</td></tr></table>
 <h4>Descripción del formato</h4>
 La descripción de cada línea se hará con base en su número:
 <ol type="1">
