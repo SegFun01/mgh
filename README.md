@@ -51,6 +51,8 @@ Por lo tanto &alpha; será:<br>
 <li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la siguiente
 <li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
 <li>[M1],[M2],[M3],[M4]: matrices intermedias del cálculo 
+<li>[Hi]: Cargas en los nudos de la iteración actual
+<li>[Qi]: Caudales en los tramos de la iteración actual
 </ul>
 La pérdida de carga en cada tramo de la red es:<br>
 <table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table><br>
@@ -179,7 +181,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <h3>Por desarrollar</h3>
 <ol>
   <li>Una interfaz de usuario para construir cada modelo y hacer los archivos de entrada de forma amigable.
-  <li>Implementar un tramo tipo "Válvula de retención o Check"
+  <li>Implementar un tramo tipo "Válvula de retención o check"
   <li>Implementar emisores en los nudos de demanda
   <li>Ajuste de presiones negativas.  Es realmente importante qu el sistema se reponga del error de obtener presiones negativas cuando las consideraciones de demanda lo llevan más allá de las posibilidades físicas de caudal y carga.  Debe hacerse un algoritmo que iniciando con los nudos negativos ajuste los caudales de demanda para que la presión en los nodos no tenga valores negativos en ninguna parte de la red.  Esto implica que existirán lugares con demanda cero a causa del incremento de la demanda en otros nudos, empezando a afectar de arriba a abajo. 
     <li>Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
@@ -188,6 +190,50 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
   <li>Falta revisar si el archivo de entrada existe y si se puede abrir...
   </ol>
   
- 
-  
+<h3>Contenido</h3>
+<table><tr><th>Archivo</th><th>Descripción</th></tr>
+<tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
+<tr><td>f_hid.py</td><td>Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales</td></tr>
+<tr><td>f_io.py </td><td>Funciones de entrada y salida de datos</td></tr>
+<tr><td>COPYING</td><td>Permiso de copia y distribución de mgh</td></tr>
+<tr><td>LICENSE</td><td>Texto de la licencia GPL 3</td></tr>
+<tr><td>README.md</td><td>Este documento</td></tr>
+<tr><td>img</td><td>Carpeta que contiene las imágenes de este README y otras</td></tr>
+<tr><td>input</td><td>Carpeta para los archivos de entrada de los modelos de redes a correr:</td></tr>
+<tr><td>&nbsp;&nbsp;default.mgh</td><td>Archivo de entrada de pruebas con una red simple</td></tr>
+<tr><td>&nbsp;&nbsp;default.mgh.json</td><td>Archivo de entrada en formato JSON a usar en futuras versiones</td></tr>
+<tr><td>&nbsp;&nbsp;bomba.mgh</td><td>Red simple con una bomba</td></tr>
+<tr><td>&nbsp;&nbsp;VRP.mgh</td><td>Red simple con una Válvula reductora de presión</td></tr>
+<tr><td>&nbsp;&nbsp;P3Tanques.py </td><td>Solución al problema de los tres tanques</td></tr>
+<tr><td>&nbsp;&nbsp;Qmax.py</td><td>Determinación del caudal máximo en una tubería</td></tr>
+<tr><td>output</td><td>Carpeta a usar para el envío de los archivos de salida:</td></tr>
+<tr><td>&nbsp;&nbsp;default.mgh.out</td><td>Archivo de salida de pruebas con una red simple</td></tr>
+<tr><td>&nbsp;&nbsp;bomba.mgh.out</td><td>Salida de red simple con una bomba</td></tr>
+<tr><td>&nbsp;&nbsp;VRP.mgh.out</td><td>Salida de red simple con una Válvula reductora de presión</td></tr>
+<tr><td>&nbsp;&nbsp;P3Tanques.mgh.out</td><td>Salida de solución al problema de los tres tanques</td></tr>
+<tr><td>&nbsp;&nbsp;Qmax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
+</table>
+
+ <h3>Modo de uso</h3>
+ <pre>
+ Modo de uso:  python mgh.py nombre_archivo.mgh opcion
+ -----------------------------------------------------
+
+Opciones:
+-n: modo normal, por defecto, imprime tablas de datos de entrada y salida
+
+-q: modo silencioso, solo imprime los vectores H y Q, de alturas piezométricas
+    en los nudos y caudales en los tramos
+
+-v: modo elocuente, imprime tablas de datos de entrada y salida, todos los vec
+    tores y matrices; y los resultados de cada iteración
+
+Observaciones:
+La salida del programa va dirigida a la consola: "stdout"
+Para redirigir la salida use entubamiento con > o con >>
+
+Ejemplo: 
+  python mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
+</pre>
+<hr>
 Carlos Camacho Soto, 2022
