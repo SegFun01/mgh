@@ -200,19 +200,19 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <tr><td>README.md</td><td>Este documento</td></tr>
 <tr><td>img</td><td>Carpeta que contiene las imágenes de este README y otras</td></tr>
 <tr><td>input</td><td>Carpeta para los archivos de entrada de los modelos de redes a correr:</td></tr>
-<tr><td>&nbsp;&nbsp;default.mgh</td><td>Archivo de entrada de pruebas con una red simple</td></tr>
-<tr><td>&nbsp;&nbsp;default-error-topol.mgh</td><td>Archivo de entrada para probar error topológico de una red</td></tr>
-<tr><td>&nbsp;&nbsp;default.mgh.json</td><td>Archivo de entrada en formato JSON a usar en futuras versiones</td></tr>
-<tr><td>&nbsp;&nbsp;EjemploBomba.mgh</td><td>Red simple con una bomba</td></tr>
-<tr><td>&nbsp;&nbsp;EjemploVRP.mgh</td><td>Red simple con una Válvula reductora de presión</td></tr>
-<tr><td>&nbsp;&nbsp;P3Tanques.mgh </td><td>Solución al problema de los tres tanques</td></tr>
-<tr><td>&nbsp;&nbsp;CaudalMax.mgh</td><td>Determinación del caudal máximo en una tubería</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; default.mgh</td><td>Archivo de entrada de pruebas con una red simple</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; default-error-topol.mgh</td><td>Archivo de entrada para probar error topológico de una red</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; default.mgh.json</td><td>Archivo de entrada en formato JSON a usar en futuras versiones</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; EjemploBomba.mgh</td><td>Red simple con una bomba</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; EjemploVRP.mgh</td><td>Red simple con una Válvula reductora de presión</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; P3Tanques.mgh </td><td>Solución al problema de los tres tanques</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh</td><td>Determinación del caudal máximo en una tubería</td></tr>
 <tr><td>output</td><td>Carpeta a usar para el envío de los archivos de salida:</td></tr>
-<tr><td>&nbsp;&nbsp;default.mgh.out</td><td>Archivo de salida de pruebas con una red simple</td></tr>
-<tr><td>&nbsp;&nbsp;EjemploBomba.mgh.out</td><td>Salida de red simple con una bomba</td></tr>
-<tr><td>&nbsp;&nbsp;EjemploVRP.mgh.out</td><td>Salida de red simple con una Válvula reductora de presión</td></tr>
-<tr><td>&nbsp;&nbsp;P3Tanques.mgh.out</td><td>Salida de solución al problema de los tres tanques</td></tr>
-<tr><td>&nbsp;&nbsp;CaudalMax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; default.mgh.out</td><td>Archivo de salida de pruebas con una red simple</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; EjemploBomba.mgh.out</td><td>Salida de red simple con una bomba</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; EjemploVRP.mgh.out</td><td>Salida de red simple con una Válvula reductora de presión</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; P3Tanques.mgh.out</td><td>Salida de solución al problema de los tres tanques</td></tr>
+<tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
 </table>
 
  <h3>Modo de uso</h3>
