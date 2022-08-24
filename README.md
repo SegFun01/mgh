@@ -51,46 +51,54 @@ Por lo tanto &alpha; será:<br>
 <li>n: número de nudos de demanda (carga desconocida)
 <li>ns: número de nudos de carga fija (carga conocida: tanques y embalses)
 <li>[A]: matriz [t,t] con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal, según ecuaciones 4 y 5  
-<li>[A1]: matriz [A'] con los valores &alpha;*Q en la diagonal sin &beta; y &gamma;
-<li>[B]: matriz [t,n ]de topología nudo a tramo para los nudos de demanda 
+<li>[A1]: matriz [A'] con los valores &alpha;*Q en la diagonal sin &beta; ni &gamma;
+<li>[B]: matriz [t,n] de topología nudo a tramo para los nudos de demanda 
 <li>[B<sup>T</sup>]: matriz transpuesta de [B] requerida para operaciones de multiplicación
 <li>[C]: matriz topológica nudo-tramo [t,ns] de los nudos de carga fija 
-<li>[Q]: vector [t,1] de caudales en los tramos 
-<li>[H]: vector [n,1] de cargas deconocidas en los nudos de demanda 
+<li>[Q]: vector [t,1] de caudales en los tramos (contendrá los datos de la iteración anterior)
+<li>[H]: vector [n,1] de cargas deconocidas en los nudos de demanda (contendrá los datos de la iteración anterior)
 <li>[Ho]: vector [ns,1] de cargas conocidas en los nudos de carga fija 
 <li>[q]: vector [n,1] de demandas en los nudos 
 <li>[N]: matriz [t,t] de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
 <li>[dE]: vector [t,1] que representa el desbalance de energía en cada tramo de la red 
 <li>[dq]: vector [n,1] que representa el desbalance de caudal en cada nudo de la red 
-<li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la siguiente
-<li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la siguiente
+<li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la anterior
+<li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la anterior
 <li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
 <li>[M1], [M2], [M3], [M4] y [M5]: matrices intermedias del cálculo 
 <li>[Hi]: Cargas en los nudos de la iteración actual
 <li>[Qi]: Caudales en los tramos de la iteración actual
 </ul>
 <br>
-La pérdida de carga en cada tramo de la red es:<br>
-<table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table><br>
-La anterior ecuación es la de conservación de energía.<br><br>
+La pérdida de carga en cada tramo de la red, correspondiente a la ecuación de conservación de la energía, es:<br>
+<table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
-<table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table><br>
-Las ecuaciones (6) y (7) que se deben resolver en el método, se pueden escribir como:<br>
+<table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table>
+Las ecuaciones (6) y (7) que se deben resolver en el método, pueden escribirse como:<br>
 <table border="0"><tr><td><img src="img/f08.png"></td><td>(8)</td></tr></table>
 La anterior ecuación es no-lineal y debe resolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
 <table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr>
-<tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table><br>
+<tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table>
 En los tramos y nudos, la variación del caudal en el tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
 <table border="0"><tr><td><img src="img/f11.png"></td><td>(11)</td></tr>
-<tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table><br>
+<tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table>
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
-<table border="0"><tr><td><img src="img/f13.png"></td><td>(13)</td></tr></table><br>
-Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, en forma iterativa, siendo la iteración i+1 la sucesora de la iteración i:<br>
+<table border="0"><tr><td><img src="img/f13.png"></td><td>(13)</td></tr></table>
+Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, las cuales deben resolverse de forma iterativa. De modo que las matrices [H<sub>i+1</sub>] y [Q<sub>i+1</sub>] cuando coverjan tendrán los valores de Caudales en los tramos y Alturas piezométricas en los nodos<br>
 <table border="0"><tr><td><img src="img/f14.png"></td><td>(14)</td></tr>
-<tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table><br>
+<tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table>
 <br>
-
+El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la figura siguiente:  
+<ul>
+<li>Primero, con los datos del archivo de entrada se construyen las matrices topológicas: [B], [B<sup>T</sup>] y [C]
+<li>Se asumen valores arbitrarios para la matriz [Q] caudales en los tramos: 0.1 l/s, por ejemplo
+<li>Con esos valores de [Q] y las características de los tubos y elevaciones de los nudos se determina una matriz inicial [A] y [A1] con los valores de &alpha; que corresponden al valor de resistencia de la tubería al flujo.
+<li>Luego se itera en el calculo de [Hi] y [Qi], correspondientes a la iteración i. Para esto se requiere el uso de matrices temporales [M1], [M2], [M3], [M4] y [M5]
+<li>En cada iteración se compara [Hi] con [H] y [Qi] con [Q] para verificar convergencia: [dQ] y [dH]. Además hay un contador de iteraciones máximas.
+<li>El algoritmo se detiene cuando los valores de [dQ] sean menores a una tolerancia de cálculo dada, en caso contrario, incrementa el contador, copia los valores de [Hi] en [H] y los de [Qi] en [Q] y vuelve a iterar, primero recalculando las matrices [A] y [A1] y resolviendo de nuevo [Hi] y [Qi] 
+</ul><br>
+<img src="./img/Algoritmo_matrices_MGH.jpg"><br>
 <br>
 <h3>Características</h3>
 <ol>
@@ -144,7 +152,7 @@ V0.01
 6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
 </pre>
 </td></tr></table>
-<h4>Descripción del formato</h4>
+<h4>Descripción del formato del archivo de entrada</h4>
 La descripción de cada línea se hará con base en su número:
 <ol type="1">
 <li>TÍTULO: del archivo o nombre de la red o proyecto
