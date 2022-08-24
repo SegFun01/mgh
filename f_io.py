@@ -1,7 +1,7 @@
 # f_io.py
 # Funciones de entrada y salida y otras funciones varias
 #import math
-#import sys
+import sys
 
 #from mgh import Q
 
@@ -38,7 +38,7 @@ def cargar_desde_archivo(s_argv):
    global nn,e,q,nt,de,a,l,d,ks,km,es,op
    #-----Verificar los parámetros de entrada
    if len(s_argv) < 2 :   #cuando solo se escribe mgh, imprime el modo de uso y termina
-     io.uso()
+     uso()
      fin = "input/default.mgh"
      sys.exit()
    else:                     #cuando se da el comando más un nombre de archivo, lo ejecuta en modo normal
