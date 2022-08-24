@@ -2,11 +2,12 @@
 <h2>Método del Gradiente Hidráulico</h2>
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 
 <hr>
-Prof. Carlos Camacho Soto<br>
+Prof. Carlos Camacho Soto<br><br>
+
 <h3>Licencia</h3>
-Procesando:<br>
 GNU GENERAL PUBLIC LICENSE<br>
 Versión 3, 29 Junio 2007 <br><br>
+
 <h3>Objetivos</h3>
 <ul>
 <li>Implementar una herramienta de docencia sobre diseño y análisis de redes hidráulicas, específicamente en los cursos de hidráulica y mecánica de fluidos
@@ -16,6 +17,19 @@ Versión 3, 29 Junio 2007 <br><br>
 <li>Contar con una herramienta para solución rápida de ejercicios de los cursos de Mecánica de Fluidos e Hidráulica
 </ul>
 <br>
+
+<h3>Sobre la implementación</h3>
+Desarrollado y probado en:
+<pre>
+   Python 3.9.2 (default, Feb 28 2021, 17:03:44) 
+   [GCC 10.2.1 20210110] on linux
+</pre>
+<br>
+Requiere de:<br>
+<pre>
+   numpy >= 1.19.5
+</pre>
+<br><br>
 
 <h3>Descripción</h3>
 Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
@@ -32,25 +46,25 @@ Por lo tanto &alpha; será:<br>
 
 <h3>Definición de variables y matrices</h3>
 <ul>
-<li>NT: número tuberías en la red (t)
-<li>ND: número de nudos de demanda (carga desconocida) (n)
-<li>NC: número de nudos de carga fija (carga conocida: tanques y embalses) (ns)
-<li>[A12]: matriz de topología nudo a tramo para los nudos de demanda [t,n]
-<li>[A10]: matriz topológica nudo-tramo de los nudos de carga fija [t,ns]
-<li>[Q]: vector de caudales en los tramos [t,1]
-<li>[H]: vector de cargas deconocidas en los nudos de demanda [n,1]
-<li>[Ho]: vector de cargas conocidas en los nudos de carga fija [ns,1]
-<li>[A11]: matriz con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal [t,t]
-<li>[q]: vector de demandas en los nudos [n,1]
-<li>[A21]: matriz transpuesta de A12 requerida para operaciónes de multiplicación
-<li>[N]: matriz de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
-<li>[A11]': matriz con los valores &alpha;*Q en la diagonal (no inluye el efecto de &beta; y &gamma;)
-<li>[dE]: vector que representa el desbalance de energía en cada tramo de la red [t,1]
-<li>[dq]: vector que representa el desbalance de caudal en cada nudo de la red [n,1]
+<li>t: número tuberías en la red
+<li>n: número de nudos de demanda (carga desconocida)
+<li>ns: número de nudos de carga fija (carga conocida: tanques y embalses)
+<li>[A]: matriz [t,t] con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal, según ecuaciones 4 y 5  
+<li>[A1]: matriz [A'] con los valores &alpha;*Q en la diagonal sin &beta; y &gamma;
+<li>[B]: matriz [t,n ]de topología nudo a tramo para los nudos de demanda 
+<li>[B<sup>T</sup>]: matriz transpuesta de [B] requerida para operaciónes de multiplicación
+<li>[C]: matriz topológica nudo-tramo [t,ns] de los nudos de carga fija 
+<li>[Q]: vector [t,1] de caudales en los tramos 
+<li>[H]: vector [n,1] de cargas deconocidas en los nudos de demanda 
+<li>[Ho]: vector [ns,1] de cargas conocidas en los nudos de carga fija 
+<li>[q]: vector [n,1] de demandas en los nudos 
+<li>[N]: matriz [t,t] de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
+<li>[dE]: vector [t,1] que representa el desbalance de energía en cada tramo de la red 
+<li>[dq]: vector [n,1] que representa el desbalance de caudal en cada nudo de la red 
 <li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la siguiente
 <li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la siguiente
 <li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
-<li>[M1],[M2],[M3],[M4]: matrices intermedias del cálculo 
+<li>[M1], [M2], [M3], [M4] y [M5]: matrices intermedias del cálculo 
 <li>[Hi]: Cargas en los nudos de la iteración actual
 <li>[Qi]: Caudales en los tramos de la iteración actual
 </ul>
