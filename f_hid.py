@@ -62,19 +62,18 @@ def reA11(a,q,t):
     return mat
     
 ##### estas funciones están en edición
-def construir_A11I(a,q,t):
+def construir_A1(a,q,t):
    # devuelve una nueva matriz A11I -> sin los valores beta y gama
    m=np.zeros([t,t],dtype=float)
    for i in range(t):
        m[i,i]==a[i]*q[i]
    return m
 
-def construir_A11(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):  
-    # toma A11I y reemplaza alfa, beta y gama de acuerdo a [es] y [op]
-    # 
-    m = np.zeros([t,t],dtype=float) # aquí se guarda A11I temporalmente para ser devuelta
+def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):  
+    # toma A1 y reemplaza alfa, beta y gama de acuerdo a [es] y [op]
+    m = np.zeros([t,t],dtype=float) # aquí se guarda A1 temporalmente para ser devuelta
     for i in range(t):
-       m[i,i]=a11[i,i]   #copia A11I
+       m[i,i]=a11[i,i]   #copia A1
     # Se necesitan los vectores e, de, a para computar el nuevo valor (a+b+c)
     for i in range(t):
          if es[i].strip()=="VR":  # VALVULA REDUCTORA
