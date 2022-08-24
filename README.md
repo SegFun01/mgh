@@ -69,6 +69,7 @@ Por lo tanto &alpha; será:<br>
 <li>[Hi]: Cargas en los nudos de la iteración actual
 <li>[Qi]: Caudales en los tramos de la iteración actual
 </ul>
+<br>
 La pérdida de carga en cada tramo de la red es:<br>
 <table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table><br>
 La anterior ecuación es la de conservación de energía.<br><br>
@@ -188,11 +189,12 @@ La descripción de cada línea se hará con base en su número:
   <li>normal: muestra las tablas de nudos y de tramos para la última iteración 
   <li>detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
   </ul></ol>
-
+<br>
 <h3>Estado Actual</h3>
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
 Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
 
+<br>
 <h3>Por desarrollar</h3>
 <ol>
   <li>Una interfaz de usuario para construir cada modelo y hacer los archivos de entrada de forma amigable.
@@ -204,7 +206,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
   <li>Entrada y salida de datos por medio de archivos JSON
   <li>Falta revisar si el archivo de entrada existe y si se puede abrir...
   </ol>
-  
+<br>  
 <h3>Contenido</h3>
 <table><tr><th>Archivo</th><th>Descripción</th></tr>
 <tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
