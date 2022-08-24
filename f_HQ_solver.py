@@ -1,10 +1,10 @@
 # f_HQ_solver.py
 # Algoritmo de solución de las matrices [Hi] y [Qi]
 #
-import math
-import numpy as np
+#import math
+#import numpy as np
 
-from mgh import Q, H, Ho, B, BT, C, N, I, A, A1, Qi, Hi, qi
+#from mgh import Q, H, Ho, B, BT, C, N, I, A, A1, Qi, Hi, qi
 
 def calcula_Hi_Qi():
    #----------->>>>>>>>>> Deficinicón de variables globales

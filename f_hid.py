@@ -1,7 +1,7 @@
 # Archivo con las funciones hidráulicas del método MGH
 #Carlos Camacho Agosto 2022
 # 
-import math
+#import math
 
 def calculaDesbalance(dq, t):
     #Calcula el MAYOR desbalance de caudales en cada iteración de todos los nudos

@@ -1,9 +1,9 @@
 # f_io.py
 # Funciones de entrada y salida y otras funciones varias
-import math
-import sys
+#import math
+#import sys
 
-from mgh import Q
+#from mgh import Q
 
 # Hacer las funciones de impresión de salida aquí
 # Hacer la función de revisión topológica aquí
