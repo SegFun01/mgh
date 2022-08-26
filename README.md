@@ -98,6 +98,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 <li>En cada iteración se compara [Hi] con [H] y [Qi] con [Q] para verificar convergencia: [dQ] y [dH]. Además hay un contador de iteraciones máximas.
 <li>El algoritmo se detiene cuando los valores de [dQ] sean menores a una tolerancia de cálculo dada, en caso contrario, incrementa el contador, copia los valores de [Hi] en [H] y los de [Qi] en [Q] y vuelve a iterar, primero recalculando las matrices [A] y [A1] y resolviendo de nuevo [Hi] y [Qi] 
 </ul><br>
+<h4>Diagrama de flujo del cálculo de Hi y Qi</h4>
 <img src="./img/Algoritmo_matrices_MGH.jpg"><br>
 <br>
 <h3>Características</h3>
