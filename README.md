@@ -220,7 +220,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <table><tr><th>Archivo</th><th>Descripción</th></tr>
 <tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
 <tr><td>f_hid.py</td><td>Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales</td></tr>
-<tr><td>f_io.py </td><td>Funciones de entrada y salida de datos</td></tr>
+<tr><td>f_io.py </td><td>Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados</td></tr>
 <tr><td>COPYING</td><td>Permiso de copia y distribución de mgh</td></tr>
 <tr><td>LICENSE</td><td>Texto de la licencia GPL 3</td></tr>
 <tr><td>README.md</td><td>Este documento</td></tr>
