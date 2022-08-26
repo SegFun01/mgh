@@ -1,52 +1,56 @@
 # Archivo con las funciones hidráulicas del método MGH
-#Carlos Camacho Agosto 2022
-# 
-#import math
+# Carlos Camacho Agosto 2022
+# f_hid.py: funciones hidráulicas 
+#---
+ 
+import math
+import numpy as np
 
+#---> Calcula el MAYOR desbalance de caudales en cada iteración de todos los nudos
 def calculaDesbalance(dq, t):
-    #Calcula el MAYOR desbalance de caudales en cada iteración de todos los nudos
     des = 0
     for i in range(t):
         if  abs(dq[i]) > des:
             des = abs(dq[i])      #¿esto debe ser en valor absoluto? -> no importa, se usa como criterio de fin
     return des        
-        
+
+#---> Calcula el area de la tuberia en m2 con diametro en mm        
 def area(D):
-    #Calcula el area de la tuberia en m2 con diametro en mm
     a = D * D * math.pi / 4 / 1000 / 1000
     return a
     
+#---> Calcula la velocidad del flujo a partir del caudal y el area    
 def ve(q,a):
-    #Calcula la velocidad del flujo a partir del caudal y el area
     v = q / a
     return v
 
+#---> Calcula el numero de reynolds para la condicion de flujo dada
 def reynolds(v,d,vis):
-    #Calcula el numero de reynolds para la condicion de flujo dada
     re = abs( v * d / 1000 / vis )
     return re
 
+#---< Calcula el factor de friccion con Swamee Jain, se puede mejorar con Colebrook White
 def fSJ(k, d, R):
-    #Calcula el factor de friccion con Swamee Jain, se puede mejorar con Colebrook White
     Re = pow(abs(R),0.9)
-    f = 0.25 / ( math.log10(k/d/3.7 + 5.7/Re)**2)
+    f = 0.25 / ( math.log10(k/d/3.7 + 5.74/Re)**2)
     return f
 
+#---> Calcula las perdidas por friccion en un tramo
 def hfr(f,L,v,d):
-    #Calcula las perdidas por friccion en un tramo
     h = f * L * (v**2) / (d/1000) / 19.62
     return h
-    
+
+#---> Calcula las perdidas locales de un tramo    
 def hme(km, v):
-    #Calcula las perdidas locales de un tramo
     h = km * (v**2) / 19.62
     return h
     
+#--->Calcula el valor de alfa dividiendo h entre el caudal al cuadrado
 def alf(h,q):
-   #Calcula el valor de alfa dividiendo h entre el caudal al cuadrado
    q = float(abs(q))
    a = h / (q**2)
    return a
+    
 
 # al parecer esta función reA11 no va a ser necesaria porque se usan Construir_A11I y Consrtuir_A11 ?????       
 def reA11(a,q,t):
@@ -62,11 +66,12 @@ def reA11(a,q,t):
     return mat
     
 ##### estas funciones están en edición
-def construir_A1(a,q,t):
+def construir_A1(alfa,q,t):
    # devuelve una nueva matriz A11I -> sin los valores beta y gama
    m=np.zeros([t,t],dtype=float)
    for i in range(t):
-       m[i,i]==a[i]*q[i]
+       m[i,i]=alfa[i]*q[i]
+       #print("m[i,i],alfa[i],Q[i] ",m[i,i],alfa[i],q[i])
    return m
 
 def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):  
