@@ -215,6 +215,35 @@ def calcula_Hi_Qi():
    # - paso 12
    Qi= np.subtract(M1,M2) # segundo resultado
 
+#---> Impresión de reporte final
+def imprime_reporte():
+   print("MÉTODO DEL GRADIENTE HIDRÁULICO")
+   print("--")
+   print("Archivo de entrada:", fin)
+   print("Titulo:     ",titulo)
+   print("Autor:      ",autor)
+   print("Fecha:      ",fecha)
+   print("Versión:    ",version)
+   print("Viscosidad:",viscosidad)
+   print("Desbalance: ",imbalance)
+   print("Máximo iteraciones permitidas: ",MaxIt)
+   print("Factor global de demanda: ", factor)
+   print("")
+   print("Nudo  Elevación  Carga fija      Presión")
+   print("----------------------------------------")
+   for i in range(ns):
+       print(f"  {nn[i]}    {e[i]}    {q[i]}    {q[i]-e[i]} " )
+   print("")
+   print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
+   print("--------------------------------------------------------------------------")
+   for i in range(n):
+       print(f"  {nn[i+1]}    {e[i+1]}    {q[i+1]}    {fi[i+1]}    {qi[i]}    {H[i]}    {Hi[i]-e[i]} " )
+   print("")
+   print("Tramo   de->a         Caudal      hf       hL         hT")
+   print("--------------------------------------------------------------------------")    
+   for i in range(t):
+       print(f"  {nt[i]} {de[i]}->{a[i]}   {Qi[i]}    {hf[i]}    {hm[i]}    {hf[i]+hm[i]} " )
+   print("Desbalance:",dqT)
 #----------------------------------------------------------------------
 #--- FIN DE FUNCIONES GLOBALES
 
@@ -224,13 +253,15 @@ def calcula_Hi_Qi():
 dqT, it = 1000, 0                                        # Se define dqT en 1000 e it en 0 para iniciar iteraciones
 while dqT > imbalance and it < MaxIt:
   calcula_Hi_Qi()
- #var.dq= np.subtract(np.matmul(var.BT,var.Qi),var.qi)
- # dqT= hid.calculaDesbalance(var.dq, var.t)
+  dq= np.subtract(np.matmul(BT,Qi),qi)
+  print("dq:",dq)
+  dqT= hid.calculaDesbalance(dq, n)
   it = MaxIt                                             # esto es para hacer solo una iteración de prueba  >>>> COMENTAR
   #it = it+1                                              # para hacer todas las iteraciones
   Q = Qi
   H = Hi
   io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
+  imprime_reporte()
   #io.recalcular_alfas()                                  # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
   #A1= hid.construir_A1(var.alfa,var.Q,var.t)                         # vuelve a reconstruir la matriz alfa [A']   
   #A = hid.construir_A(var.A1,var.t,var.es,var.op,var.e,var.de,var.a,var.hf,var.hm,var.H,var.Q,var.modo)  # vuelve a reconstruir la matriz alfa [A]
