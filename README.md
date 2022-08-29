@@ -224,6 +224,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <tr><td>COPYING</td><td>Permiso de copia y distribución de mgh</td></tr>
 <tr><td>LICENSE</td><td>Texto de la licencia GPL 3</td></tr>
 <tr><td>README.md</td><td>Este documento</td></tr>
+<tr><td>GradienteHidráulico.xlsx</td><td>Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación</td></tr>
 <tr><td>img</td><td>Carpeta que contiene las imágenes de este README y otras</td></tr>
 <tr><td>input</td><td>Carpeta para los archivos de entrada de los modelos de redes a correr:</td></tr>
 <tr><td>&nbsp;&nbsp;&#9493; default.mgh</td><td>Archivo de entrada de pruebas con una red simple</td></tr>
@@ -263,4 +264,5 @@ Ejemplo:
   python mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
 </pre>
 <hr>
+
 Carlos Camacho Soto, 2022
