@@ -63,9 +63,8 @@ except:
     print("        MÉTODO DEL GRADIENTE HIDRÁULICO")
     print("--------------------------------------------------")
     print("Archivo de entrada:", fin)
-    print("--------------------------------------------------")
-    print("Ocurrió un error al abrir el archivo:",fin)
-    print("Nada que hacer aquí...")
+    print("¡Ocurrió un error al abrir el archivo !!!")
+    print("Programa abortado")
     print("--------------------------------------------------")
     sys.exit()    
 #-----Cargar los datos globales de la corrida
