@@ -80,6 +80,26 @@ def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version):
    print("Topología de nudos OK")
 #----------
 
+#---------->>>>>>>>>> Imprimir matrices de una lista
+def imprime matrices(matrices,nombres):
+   # a partir de una lista de matrices y una lista de sus nombres imprime cada matriz de la lista
+   j=0
+   for i in matrices:
+      print(f"Matriz [{nombres[j]}]")
+      print(f"{i}")
+      print("")
+      j=j+1
+   
+#---------->>>>>>>>>> Imprimir lista de variables hidráulicas de los nudos
+def imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t):
+   print("Variables hidráulicas de los tramos")   
+   print("")
+   print(" Nudo  De->A   L   d   ks   kL   Estado   area  vel  Re   f   hf   hL   alfa")
+   print("-----------------------------------------------------------------------------")
+   for i in t:
+       print(f"{nt[i]:>3}  {de[i]:>3} {a[i]:>3}  {l[i]:5.2f}   {d[i]:5.2f}   {ks[i]:1.5f}   {km[i]:3.2f}  {es[i]:>8}   {At[i]:2.4f}   {v[i]:3.2f}   {Re[i]:7.0f}   {f[i]:1.5f}   {hf[i]:3.2f}    {hm[i]:3.2f} " )
+   print("-----------------------------------------------------------------------------")
+
 #---------->>>>>>>>>> Imprimir matrices para verificación
 def matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1):
   print("Matriz cargas fijas:",Ho) 

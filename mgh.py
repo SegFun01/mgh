@@ -228,7 +228,7 @@ def calcula_Hi_Qi():
    Qi= np.subtract(M1,M2) # segundo resultado
 
 #---> Impresión de reporte final
-def imprime_reporte():
+def imprime_reporte():                       # pasar a f_io con valores de entrada 
    print("MÉTODO DEL GRADIENTE HIDRÁULICO")
    print("--")
    print("Archivo de entrada:", fin)
@@ -241,42 +241,55 @@ def imprime_reporte():
    print("Máximo iteraciones permitidas: ",MaxIt)
    print("Factor global de demanda: ", factor)
    print("")
-   print("Nudo  Elevación  Carga fija      Presión     Demanda")
-   print("----------------------------------------------------")
+   print("Nudo  Elevación  Carga fija    Presión     Demanda")
+   print("------------------------------------------------------")
    for i in range(ns):
-       print(f"  {nn[i]}    {e[i]:3:2f}    {q[i]}    {q[i]-e[i]} " )
+       print(f"  {nn[i]:>3}    {e[i]:3.2f}    {h[i]:3.2f}    {(h[i]-e[i]):3.2f}  {qfi[i]:3.2f} " )
    print("")
    print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
    print("--------------------------------------------------------------------------")
    for i in range(n):
-       print(f"  {nn[i+1]}    {e[i+1]}    {q[i+1]}    {fi[i+1]}    {qi[i]}    {H[i]}    {Hi[i]-e[i]} " )
+       print(f"  {nn[i+ns]:>3}    {e[i+ns]:3.2f}    {q[i+ns]:3.2f}    {fi[i+ns]:3.2f}    {qi[i]:3.2f}    {H[i]:3.2f}    {(Hi[i]-e[i]):3.2f} " )
    print("")
-   print("Tramo   de->a         Caudal      hf       hL         hT")
+   print("Tramo   de -> a      velocidad   Caudal      hf       hL         hT")
    print("--------------------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]} {de[i]}->{a[i]}   {Qi[i]}    {hf[i]}    {hm[i]}    {hf[i]+hm[i]} " )
+       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3}    {v[i]:3.2f}   {Qi[i]:3.2f}    {hf[i]:3.2f}    {hm[i]:3.2f}    {(hf[i]+hm[i]):3.2f} " )
 #----------------------------------------------------------------------
+
 #--- FIN DE FUNCIONES GLOBALES
 
+if modo == "-v":                                        # modo de impresión detallado
+     # imprime las matrices iniciales
+     io.imprime_matrices([q,Ho,qi,B,C,Q], ["q","Ho","qi","B","C","Q"] )
+     print("")
+     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t)
+     print("")
+     io.imprime_matrices([A,A1], ["A","A1"] )
+     print("----Inician las iteraciones----")
+     print("")
 
 # Inicia el proceso de iteración
 #-------------------------------
 dqT, it = 1000, 0                                        # Se define dqT en 1000 e it en 0 para iniciar iteraciones
 while dqT > imbalance and it < MaxIt:
   calcula_Hi_Qi()
-  dq= np.subtract(Qi,Q)
+  dq= np.subtract(Qi,Q)                                  # determina vector de desbalances de caudales en los nodos
   dqT= hid.calculaDesbalance(dq, n)
-  #it = MaxIt                                              # esto es para hacer solo una iteración de prueba  >>>> COMENTAR
+  #it = MaxIt                                            # esto es para hacer solo una iteración de prueba  >>>> COMENTAR
   it = it+1                                              # para hacer todas las iteraciones
-  Q = Qi
+  Q = Qi                                                 
   H = Hi
-  #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
-  #io.recalcular_alfas()                                  # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
-  #A1= hid.construir_A1(var.alfa,var.Q,var.t)                         # vuelve a reconstruir la matriz alfa [A']   
-  #A = hid.construir_A(var.A1,var.t,var.es,var.op,var.e,var.de,var.a,var.hf,var.hm,var.H,var.Q,var.modo)  # vuelve a reconstruir la matriz alfa [A]
+  qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)      # calcula el caudal de los nudos de carga fija
+  recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
+  A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
+  A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo)  # vuelve a reconstruir la matriz alfa [A]   
+  if modo == "-v":                                       # modo de impresión detallado
+     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
+     io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
   #fin del while
 #----------
-qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)
+
 print("dq:",dq)
 print("Iteraciones:", it)
 print("Desbalance de caudales:", dqT)
