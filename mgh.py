@@ -119,8 +119,13 @@ for i in range(0,t):
 f.close()  
 
 #---------->>>>>>>>>> Revisar topología de la red
-io.revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version)
-
+if modo=="-v":
+   print("MÉTODO DEL GRADIENTE HIDRÁULICO")
+   print("Modo de ejecución: Impresión detallada")
+   print("--")   
+   
+io.revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version,modo)
+        
 #---------->>>>>>>>>> Definicion de matrices globales del MGH
 qi = np.zeros(n,dtype=float)       # caudales demandados en los nodos
 Ho = np.zeros(ns,dtype=float)      # cargas fijas
@@ -260,6 +265,9 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
 #--- FIN DE FUNCIONES GLOBALES
 
 if modo == "-v":                                        # modo de impresión detallado
+     print("----- INICIO DEL CÁLCULO -----")
+     print("")
+     print("----- Iteración inicial -----")
      # imprime las matrices iniciales
      io.imprime_matrices([q,Ho,qi,B,C,Q], ["q","Ho","qi","B","C","Q"] )
      print("")
@@ -284,7 +292,9 @@ while dqT > imbalance and it < MaxIt:
   recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
   A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
   A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo)  # vuelve a reconstruir la matriz alfa [A]   
-  if modo == "-v":                                       # modo de impresión detallado
+  if modo == "-v":       # modo de impresión detallado
+     print("")
+     print(f"-----Iteración número: {it:3} -----")
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
      io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
   #fin del while

@@ -52,7 +52,7 @@ def imprime_salida_verbose(final,i):
 #----------
 
 #---------->>>>>>>>>> Función que revisa la topología de la red, termina si hay error y lo indica
-def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version):
+def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version,modo):
    notOK=[]
    errores=0
    for i in range(n+ns):
@@ -77,7 +77,9 @@ def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version):
       print("Revise los siguientes nudos: ",notOK)
       print("--")
       sys.exit()
-   print("Topología de nudos OK")
+   if modo =="-v":   
+     print("Topología de nudos OK")
+     print("")
 #----------
 
 #---------->>>>>>>>>> Imprimir matrices de una lista

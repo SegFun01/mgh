@@ -86,7 +86,7 @@ def imprime_matrices(matrices,nombres):
    j=0
    for i in matrices:
       print(f"Matriz [{nombres[j]}]")
-      print(f"{i:8.4f}")
+      print(f"{i}")
       print("")
       j=j+1
    
