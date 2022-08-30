@@ -59,8 +59,14 @@ if len(sys.argv) == 3 :  #se da comando, archivo, modo
 try:
     f = open(fin,'r')
 except:
+    print("--------------------------------------------------")
+    print("        MÉTODO DEL GRADIENTE HIDRÁULICO")
+    print("--------------------------------------------------")
+    print("Archivo de entrada:", fin)
+    print("--------------------------------------------------")
     print("Ocurrió un error al abrir el archivo:",fin)
     print("Nada que hacer aquí...")
+    print("--------------------------------------------------")
     sys.exit()    
 #-----Cargar los datos globales de la corrida
 titulo = f.readline().strip()
