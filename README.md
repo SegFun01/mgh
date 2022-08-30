@@ -202,6 +202,25 @@ La descripción de cada línea se hará con base en su número:
 <h3>Estado Actual</h3>
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
 Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
+<ul>
+<li> Lectura de archivo de entrada tipo CSV &#10003;
+<li> Funciones hidráulicas: Áreas, velocidades, Reynolds, Pérdidas hf y hL  &#10003;
+<li> Cálculo de f por el método de Swamee-Jain &#10003;
+<li> Cálculo de f por el método de Colebrook-White &#10003;  
+<li> Construcción de matrices topológicas: A, B, C &#10003;
+<li> Contrucción de matrices ALPHA: A y A1 &#10003;
+<li> Construcción de otras matrices y vectores: N, I &#10003;
+<li> Algoritmo de cálculo de Hi y Qi &#10003;
+<li> Inclusión de accesorios especiales: VSP, VRP, Bomba, Check &#128269;
+<li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10007;
+<li> Selección de ecuación a usar (S-J ó C-W): &#10007;
+<li> Impresión de resultados en tablas &#10007;
+<li> Impresión de matrices &#10007;
+<li> Salida de datos por medio de JSON &#10007;
+<li> Entrada de datos por medio de JSON &#10007;
+<li> Aplicación para construir redes usando NCURSES &#10007;
+<li> ... 
+</ul>
 
 <br>
 <h3>Por desarrollar</h3>
