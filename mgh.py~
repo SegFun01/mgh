@@ -29,7 +29,8 @@ modo="-n"
 #---------->>>>>>>>> Vectores de carga de datos desde el archivo
 nn= []   # id de los nudos
 e = []   # elevaciones de cada nudo
-q = []   # demandas de los nudos
+q = []   # demandas de los nudos (alturas de carga fija)
+h = []   # cargas fijas en los nudos de carga fija
 nt= []   # id de los tramos o tubos
 de= []   # id del nudo de inicio del tramo
 a = []   # id del nudo final del tramo
@@ -56,7 +57,17 @@ if len(sys.argv) == 3 :  #se da comando, archivo, modo
    modo = sys.argv[2]
    modo.strip()
 #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
-f = open(fin,'r')
+try:
+    f = open(fin,'r')
+except:
+    print("--------------------------------------------------")
+    print("        MÉTODO DEL GRADIENTE HIDRÁULICO")
+    print("--------------------------------------------------")
+    print("Archivo de entrada:", fin)
+    print("¡Ocurrió un error al abrir el archivo !!!")
+    print("Programa abortado")
+    print("--------------------------------------------------")
+    sys.exit()    
 #-----Cargar los datos globales de la corrida
 titulo = f.readline().strip()
 autor = f.readline().strip()
@@ -80,7 +91,8 @@ for i in range(0,ns):
    nn.append(int(valores[0]))
    e.append(float(valores[1]))
    trash = valores[2].split(" ")
-   q.append(float(trash[1]))
+   q.append(float(trash[1]))          # este q es la carga de los nudos de carga fija. Usar más adelante para guardar q de los tanques
+   h.append(float(trash[1]))          # copiando la altura en el vector h también  REVISAR ESTO PARA USAR SOLO H, ahora no es posible
    fi.append(0)
 #-----Leer los nudos de demanda
 for i in range(0,n):
@@ -132,12 +144,12 @@ beta=np.zeros([t],dtype=float)     # valores beta de cada tramo para usar en A11
 gama=np.zeros([t],dtype=float)     # valores gama de cada tramo para usar en A11
 Hi = np.zeros(n,dtype=float)       # cargas dinamicas en los nudos de la actual iteración
 Qi = np.zeros([t],dtype=float)     # caudales en los tramos [m3/s] en la actual iteración
-
+qfi = np.zeros(ns,dtype=float)     # caudales en los nudos de carga fija
 #---------->>>>>>>>>> Iniciar matrices: carga de los datos en las matrices a partir de los vectores de lectura
 Q.fill(0.1)                          # iniciar caudales en tramos
 np.fill_diagonal(N,2)                # iniciar matriz N con 2 en la diagonal
 for i in range(0,ns):                
-    Ho[i]=(q[i])                     # iniciar matriz alturas fijas 
+    Ho[i]=(h[i])                     # iniciar matriz alturas fijas 
 for i in range(ns,n+ns):
     qi[i-ns]=(q[i]/1000*factor*fi[i]) # iniciar matriz demandas en nudos   
 for i in range(t):
@@ -216,7 +228,7 @@ def calcula_Hi_Qi():
    Qi= np.subtract(M1,M2) # segundo resultado
 
 #---> Impresión de reporte final
-def imprime_reporte():
+def imprime_reporte():                       # pasar a f_io con valores de entrada 
    print("MÉTODO DEL GRADIENTE HIDRÁULICO")
    print("--")
    print("Archivo de entrada:", fin)
@@ -229,52 +241,63 @@ def imprime_reporte():
    print("Máximo iteraciones permitidas: ",MaxIt)
    print("Factor global de demanda: ", factor)
    print("")
-   print("Nudo  Elevación  Carga fija      Presión")
-   print("----------------------------------------")
+   print("Nudo  Elevación  Carga fija    Presión     Demanda")
+   print("------------------------------------------------------")
    for i in range(ns):
-       print(f"  {nn[i]}    {e[i]}    {q[i]}    {q[i]-e[i]} " )
+       print(f"  {nn[i]:>3}    {e[i]:3.2f}    {h[i]:3.2f}    {(h[i]-e[i]):3.2f}  {(qfi[i]*1000):3.2f} " )
    print("")
    print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
    print("--------------------------------------------------------------------------")
    for i in range(n):
-       print(f"  {nn[i+1]}    {e[i+1]}    {q[i+1]}    {fi[i+1]}    {qi[i]}    {H[i]}    {Hi[i]-e[i]} " )
+       print(f"  {nn[i+ns]:>3}    {e[i+ns]:3.2f}    {q[i+ns]:3.2f}    {fi[i+ns]:3.2f}    {(qi[i]*1000):3.2f}    {H[i]:3.2f}    {(Hi[i]-e[i]):3.2f} " )
    print("")
-   print("Tramo   de->a         Caudal      hf       hL         hT")
+   print("Tramo   de -> a      velocidad   Caudal      hf       hL         hT")
    print("--------------------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]} {de[i]}->{a[i]}   {Qi[i]}    {hf[i]}    {hm[i]}    {hf[i]+hm[i]} " )
-   print("Desbalance:",dqT)
+       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3}    {v[i]:3.2f}   {(Qi[i]*1000):3.2f}    {hf[i]:3.2f}    {hm[i]:3.2f}    {(hf[i]+hm[i]):3.2f} " )
 #----------------------------------------------------------------------
+
 #--- FIN DE FUNCIONES GLOBALES
 
+if modo == "-v":                                        # modo de impresión detallado
+     # imprime las matrices iniciales
+     io.imprime_matrices([q,Ho,qi,B,C,Q], ["q","Ho","qi","B","C","Q"] )
+     print("")
+     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t)
+     print("")
+     io.imprime_matrices([A,A1], ["A","A1"] )
+     print("----Inician las iteraciones----")
+     print("")
 
 # Inicia el proceso de iteración
 #-------------------------------
 dqT, it = 1000, 0                                        # Se define dqT en 1000 e it en 0 para iniciar iteraciones
 while dqT > imbalance and it < MaxIt:
   calcula_Hi_Qi()
-  dq= np.subtract(Qi,Q)
-  print("dq:",dq)
+  dq= np.subtract(Qi,Q)                                  # determina vector de desbalances de caudales en los nodos
   dqT= hid.calculaDesbalance(dq, n)
-  #it = MaxIt                                              # esto es para hacer solo una iteración de prueba  >>>> COMENTAR
+  #it = MaxIt                                            # esto es para hacer solo una iteración de prueba  >>>> COMENTAR
   it = it+1                                              # para hacer todas las iteraciones
-  Q = Qi
+  Q = Qi                                                 
   H = Hi
-  #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
-imprime_reporte()
-print("Alturas piezométricas",Hi)
-print("")
-print("Caudales en los tramos",Qi)
-  #io.recalcular_alfas()                                  # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
-  #A1= hid.construir_A1(var.alfa,var.Q,var.t)                         # vuelve a reconstruir la matriz alfa [A']   
-  #A = hid.construir_A(var.A1,var.t,var.es,var.op,var.e,var.de,var.a,var.hf,var.hm,var.H,var.Q,var.modo)  # vuelve a reconstruir la matriz alfa [A]
+  qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)      # calcula el caudal de los nudos de carga fija
+  recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
+  A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
+  A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo)  # vuelve a reconstruir la matriz alfa [A]   
+  if modo == "-v":                                       # modo de impresión detallado
+     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
+     io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
   #fin del while
 #----------
+
+print("dq:",dq)
+print("Iteraciones:", it)
+print("Desbalance de caudales:", dqT)
 imprime_reporte()
 print("Alturas piezométricas",Hi)
 print("")
-print("Caudales en los tramos",Qi)
-
+print("Caudales en los tramos",(Qi*1000))
+print("Caudales en nudos de carga fija",qfi)
 
 #io.imprime_salida_normal() / io.imprimesalida_quiet
 

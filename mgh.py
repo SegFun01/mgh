@@ -244,17 +244,17 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Nudo  Elevación  Carga fija    Presión     Demanda")
    print("------------------------------------------------------")
    for i in range(ns):
-       print(f"  {nn[i]:>3}    {e[i]:3.2f}    {h[i]:3.2f}    {(h[i]-e[i]):3.2f}  {qfi[i]:3.2f} " )
+       print(f"  {nn[i]:>3}    {e[i]:3.2f}    {h[i]:3.2f}    {(h[i]-e[i]):3.2f}  {(qfi[i]*1000):3.2f} " )
    print("")
    print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
    print("--------------------------------------------------------------------------")
    for i in range(n):
-       print(f"  {nn[i+ns]:>3}    {e[i+ns]:3.2f}    {q[i+ns]:3.2f}    {fi[i+ns]:3.2f}    {qi[i]:3.2f}    {H[i]:3.2f}    {(Hi[i]-e[i]):3.2f} " )
+       print(f"  {nn[i+ns]:>3}    {e[i+ns]:3.2f}    {q[i+ns]:3.2f}    {fi[i+ns]:3.2f}    {(qi[i]*1000):3.2f}    {H[i]:3.2f}    {(Hi[i]-e[i]):3.2f} " )
    print("")
    print("Tramo   de -> a      velocidad   Caudal      hf       hL         hT")
    print("--------------------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3}    {v[i]:3.2f}   {Qi[i]:3.2f}    {hf[i]:3.2f}    {hm[i]:3.2f}    {(hf[i]+hm[i]):3.2f} " )
+       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3}    {v[i]:3.2f}   {(Qi[i]*1000):3.2f}    {hf[i]:3.2f}    {hm[i]:3.2f}    {(hf[i]+hm[i]):3.2f} " )
 #----------------------------------------------------------------------
 
 #--- FIN DE FUNCIONES GLOBALES
@@ -292,12 +292,12 @@ while dqT > imbalance and it < MaxIt:
 
 print("dq:",dq)
 print("Iteraciones:", it)
-print("Desbalance de caudales:", dqT)
+print("Desbalance de caudales [l/s]:", dqT*1000)
 imprime_reporte()
 print("Alturas piezométricas",Hi)
 print("")
-print("Caudales en los tramos",Qi)
-print("Caudales en nudos de carga fija",qfi)
+print("Caudales en los tramos [l/s]:",(Qi*1000))
+print("Caudales en nudos de carga fija [l/s]:",(qfi*1000))
 
 #io.imprime_salida_normal() / io.imprimesalida_quiet
 
