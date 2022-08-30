@@ -244,24 +244,26 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 
  <h3>Modo de uso</h3>
  <pre>
- Modo de uso:  python mgh.py nombre_archivo.mgh opcion
- -----------------------------------------------------
-
-Opciones:
+                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022
+--------------------------------------------------------------------------
+                                                                          
+Modo de uso:  python mgh.py nombre_archivo.mgh opcion
+                                                                          
+Opciones:                                                                 
+                                                                          
 -n: modo normal, por defecto, imprime tablas de datos de entrada y salida
-
--q: modo silencioso, solo imprime los vectores H y Q, de alturas piezométricas
-    en los nudos y caudales en los tramos
-
--v: modo elocuente, imprime tablas de datos de entrada y salida, todos los vec
-    tores y matrices; y los resultados de cada iteración
-
-Observaciones:
-La salida del programa va dirigida a la consola: "stdout"
-Para redirigir la salida use entubamiento con > o con >>
-
-Ejemplo: 
-  python mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
+                                                                         
+-q: modo silencioso, solo imprime los vectores H y Q finales              
+                                                                          
+-v: modo detallado, imprime tablas de datos de entrada y salida, los vec-  
+    tores y matrices y los resultados de cada iteración                   
+                                                                          
+Observaciones:                                                           
+La salida del programa va dirigida a la consola: "stdout".                
+Para redirigir la salida use entubamiento con > o con >>                 
+                                                                         
+Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
+                                                                          
 </pre>
 <hr>
 
