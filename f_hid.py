@@ -135,5 +135,15 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
              # if ($modo=="2"){
              #  printf("En el tramo %d hay una BOMBA, se ajusta A11[%d][%d] con ALFA, BETA Y GAMA %f %f %f = %f<br>",$i+1, $i,$i, $abc[$pos-3],$abc[$pos-2],$abc[$pos-1],$A11[$i][$i]);
     return m         
-         
+
+def caudal_nudos_carga_fija(Q,nn,de,a,ns,t):
+    qcf = np.zeros(ns,dtype=float)  # contendrá el valor del caudal de los nudos de carga fija tamaño [ns]
+    for i in ns:
+        for j in t:
+            if de[j]==nn[j]:
+                qcf[i]=qcf[i] - Q[j]
+            if a[j]==nn[j]:
+                qcf[i]=qcf[i] + Q[j]
+    return qncf         
+
 #### hasta aquí las funciones hidráulicas

@@ -29,7 +29,8 @@ modo="-n"
 #---------->>>>>>>>> Vectores de carga de datos desde el archivo
 nn= []   # id de los nudos
 e = []   # elevaciones de cada nudo
-q = []   # demandas de los nudos
+q = []   # demandas de los nudos (alturas de carga fija)
+h = []   # cargas fijas en los nudos de carga fija
 nt= []   # id de los tramos o tubos
 de= []   # id del nudo de inicio del tramo
 a = []   # id del nudo final del tramo
@@ -90,7 +91,8 @@ for i in range(0,ns):
    nn.append(int(valores[0]))
    e.append(float(valores[1]))
    trash = valores[2].split(" ")
-   q.append(float(trash[1]))
+   q.append(float(trash[1]))          # este q es la carga de los nudos de carga fija. Usar más adelante para guardar q de los tanques
+   h.append(float(trash[1]))          # copiando la altura en el vector h también  REVISAR ESTO PARA USAR SOLO H, ahora no es posible
    fi.append(0)
 #-----Leer los nudos de demanda
 for i in range(0,n):
@@ -147,7 +149,7 @@ Qi = np.zeros([t],dtype=float)     # caudales en los tramos [m3/s] en la actual 
 Q.fill(0.1)                          # iniciar caudales en tramos
 np.fill_diagonal(N,2)                # iniciar matriz N con 2 en la diagonal
 for i in range(0,ns):                
-    Ho[i]=(q[i])                     # iniciar matriz alturas fijas 
+    Ho[i]=(h[i])                     # iniciar matriz alturas fijas 
 for i in range(ns,n+ns):
     qi[i-ns]=(q[i]/1000*factor*fi[i]) # iniciar matriz demandas en nudos   
 for i in range(t):
