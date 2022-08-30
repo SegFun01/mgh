@@ -56,7 +56,12 @@ if len(sys.argv) == 3 :  #se da comando, archivo, modo
    modo = sys.argv[2]
    modo.strip()
 #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
-f = open(fin,'r')
+try:
+    f = open(fin,'r')
+except:
+    print("Ocurrió un error al abrir el archivo:",fin)
+    print("Nada que hacer aquí...")
+    sys.exit()    
 #-----Cargar los datos globales de la corrida
 titulo = f.readline().strip()
 autor = f.readline().strip()
