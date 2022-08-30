@@ -138,12 +138,12 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
 
 def caudal_nudos_carga_fija(Q,nn,de,a,ns,t):
     qcf = np.zeros(ns,dtype=float)  # contendrá el valor del caudal de los nudos de carga fija tamaño [ns]
-    for i in ns:
-        for j in t:
-            if de[j]==nn[j]:
+    for i in range(ns):
+        for j in range(t):
+            if de[j]==nn[i]:
                 qcf[i]=qcf[i] - Q[j]
-            if a[j]==nn[j]:
+            if a[j]==nn[i]:
                 qcf[i]=qcf[i] + Q[j]
-    return qncf         
+    return qcf         
 
 #### hasta aquí las funciones hidráulicas

@@ -35,6 +35,21 @@ def fSJ(k, d, R):
     f = 0.25 / ( math.log10(k/d/3.7 + 5.74/Re)**2)
     return f
 
+#---< Calcula el factor de friccion con Colebrook White
+def fCW(k, d, R, t): # parámetros de entrada ks/D, Re, t
+   # Calcular el factor de f por Colebrook-White
+   f1= 0.01
+   f=0
+   dif = 0.1
+   #it=0
+   while dif>t:
+      f= ( 1 / ( -2* math.log10(k/d/3.7 + 2.51/(R * math.sqrt(f1) ) ) ))**2
+      dif=abs(f1-f)
+      f1=f
+      #it=it+1
+      #print("Iteracion:",it, " factor: ",f)
+   return f
+
 #---> Calcula las perdidas por friccion en un tramo
 def hfr(f,L,v,d):
     h = f * L * (v**2) / (d/1000) / 19.62
@@ -120,5 +135,15 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
              # if ($modo=="2"){
              #  printf("En el tramo %d hay una BOMBA, se ajusta A11[%d][%d] con ALFA, BETA Y GAMA %f %f %f = %f<br>",$i+1, $i,$i, $abc[$pos-3],$abc[$pos-2],$abc[$pos-1],$A11[$i][$i]);
     return m         
-         
+
+def caudal_nudos_carga_fija(Q,nn,de,a,ns,t):
+    qcf = np.zeros(ns,dtype=float)  # contendrá el valor del caudal de los nudos de carga fija tamaño [ns]
+    for i in range(ns):
+        for j in range(t):
+            if de[j]==nn[i]:
+                qcf[i]=qcf[i] - Q[j]
+            if a[j]==nn[i]:
+                qcf[i]=qcf[i] + Q[j]
+    return qncf         
+
 #### hasta aquí las funciones hidráulicas
