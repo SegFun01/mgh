@@ -144,7 +144,7 @@ beta=np.zeros([t],dtype=float)     # valores beta de cada tramo para usar en A11
 gama=np.zeros([t],dtype=float)     # valores gama de cada tramo para usar en A11
 Hi = np.zeros(n,dtype=float)       # cargas dinamicas en los nudos de la actual iteración
 Qi = np.zeros([t],dtype=float)     # caudales en los tramos [m3/s] en la actual iteración
-
+qfi = np.zeros(ns,dtype=float)     # caudales en los nudos de carga fija
 #---------->>>>>>>>>> Iniciar matrices: carga de los datos en las matrices a partir de los vectores de lectura
 Q.fill(0.1)                          # iniciar caudales en tramos
 np.fill_diagonal(N,2)                # iniciar matriz N con 2 en la diagonal
@@ -241,10 +241,10 @@ def imprime_reporte():
    print("Máximo iteraciones permitidas: ",MaxIt)
    print("Factor global de demanda: ", factor)
    print("")
-   print("Nudo  Elevación  Carga fija      Presión")
-   print("----------------------------------------")
+   print("Nudo  Elevación  Carga fija      Presión     Demanda")
+   print("----------------------------------------------------")
    for i in range(ns):
-       print(f"  {nn[i]}    {e[i]}    {q[i]}    {q[i]-e[i]} " )
+       print(f"  {nn[i]}    {e[i]:3:2f}    {q[i]}    {q[i]-e[i]} " )
    print("")
    print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
    print("--------------------------------------------------------------------------")
@@ -276,6 +276,7 @@ while dqT > imbalance and it < MaxIt:
   #A = hid.construir_A(var.A1,var.t,var.es,var.op,var.e,var.de,var.a,var.hf,var.hm,var.H,var.Q,var.modo)  # vuelve a reconstruir la matriz alfa [A]
   #fin del while
 #----------
+qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)
 print("dq:",dq)
 print("Iteraciones:", it)
 print("Desbalance de caudales:", dqT)
@@ -283,7 +284,7 @@ imprime_reporte()
 print("Alturas piezométricas",Hi)
 print("")
 print("Caudales en los tramos",Qi)
-
+print("Caudales en nudos de carga fija",qfi)
 
 #io.imprime_salida_normal() / io.imprimesalida_quiet
 
