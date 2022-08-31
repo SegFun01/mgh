@@ -15,8 +15,7 @@ mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 or FITNESS FOR A PARTICULAR PURPOSE.<br>
 See the GNU General Public License for more details.<br>
 You should have received a copy of the GNU General Public License along with mgh.<br> 
-If not, see: <a href=https://www.gnu.org/licenses/>https://www.gnu.org/licenses/</a> 
-<br><br>
+<br>
 
 <h3>Objetivos</h3>
 <ul>
