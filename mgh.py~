@@ -1,11 +1,25 @@
-# Modelado de redes hidraulicas por el metodo del gradiente hidraulico
-# Autor: Ing. Carlos Camacho Soto
-# Fecha: julio 2022
+""" Modelado de redes hidráulicas por el método del gradiente hidráulico
+    Autor: Ing. Carlos Camacho Soto, ccamacho@segundafundacion.com
+    Lugar: San José, Costa Rica
+    Fecha: julio 2022
+
+    Copyright © 2022 Carlos Camacho Soto
+
+    This file "mgh.py" is part of mgh
+      mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+      Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+      mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+      or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with mgh. 
+      If not, see <https://www.gnu.org/licenses/>. 
+"""
 #! /usr/bin/env python
 
 #---------->>>>>>>>>> Importar archivos y librerías
 import math
 import sys
+import time
 import numpy as np    
 import f_hid as hid   # funciones hidráulicas
 import f_io as io     # funciones de impresion
@@ -25,6 +39,7 @@ n=5
 t=7
 factor=1
 modo="-n"
+ecuacion="S"        # Ecuación por defecto a usar Swamee-Jain, alternativa C=Colebrook-White
 
 #---------->>>>>>>>> Vectores de carga de datos desde el archivo
 nn= []   # id de los nudos
@@ -78,6 +93,8 @@ valores = linea.split(",")
 viscosidad = float(valores[0])
 imbalance = float(valores[1])    
 MaxIt = int(valores[2])
+if valores[3].strip() in "C c":
+    ecuacion="C"
 linea = f.readline()
 valores = linea.split(",")
 ns = int(valores[0])          # nodos de carga fija NS
@@ -170,7 +187,10 @@ for i in range(t):
     At[i]=hid.area(d[i])             # iniciar matriz Areas de Tubos
     v[i]=hid.ve(Q[i],At[i])          # iniciar matriz de velocidades en tubos
     Re[i]=hid.reynolds(v[i],d[i],viscosidad) # iniciar matriz Reynolds
-    f[i]=hid.fSJ(ks[i],d[i],Re[i])           # iniciar matriz factor fricción  
+    if ecuacion=="C":
+        f[i]= hid.fCW(ks[i],d[i],Re[i],t)    # iniciar matriz factor fricción usando Colebrook-White
+    else:
+        f[i]=hid.fSJ(ks[i],d[i],Re[i])       # iniciar matriz factor fricción usando Swamee-Jain
     hf[i]=hid.hfr(f[i],l[i],v[i],d[i])       # iniciar matriz pérdidas fricción
     hm[i]=hid.hme(km[i],v[i])                # iniciar matriz pérdidas locales 
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])        # Iniciar matriz de alfas
@@ -184,13 +204,16 @@ A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo) # iniciar matriz A
 
 #---> DEFINICION DE FUNCIONES GOLABLES --------------------------------
 
-#---> RECALCULAR las matrices v, Re, f, hf, hm y alfa en cada iteración
+#---> RECALCULAR las matrices v, Re, f, hf, hm para obtener el alfa en cada iteración
 def recalcular_alfa():
    global v,Re,f,hf,hm,alfa
    for i in range(t):
        v[i]= hid.ve(Q[i],At[i])
        Re[i]=hid.reynolds(v[i],d[i],viscosidad)
-       f[i]= hid.fSJ(ks[i],d[i],Re[i])
+       if ecuacion=="C":
+          f[i]= hid.fCW(ks[i],d[i],Re[i],t)        # f usando Colebrook-White
+       else:   
+          f[i]= hid.fSJ(ks[i],d[i],Re[i])          # f usando Swamee-Jain
        hf[i]=hid.hfr(f[i], l[i], v[i], d[i]) 
        hm[i]= hid.hme(km[i],v[i])
        alfa[i]=hid.alf(hf[i]+hm[i],Q[i])
@@ -234,7 +257,7 @@ def calcula_Hi_Qi():
 
 #---> Impresión de reporte final
 def imprime_reporte():                       # pasar a f_io con valores de entrada 
-   print("MÉTODO DEL GRADIENTE HIDRÁULICO")
+   print("MÉTODO DEL GRADIENTE HIDRÁULICO                 v.0.1")
    print("--")
    print("Archivo de entrada:", fin)
    print("Titulo:     ",titulo)
@@ -244,22 +267,54 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Viscosidad:",viscosidad)
    print("Desbalance: ",imbalance)
    print("Máximo iteraciones permitidas: ",MaxIt)
+   if ecuacion=="C":
+      print("Ecuación para calcular pérdidas de fricción: Colebrook-White")
+   else:
+      print("Ecuación para calcular pérdidas de fricción: Swamee-Jain")
    print("Factor global de demanda: ", factor)
    print("")
-   print("Nudo  Elevación  Carga fija    Presión     Demanda")
-   print("------------------------------------------------------")
+   print("DATOS DE ENTRADA")
+   print("")
+   print("Nudos de carga fija")
+   print("  N  Elevación  Carga   Nivel")
+   print("------------------------------")
    for i in range(ns):
-       print(f"  {nn[i]:>3}    {e[i]:3.2f}    {h[i]:3.2f}    {(h[i]-e[i]):3.2f}  {(qfi[i]*1000):3.2f} " )
+      print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} ")
    print("")
-   print("Nudo  Elevación    Demanda base  Factor   Demanda      Carga       Presión")
-   print("--------------------------------------------------------------------------")
+   print("Nudos de demanda")
+   print("  N Elevación   Demanda   FVH")
+   print("----------------------------------------------")
    for i in range(n):
-       print(f"  {nn[i+ns]:>3}    {e[i+ns]:3.2f}    {q[i+ns]:3.2f}    {fi[i+ns]:3.2f}    {(qi[i]*1000):3.2f}    {H[i]:3.2f}    {(Hi[i]-e[i]):3.2f} " )
+      print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:7.2f} {fi[i+ns]:4.2f} ")
    print("")
-   print("Tramo   de -> a      velocidad   Caudal      hf       hL         hT")
+   print("Tramos")
+   print("  T   de->a    L    D     A     ks     km   Estado   Op ")
+   print("----------------------------------------------------------")
+   for i in range(t):
+      print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {op[i]} ")
+   print("")   
+   print("RESULTADOS")
+   print("")
+   print("Nudos de carga fija")  
+   print("  N  Elevación  Carga   Nivel   Caudal")
+   print("--------------------------------------------------------")
+   for i in range(ns):
+       print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} {(qfi[i]*1000):6.2f}")
+   print("")
+   print("Nudos de demanda")
+   print("Nudo  Elevación DemandaBase   FVH   DemandaNeta     Carga    Presión")
+   print("-----------------------------------------------------------------------")
+   for i in range(n):
+       print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:6.2f} {fi[i+ns]:3.2f} {(qi[i]*1000):6.2f} {H[i]:3.2f} {(Hi[i]-e[i]):7.2f}")
+   print("")
+   print("Tramos")
+   print("Tramo   de->a  Velocidad   Caudal      hf       hL         hT  ")
    print("--------------------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3}    {v[i]:3.2f}   {(Qi[i]*1000):3.2f}    {hf[i]:3.2f}    {hm[i]:3.2f}    {(hf[i]+hm[i]):3.2f} " )
+       print(f"  {nt[i]:>3} {de[i]:>3}{a[i]:>3} {v[i]:5.2f} {(Qi[i]*1000):6.2f} {hf[i]:6.2f} {hm[i]:6.2f} {(hf[i]+hm[i]):6.2f}")
+   print("")
+   print("Fecha y hora de esta corrida: ",time.strftime("%c"))
+   print("crcs-2022")
 #----------------------------------------------------------------------
 
 #--- FIN DE FUNCIONES GLOBALES
@@ -294,24 +349,31 @@ while dqT > imbalance and it < MaxIt:
   A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo)  # vuelve a reconstruir la matriz alfa [A]   
   if modo == "-v":       # modo de impresión detallado
      print("")
-     print(f"-----Iteración número: {it:3} -----"
+     print(f"-----Iteración número: {it:3} -----")
+     print("")
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
      io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
+     print("")
+     print(f"Iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
+     print("")
   #fin del while
 #----------
 
-print("dq:",dq)
-print("Iteraciones:", it)
-print("Desbalance de caudales [l/s]:", dqT*1000)
-imprime_reporte()
-print("Alturas piezométricas",Hi)
-print("")
-print("Caudales en los tramos [l/s]:",(Qi*1000))
-print("Caudales en nudos de carga fija [l/s]:",(qfi*1000))
+# ---> Una vez que converge el proceso de ieraciones, muestra los resultados
+if modo=="-q":
+    imprime_salida_quiet(Q,H,e,ns)
+else:
+    imprime_reporte()
+#print("Fin. CRCS2022")
+#print("dq:",dq)
+#print("Iteraciones:", it)
+#print("Desbalance de caudales [l/s]:", dqT*1000)
+#print("Alturas piezométricas",Hi)
+#print("")
+#print("Caudales en los tramos [l/s]:",(Qi*1000))
+#print("Caudales en nudos de carga fija [l/s]:",(qfi*1000))
 
-#io.imprime_salida_normal() / io.imprimesalida_quiet
-
-#EOF
+# EOF ------
 
 
 

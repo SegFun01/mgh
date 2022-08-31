@@ -1,5 +1,21 @@
-# f_io.py
-# Funciones de entrada y salida y otras funciones varias
+""" Archivo con las funciones de entrada y salida y otras varias de MGH
+    Autor: Ing. Carlos Camacho Soto, ccamacho@segundafundacion.com
+    Lugar: San José, Costa Rica
+    Fecha: julio 2022
+    f_io.py: funciones de impresión y otras varias
+    
+    Copyright © 2022 Carlos Camacho Soto
+
+    This file "f_io.py" is part of mgh
+      mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+      Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+      mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+      or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with mgh. 
+      If not, see <https://www.gnu.org/licenses/>. 
+"""
+
 #import math
 import sys
 import numpy as np
@@ -34,8 +50,16 @@ def uso():
 #----------Fin de uso()
 
 #---------->>>>>>>>>> Función para imprimir los datos de salida en modo quiet
-def imprime_salida_quiet():
-   print("quiet: Imprime solo [Q] y [H] finales")
+def imprime_salida_quiet(Q,H,e,ns):      # Imprime caudales en los tramos y presiones en los nudos de demanda
+   print("  [Q] l/s")
+   for in in range(Q.size):
+      print(f"| {(Q[i]*1000):7.2f} |")
+   print("")   
+   print("  [P] m")
+   for in in range(H.size):
+      print(f"| {(H[i]-e[i+ns]):7.2f} |")
+   print("") 
+  
 #-----------
 
 #---------->>>>>>>>>> Función que imprime la salida normal: tablas de nudos y tramos
@@ -52,7 +76,7 @@ def imprime_salida_verbose(final,i):
 #----------
 
 #---------->>>>>>>>>> Función que revisa la topología de la red, termina si hay error y lo indica
-def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version):
+def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version,modo):
    notOK=[]
    errores=0
    for i in range(n+ns):
@@ -77,7 +101,9 @@ def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version):
       print("Revise los siguientes nudos: ",notOK)
       print("--")
       sys.exit()
-   print("Topología de nudos OK")
+   if modo =="-v":   
+     print("Topología de nudos OK")
+     print("")
 #----------
 
 #---------->>>>>>>>>> Imprimir matrices de una lista

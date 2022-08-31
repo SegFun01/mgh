@@ -52,11 +52,11 @@ def uso():
 #---------->>>>>>>>>> Función para imprimir los datos de salida en modo quiet
 def imprime_salida_quiet(Q,H,e,ns):      # Imprime caudales en los tramos y presiones en los nudos de demanda
    print("  [Q] l/s")
-   for in in range(Q.size):
+   for i in range(Q.size):
       print(f"| {(Q[i]*1000):7.2f} |")
    print("")   
    print("  [P] m")
-   for in in range(H.size):
+   for i in range(H.size):
       print(f"| {(H[i]-e[i+ns]):7.2f} |")
    print("") 
   

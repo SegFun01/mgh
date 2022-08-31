@@ -187,7 +187,7 @@ for i in range(t):
     At[i]=hid.area(d[i])             # iniciar matriz Areas de Tubos
     v[i]=hid.ve(Q[i],At[i])          # iniciar matriz de velocidades en tubos
     Re[i]=hid.reynolds(v[i],d[i],viscosidad) # iniciar matriz Reynolds
-    if ecuacion="C":
+    if ecuacion=="C":
         f[i]= hid.fCW(ks[i],d[i],Re[i],t)    # iniciar matriz factor fricción usando Colebrook-White
     else:
         f[i]=hid.fSJ(ks[i],d[i],Re[i])       # iniciar matriz factor fricción usando Swamee-Jain
@@ -210,7 +210,7 @@ def recalcular_alfa():
    for i in range(t):
        v[i]= hid.ve(Q[i],At[i])
        Re[i]=hid.reynolds(v[i],d[i],viscosidad)
-       if ecuacion="C":
+       if ecuacion=="C":
           f[i]= hid.fCW(ks[i],d[i],Re[i],t)        # f usando Colebrook-White
        else:   
           f[i]= hid.fSJ(ks[i],d[i],Re[i])          # f usando Swamee-Jain
@@ -279,18 +279,18 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación  Carga   Nivel")
    print("------------------------------")
    for i in range(ns):
-      print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2} {(h[i]-e[i]):7.2} ")
+      print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} ")
    print("")
    print("Nudos de demanda")
    print("  N Elevación   Demanda   FVH")
    print("----------------------------------------------")
-   for i in range(n)
+   for i in range(n):
       print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:7.2f} {fi[i+ns]:4.2f} ")
    print("")
    print("Tramos")
    print("  T   de->a    L    D     A     ks     km   Estado   Op ")
    print("----------------------------------------------------------")
-   for i in range(t)
+   for i in range(t):
       print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {op[i]} ")
    print("")   
    print("RESULTADOS")
@@ -299,7 +299,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación  Carga   Nivel   Caudal")
    print("--------------------------------------------------------")
    for i in range(ns):
-       print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2} {(h[i]-e[i]):7.2} {(qfi[i]*1000):6.2f}")
+       print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} {(qfi[i]*1000):6.2f}")
    print("")
    print("Nudos de demanda")
    print("Nudo  Elevación DemandaBase   FVH   DemandaNeta     Carga    Presión")
@@ -308,10 +308,10 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
        print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:6.2f} {fi[i+ns]:3.2f} {(qi[i]*1000):6.2f} {H[i]:3.2f} {(Hi[i]-e[i]):7.2f}")
    print("")
    print("Tramos")
-   print("Tramo   de -> a  Velocidad   Caudal      hf       hL         hT  ")
+   print("Tramo   de->a  Velocidad   Caudal      hf       hL         hT  ")
    print("--------------------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]:>3} {de[i]:>3}->{a[i]:>3} {v[i]:5.2f}   {(Qi[i]*1000):6.2f} {hf[i]:6.2f} {hm[i]:6.2f} {(hf[i]+hm[i]):6.2f}")
+       print(f"  {nt[i]:>3} {de[i]:>3}{a[i]:>3} {v[i]:5.2f} {(Qi[i]*1000):6.2f} {hf[i]:6.2f} {hm[i]:6.2f} {(hf[i]+hm[i]):6.2f}")
    print("")
    print("Fecha y hora de esta corrida: ",time.strftime("%c"))
    print("crcs-2022")
@@ -350,17 +350,18 @@ while dqT > imbalance and it < MaxIt:
   if modo == "-v":       # modo de impresión detallado
      print("")
      print(f"-----Iteración número: {it:3} -----")
+     print("")
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
      io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
      print("")
-     print(f"Iteración: {it-1:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
+     print(f"Iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
      print("")
   #fin del while
 #----------
 
 # ---> Una vez que converge el proceso de ieraciones, muestra los resultados
-if modo="q":
-    imprime_salida_quiet(Q,H,e,ns)
+if modo=="-q":
+    io.imprime_salida_quiet(Q,H,e,ns)
 else:
     imprime_reporte()
 #print("Fin. CRCS2022")
