@@ -145,7 +145,7 @@ Red de ejemplo 1
 Ing. Carlos Camacho                           
 28/01/2019                                    
 V0.01                                         
-1.007E-6, 1.0E-5, 40                            
+1.007E-6, 1.0E-5, 40, S                            
 1, 5, 7, 1                                       
 0, 100, 110, *                                    
 1,  90,  60, 1                                 
@@ -169,7 +169,7 @@ La descripción de cada línea se hará con base en su número:
 <li>AUTOR: autor del modelo
 <li>FECHA: de la modelación
 <li>VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturno, etc
-<li>VISCOSIDAD, DESBALANCE, ITERACIONES: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales y Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones
+<li>VISCOSIDAD, DESBALANCE, ITERACIONES, ECUACIÓN: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales, Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones y Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
 <li>NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
 <li>NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
 <li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
@@ -210,7 +210,7 @@ La descripción de cada línea se hará con base en su número:
 <br>
 <h3>Estado Actual</h3>
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
-Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de pruebas.<br>
+Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa de pruebas.<br>
 <ul>
 <li> Lectura de archivo de entrada tipo CSV &#10003;
 <li> Funciones hidráulicas: Áreas, velocidades, Reynolds, Pérdidas hf y hL  &#10003;
@@ -219,16 +219,17 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <li> Construcción de matrices topológicas: A, B, C &#10003;
 <li> Contrucción de matrices ALPHA: A y A1 &#10003;
 <li> Construcción de otras matrices y vectores: N, I &#10003;
-<li> Algoritmo de cálculo de Hi y Qi &#10003;
+<li> Algoritmo de cálculo de Hi y Qi por iteración &#10003;
 <li> Inclusión de accesorios especiales: VSP, VRP, Bomba, Check &#128269;
-<li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10007;
-<li> Selección de ecuación a usar (S-J ó C-W): &#10007;
-<li> Impresión de resultados en tablas &#10007;
-<li> Impresión de matrices &#10007;
+<li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
+<li> Selección de ecuación a usar (S-J ó C-W): &#10003;
+<li> Impresión de resultados en tablas &#128269;
+<li> Impresión de matrices &#128269;
+<li> Impresión de salida quiet: solo tablas de caudales y cargas &#128269;
 <li> Salida de datos por medio de JSON &#10007;
 <li> Entrada de datos por medio de JSON &#10007;
 <li> Aplicación para construir redes usando NCURSES &#10007;
-<li> ... 
+<li> Documentación &#128269;
 </ul>
 
 <br>
@@ -241,7 +242,6 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
     <li>Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
   <li>Mostrar licencia y versión por medio de una opción, ejm: mgh -lv
   <li>Entrada y salida de datos por medio de archivos JSON
-  <li>Falta revisar si el archivo de entrada existe y si se puede abrir...
   </ol>
 <br>  
 <h3>Contenido</h3>
@@ -249,8 +249,7 @@ Actualmente no se han hecho pruebas de su funcionamiento.  Estamos en etapa de p
 <tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
 <tr><td>f_hid.py</td><td>Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales</td></tr>
 <tr><td>f_io.py </td><td>Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados</td></tr>
-<tr><td>COPYING</td><td>Permiso de copia y distribución de mgh</td></tr>
-<tr><td>LICENSE</td><td>Texto de la licencia GPL 3</td></tr>
+<tr><td>LICENSE</td><td>Texto de la licencia GPL-3</td></tr>
 <tr><td>README.md</td><td>Este documento</td></tr>
 <tr><td>GradienteHidráulico.xlsx</td><td>Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación</td></tr>
 <tr><td>img</td><td>Carpeta que contiene las imágenes de este README y otras</td></tr>
