@@ -5,7 +5,7 @@ Implementación en python3 de la metodología de análisis de redes propuesta po
 Prof. Carlos Camacho Soto<br><br>
 
 <h3>Licencia y Copyright</h3>
-Publicado bajo la licencia <b>GPL-3</b>: GNU General Public License - versión 3 del 29 Junio de 2007 <br>
+Publicado bajo la licencia GPL-3: GNU General Public License - versión 3 del 29 Junio de 2007 <br>
 Copyright © 2022 Carlos Camacho Soto
 <br><br>
 This file "README.md" is part of mgh<br>
