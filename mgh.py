@@ -1,6 +1,19 @@
-# Modelado de redes hidraulicas por el metodo del gradiente hidraulico
-# Autor: Ing. Carlos Camacho Soto
-# Fecha: julio 2022
+""" Modelado de redes hidráulicas por el método del gradiente hidráulico
+    Autor: Ing. Carlos Camacho Soto, ccamacho@segundafundacion.com
+    Lugar: San José, Costa Rica
+    Fecha: julio 2022
+
+    Copyright © 2022 Carlos Camacho Soto
+
+    This file "mgh.py" is part of mgh
+      mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+      Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+      mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+      or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with mgh. 
+      If not, see <https://www.gnu.org/licenses/>. 
+"""
 #! /usr/bin/env python
 
 #---------->>>>>>>>>> Importar archivos y librerías

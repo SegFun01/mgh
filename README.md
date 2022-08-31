@@ -4,9 +4,19 @@ Implementación en python3 de la metodología de análisis de redes propuesta po
 <hr>
 Prof. Carlos Camacho Soto<br><br>
 
-<h3>Licencia</h3>
-GNU GENERAL PUBLIC LICENSE<br>
-Versión 3, 29 Junio 2007 <br><br>
+<h3>Licencia y Copyright</h3>
+Publicado bajo la licencia <b>GPL-3</b>: GNU General Public License - versión 3 del 29 Junio de 2007 <br>
+Copyright © 2022 Carlos Camacho Soto
+<br><br>
+This file "README.md" is part of mgh<br>
+mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option) any later version. <br>
+mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE.<br>
+See the GNU General Public License for more details.<br>
+You should have received a copy of the GNU General Public License along with mgh.<br> 
+If not, see: <a href=https://www.gnu.org/licenses/>https://www.gnu.org/licenses/</a> 
+<br><br>
 
 <h3>Objetivos</h3>
 <ul>

@@ -1,8 +1,21 @@
-# Archivo con las funciones hidráulicas del método MGH
-# Carlos Camacho Agosto 2022
-# f_hid.py: funciones hidráulicas 
-#---
- 
+""" Archivo con las funciones hidráulicas del método MGH
+    Autor: Ing. Carlos Camacho Soto, ccamacho@segundafundacion.com
+    Lugar: San José, Costa Rica
+    Fecha: julio 2022
+    f_hid.py: funciones hidráulicas 
+    
+    Copyright © 2022 Carlos Camacho Soto
+
+    This file "f_hid.py" is part of mgh
+      mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+      Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+      mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+      or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with mgh. 
+      If not, see <https://www.gnu.org/licenses/>. 
+""" 
+
 import math
 import numpy as np
 

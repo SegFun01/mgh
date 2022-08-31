@@ -1,5 +1,21 @@
-# f_io.py
-# Funciones de entrada y salida y otras funciones varias
+""" Archivo con las funciones de entrada y salida y otras varias de MGH
+    Autor: Ing. Carlos Camacho Soto, ccamacho@segundafundacion.com
+    Lugar: San José, Costa Rica
+    Fecha: julio 2022
+    f_io.py: funciones de impresión y otras varias
+    
+    Copyright © 2022 Carlos Camacho Soto
+
+    This file "f_io.py" is part of mgh
+      mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
+      Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+      mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+      or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with mgh. 
+      If not, see <https://www.gnu.org/licenses/>. 
+"""
+
 #import math
 import sys
 import numpy as np
