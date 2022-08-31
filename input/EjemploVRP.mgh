@@ -2,7 +2,7 @@ Ejemplo con valvula de control
 Carlos Camacho
 02/02/2019
 1.0.0
-1.007E-6,1.0E-5,40
+1.007E-6,1.0E-5,40,S
 1,6,7,1
 0, 90, 100 ,*
 1, 70, 20, 1

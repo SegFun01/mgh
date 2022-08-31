@@ -7,6 +7,7 @@
 	"viscosidad": 1.007E-6,
 	"tolerancia": 1E-5,
 	"max_iteraciones": 40,
+	"ecuacion": "S",
 	"nc": 1,
 	"nd": 5,
 	"nt": 7,
