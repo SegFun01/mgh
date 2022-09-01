@@ -223,7 +223,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 <li> Contrucción de matrices ALPHA: A y A1 &#10003;
 <li> Construcción de otras matrices y vectores: N, I &#10003;
 <li> Algoritmo de cálculo de Hi y Qi por iteración &#10003;
-<li> Inclusión de accesorios especiales: VSP, VRP, Bomba, Check &#128269;
+<li> Inclusión de accesorios especiales: Tubería Cerrada, Válvula Sostenedora, Válvula Reductora, Bomba, Check &#128269;
 <li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
 <li> Selección de ecuación a usar (S-J ó C-W): &#10003;
 <li> Impresión de resultados en tablas &#10003;

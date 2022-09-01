@@ -309,7 +309,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación    Carga    Nivel   Caudal")
    print("------------------------------------------")
    for i in range(ns):
-       print(f"{nn[i]:>3}  {e[i]:7.2f}    {h[i]:7.2f}  {(h[i]-e[i]):7.2f}  {(qfi[i]*1000):6.2f}")
+       print(f"{nn[i]:>3}  {e[i]:7.2f}    {h[i]:7.2f}  {(h[i]-e[i]):7.2f}  {(qfi[i]*1000):7.2f}")
    print("------------------------------------------")
    print("")
    print("Nudos de demanda")
