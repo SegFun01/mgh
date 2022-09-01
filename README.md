@@ -161,10 +161,10 @@ V0.01
 5,  5,  4,  700,  200,  0.0015,  0,  TA, -    
 6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
 </pre>
+</td></tr></table>
 El anterior archivo de entrada corresponde al ejemplo mostrado en la siguiente figura:
 <img src="/img/f17.png"><br>
 Se incluye en el contenido de la carpeta principal, un archivo con la solución del ejercicio anterior por medio de una hoja eletrónica, llamado "GradienteHidráulico.xlsx", el cual fue usado como comprobación del funcionamiento de mgh.<br>
-</td></tr></table>
 <h4>Descripción del formato del archivo de entrada</h4>
 La descripción de cada línea se hará con base en su número:
 <ol type="1">
