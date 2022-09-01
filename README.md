@@ -273,8 +273,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 <tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
 </table>
 
- <h3>Modo de uso</h3>
- <pre>
+<h3>Modo de uso</h3>
+<pre>
                     METODO DEL GRADIENTE HIDRÁULICO              crcs 2022
 --------------------------------------------------------------------------
                                                                           
@@ -286,12 +286,11 @@ Opciones:
                                                                          
 -q: modo silencioso, solo imprime los vectores H y Q finales              
                                                                           
--v: modo detallado, imprime tablas de datos de entrada y salida, los vec-  
+-v: modo detallado, imprime tablas de datos de entrada y salida, los vec- 
     tores y matrices y los resultados de cada iteración                   
                                                                           
 Observaciones:                                                           
-La salida del programa va dirigida a la consola: "stdout".                
-Para redirigir la salida use entubamiento con > o con >>                 
+La salida del programa va dirigida a la consola: "stdout".                            
                                                                          
 Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
                                                                           
