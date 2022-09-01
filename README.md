@@ -291,6 +291,7 @@ Opciones:
 
 Nota:
 La salida del programa va dirigida a la consola: "stdout".
+Si desea enviar a archivo use redirección con > o con >>
 
 Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
 
