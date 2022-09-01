@@ -41,6 +41,7 @@ t=7
 factor=1
 modo="-n"
 ecuacion="S"        # Ecuación por defecto a usar Swamee-Jain, alternativa C=Colebrook-White
+tol= 1E-6
 
 #---------->>>>>>>>> Vectores de carga de datos desde el archivo
 nn= []   # id de los nudos
@@ -194,7 +195,7 @@ for i in range(t):
     v[i]=hid.ve(Q[i],At[i])          # iniciar matriz de velocidades en tubos
     Re[i]=hid.reynolds(v[i],d[i],viscosidad) # iniciar matriz Reynolds
     if ecuacion=="C":
-        f[i]= hid.fCW(ks[i],d[i],Re[i],t)    # iniciar matriz factor fricción usando Colebrook-White
+        f[i]= hid.fCW(ks[i],d[i],Re[i],tol)    # iniciar matriz factor fricción usando Colebrook-White
     else:
         f[i]=hid.fSJ(ks[i],d[i],Re[i])       # iniciar matriz factor fricción usando Swamee-Jain
     hf[i]=hid.hfr(f[i],l[i],v[i],d[i])       # iniciar matriz pérdidas fricción
@@ -217,7 +218,7 @@ def recalcular_alfa():
        v[i]= hid.ve(Q[i],At[i])
        Re[i]=hid.reynolds(v[i],d[i],viscosidad)
        if ecuacion=="C":
-          f[i]= hid.fCW(ks[i],d[i],Re[i],t)        # f usando Colebrook-White
+          f[i]= hid.fCW(ks[i],d[i],Re[i],tol)        # f usando Colebrook-White
        else:   
           f[i]= hid.fSJ(ks[i],d[i],Re[i])          # f usando Swamee-Jain
        hf[i]=hid.hfr(f[i], l[i], v[i], d[i]) 

@@ -49,13 +49,13 @@ def fSJ(k, d, R):
     return f
 
 #---< Calcula el factor de friccion con Colebrook White
-def fCW(k, d, R, t): # parámetros de entrada ks/D, Re, t
+def fCW(k, d, R, tol): # parámetros de entrada ks/D, Re, t
    # Calcular el factor de f por Colebrook-White
    f1= 0.01
    f=0
    dif = 0.1
    #it=0
-   while dif>t:
+   while dif>tol:
       f= ( 1 / ( -2* math.log10(k/d/3.7 + 2.51/(R * math.sqrt(f1) ) ) ))**2
       dif=abs(f1-f)
       f1=f
