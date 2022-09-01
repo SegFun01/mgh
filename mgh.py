@@ -110,9 +110,9 @@ for i in range(0,ns):
    valores = linea.split(",")
    nn.append(int(valores[0]))
    e.append(float(valores[1]))
-   trash = valores[2].split(" ")
-   q.append(float(trash[1]))          # este q es la carga de los nudos de carga fija. Usar más adelante para guardar q de los tanques
-   h.append(float(trash[1]))          # copiando la altura en el vector h también  REVISAR ESTO PARA USAR SOLO H, ahora no es posible
+   #trash = valores[2].split(" ")
+   q.append(float(valores[2]))          # este q es la carga de los nudos de carga fija. Usar más adelante para guardar q de los tanques
+   h.append(float(valores[2]))          # copiando la altura en el vector h también  REVISAR ESTO PARA USAR SOLO H, ahora no es posible
    fi.append(0)
 #-----Leer los nudos de demanda
 for i in range(0,n):
@@ -180,8 +180,10 @@ for i in range(ns,n+ns):
     qi[i-ns]=(q[i]/1000*factor*fi[i]) # iniciar matriz demandas en nudos   
 for i in range(t):
     for j in range(ns):
-        if de[i]==j or a[i]==j:
-            C[i]=-1                  # iniciar matriz topológica de cargas fijas 
+        if de[i]==j and es[i]!="TC":
+            C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
+        if a[i]==j and es[i]!="TC":
+            C[i,j]=1                   # iniciar matriz topológica de cargas fijas nudo de llegada =-1
     for j in range(ns,ns+n):
         jj=j-ns
         if de[i]==j:
