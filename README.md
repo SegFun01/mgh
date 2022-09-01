@@ -275,25 +275,25 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 
 <h3>Modo de uso</h3>
 <pre>
-                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022
---------------------------------------------------------------------------
-                                                                          
+                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
+-------------------------------------------------------------------------- 
+
 Modo de uso:  python mgh.py nombre_archivo.mgh opcion
                                                                           
-Opciones:                                                                 
-                                                                          
+Opciones:
+                                                                           
 -n: modo normal, por defecto, imprime tablas de datos de entrada y salida
-                                                                         
--q: modo silencioso, solo imprime los vectores H y Q finales              
-                                                                          
--v: modo detallado, imprime tablas de datos de entrada y salida, los vec- 
-    tores y matrices y los resultados de cada iteración                   
-                                                                          
-Observaciones:                                                           
-La salida del programa va dirigida a la consola: "stdout".                            
-                                                                         
-Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out 
-                                                                          
+
+-q: modo silencioso, solo imprime los vectores H y Q finales
+
+-v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
+    tores y matrices y los resultados de cada iteración                                      
+
+Nota:
+La salida del programa va dirigida a la consola: "stdout".
+
+Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
+
 </pre>
 <hr>
 
