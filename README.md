@@ -245,7 +245,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
     <li>Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
   <li>Mostrar licencia y versión por medio de una opción, ejm: mgh -lv
   <li>Entrada y salida de datos por medio de archivos JSON
-  <li>Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de MOntecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabilistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
+  <li>Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
   </ol>
 <br>  
 <h3>Contenido</h3>
