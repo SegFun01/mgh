@@ -71,6 +71,8 @@ else:                     #cuando se da el comando más un nombre de archivo, lo
 if len(sys.argv) == 3 :  #se da comando, archivo, modo
    modo = sys.argv[2]
    modo.strip()
+   if modo not in ["-n","-q","-v"]:
+      modo="-n"
 #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
 try:
     f = open(fin,'r')
@@ -258,7 +260,7 @@ def calcula_Hi_Qi():
 #---> Impresión de reporte final
 def imprime_reporte():                       # pasar a f_io con valores de entrada 
    print("MÉTODO DEL GRADIENTE HIDRÁULICO                 v.0.1")
-   print("--")
+   print("")
    print("Archivo de entrada:", fin)
    print("Titulo:     ",titulo)
    print("Autor:      ",autor)
@@ -268,50 +270,56 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Desbalance: ",imbalance)
    print("Máximo iteraciones permitidas: ",MaxIt)
    if ecuacion=="C":
-      print("Ecuación para calcular pérdidas de fricción: Colebrook-White")
+      print("Ecuación de pérdidas de fricción: Colebrook-White")
    else:
-      print("Ecuación para calcular pérdidas de fricción: Swamee-Jain")
+      print("Ecuación de pérdidas de fricción: Swamee-Jain")
    print("Factor global de demanda: ", factor)
    print("")
    print("DATOS DE ENTRADA")
    print("")
    print("Nudos de carga fija")
-   print("  N  Elevación  Carga   Nivel")
-   print("------------------------------")
+   print("  N  Elevación    Carga    Nivel")
+   print("---------------------------------")
    for i in range(ns):
-      print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} ")
+      print(f"{nn[i]:>3}  {e[i]:7.2f}    {h[i]:7.2f}  {(h[i]-e[i]):7.2f} ")
+   print("---------------------------------")
    print("")
    print("Nudos de demanda")
-   print("  N Elevación   Demanda   FVH")
-   print("----------------------------------------------")
+   print("  N  Elevación   Demanda    FVH")
+   print("---------------------------------")
    for i in range(n):
-      print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:7.2f} {fi[i+ns]:4.2f} ")
+      print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}   {fi[i+ns]:6.2f} ")
+   print("---------------------------------")
    print("")
    print("Tramos")
-   print("  T   de->a    L    D     A     ks     km   Estado   Op ")
-   print("----------------------------------------------------------")
+   print("  T   de->a      L     D     A       ks     kL   Estado   Op ")
+   print("---------------------------------------------------------------")
    for i in range(t):
-      print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {op[i]} ")
+      print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f}  {ks[i]:5.4f} {km[i]:5.1f}   {es[i]:>3}   {op[i]} ")
+   print("---------------------------------------------------------------")
    print("")   
    print("RESULTADOS")
    print("")
    print("Nudos de carga fija")  
-   print("  N  Elevación  Carga   Nivel   Caudal")
-   print("--------------------------------------------------------")
+   print("  N  Elevación    Carga    Nivel   Caudal")
+   print("------------------------------------------")
    for i in range(ns):
-       print(f"{nn[i]:>3} {e[i]:7.2f} {h[i]:7.2f} {(h[i]-e[i]):7.2f} {(qfi[i]*1000):6.2f}")
+       print(f"{nn[i]:>3}  {e[i]:7.2f}    {h[i]:7.2f}  {(h[i]-e[i]):7.2f}  {(qfi[i]*1000):6.2f}")
+   print("------------------------------------------")
    print("")
    print("Nudos de demanda")
-   print("Nudo  Elevación DemandaBase   FVH   DemandaNeta     Carga    Presión")
-   print("-----------------------------------------------------------------------")
+   print("  N  Elevación   Q Base    FVH   Q Neto     Carga   Presión")
+   print("-----------------------------------------------------------")
    for i in range(n):
-       print(f"{nn[i+ns]:>3} {e[i+ns]:7.2f} {q[i+ns]:6.2f} {fi[i+ns]:3.2f} {(qi[i]*1000):6.2f} {H[i]:3.2f} {(Hi[i]-e[i]):7.2f}")
+       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i+ns]:6.2f}  {(qi[i]*1000):6.2f}    {H[i]:6.2f}  {(Hi[i]-e[i]):7.2f}")
+   print("-----------------------------------------------------------")
    print("")
    print("Tramos")
-   print("Tramo   de->a  Velocidad   Caudal      hf       hL         hT  ")
-   print("--------------------------------------------------------------------------")    
+   print("  T   de->a      V       Q       hf      hL      hT       S")
+   print("--------------------------------------------------------------")    
    for i in range(t):
-       print(f"  {nt[i]:>3} {de[i]:>3}{a[i]:>3} {v[i]:5.2f} {(Qi[i]*1000):6.2f} {hf[i]:6.2f} {hm[i]:6.2f} {(hf[i]+hm[i]):6.2f}")
+       print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f}")
+   print("--------------------------------------------------------------")    
    print("")
    print("Fecha y hora de esta corrida: ",time.strftime("%c"))
    print("crcs-2022")
