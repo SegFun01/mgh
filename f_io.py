@@ -115,7 +115,17 @@ def imprime_matrices(matrices,nombres):
       print(f"{i}")
       print("")
       j=j+1
-   
+
+#---------->>>>>>>>>> Imprimir matrices de una lista
+def imprime_matrices_2(matrices,nombres):
+   # a partir de una lista de matrices y una lista de sus nombres imprime cada matriz de la lista
+   j=0
+   for i in matrices:
+      print(f"Matriz [{nombres[j]}]")
+      print(f"{i.shape}")
+      print("")
+      j=j+1
+
 #---------->>>>>>>>>> Imprimir lista de variables hidráulicas de los nudos
 def imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t):
    print("Variables hidráulicas de los tramos")   

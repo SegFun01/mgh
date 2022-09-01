@@ -4,6 +4,7 @@
     Fecha: julio 2022
 
     Copyright © 2022 Carlos Camacho Soto
+    Publicado bajo licencia GPL v3.0
 
     This file "mgh.py" is part of mgh
       mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
@@ -140,6 +141,7 @@ f.close()
 #---------->>>>>>>>>> Revisar topología de la red
 if modo=="-v":
    print("MÉTODO DEL GRADIENTE HIDRÁULICO")
+   print("")
    print("Modo de ejecución: Impresión detallada")
    print("--")   
    
@@ -362,25 +364,26 @@ while dqT > imbalance and it < MaxIt:
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
      io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
      print("")
-     print(f"Iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
+     print(f"-----Fin iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
      print("")
   #fin del while
 #----------
+
+if modo == "-v":                                        # modo de impresión detallado
+     print("----- FIN DEL CÁLCULO -----")
+     print("")
+     print("")
 
 # ---> Una vez que converge el proceso de ieraciones, muestra los resultados
 if modo=="-q":
     io.imprime_salida_quiet(Q,H,e,ns)
 else:
     imprime_reporte()
-#print("Fin. CRCS2022")
-#print("dq:",dq)
-#print("Iteraciones:", it)
-#print("Desbalance de caudales [l/s]:", dqT*1000)
-#print("Alturas piezométricas",Hi)
-#print("")
-#print("Caudales en los tramos [l/s]:",(Qi*1000))
-#print("Caudales en nudos de carga fija [l/s]:",(qfi*1000))
 
+"""
+    Copyright © 2022 Carlos Camacho Soto
+    Publicado bajo licencia GPL v3.0
+"""
 # EOF ------
 
 

@@ -226,9 +226,9 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 <li> Inclusión de accesorios especiales: VSP, VRP, Bomba, Check &#128269;
 <li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
 <li> Selección de ecuación a usar (S-J ó C-W): &#10003;
-<li> Impresión de resultados en tablas &#128269;
-<li> Impresión de matrices &#128269;
-<li> Impresión de salida quiet: solo tablas de caudales y cargas &#128269;
+<li> Impresión de resultados en tablas &#10003;
+<li> Impresión de matrices en modo detallado &#128269;
+<li> Impresión de salida quiet: solo tablas de caudales y cargas &#10003;
 <li> Salida de datos por medio de JSON &#10007;
 <li> Entrada de datos por medio de JSON &#10007;
 <li> Aplicación para construir redes usando NCURSES &#10007;
