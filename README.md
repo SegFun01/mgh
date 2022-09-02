@@ -211,29 +211,32 @@ La descripción de cada línea se hará con base en su número:
   <li>detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
   </ul></ol>
 <br>
-<h3>Estado Actual</h3>
+
+### Estado Actual
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
 Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa de pruebas.<br>
-<ul>
-<li> Lectura de archivo de entrada tipo CSV &#10003;
-<li> Funciones hidráulicas: Áreas, velocidades, Reynolds, Pérdidas hf y hL  &#10003;
-<li> Cálculo de f por el método de Swamee-Jain &#10003;
-<li> Cálculo de f por el método de Colebrook-White &#10003;  
-<li> Construcción de matrices topológicas: A, B, C &#10003;
-<li> Contrucción de matrices ALPHA: A y A1 &#10003;
-<li> Construcción de otras matrices y vectores: N, I &#10003;
-<li> Algoritmo de cálculo de Hi y Qi por iteración &#10003;
-<li> Inclusión de accesorios especiales: Tubería Cerrada, Válvula Sostenedora, Válvula Reductora, Bomba, Check &#128269;
-<li> Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
-<li> Selección de ecuación a usar (S-J ó C-W): &#10003;
-<li> Impresión de resultados en tablas &#10003;
-<li> Impresión de matrices en modo detallado &#128269;
-<li> Impresión de salida quiet: solo tablas de caudales y cargas &#10003;
-<li> Salida de datos por medio de JSON &#10007;
-<li> Entrada de datos por medio de JSON &#10007;
-<li> Aplicación para construir redes usando NCURSES &#10007;
-<li> Documentación &#128269;
-</ul>
+  
+- Lectura de archivo de entrada tipo CSV &#10003;
+- Funciones hidráulicas: Áreas, velocidades, Reynolds, Pérdidas hf y hL  &#10003;
+- Cálculo de f por el método de Swamee-Jain &#10003;
+- Cálculo de f por el método de Colebrook-White &#10003;  
+- Construcción de matrices topológicas: A, B, C &#10003;
+- Contrucción de matrices ALPHA: A y A1 &#10003;
+- Construcción de otras matrices y vectores: N, I &#10003;
+- Algoritmo de cálculo de Hi y Qi por iteración &#10003;
+- Inclusión de accesorios especiales: Tubería Cerrada, Válvula Sostenedora, Válvula Reductora, Bomba, Check &#128269;
+- Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
+- Selección de ecuación a usar (S-J ó C-W): &#10003;
+- Impresión de resultados en tablas &#10003;
+- Impresión de matrices en modo detallado &#128269;
+- Impresión de salida quiet: solo tablas de caudales y cargas &#10003;
+- Salida de datos por medio de JSON &#10007;
+- Entrada de datos por medio de JSON &#10007;
+- Aplicación para construir redes usando NCURSES &#10007;
+- Documentación &#128269;
+- Usar diccionarios para nudos tramos y datos generales &#10007;
+- Crear un archivo de configuración para tipo ecuación, cantidad de iteraciones, tolerancias, etc &#10007;
+- Leer datos de demandas de un archivo independiente o vectores &#10007;
 
 <br>
 <h3>Por desarrollar</h3>
@@ -274,28 +277,28 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 </table>
 
 <h3>Modo de uso</h3>
-<pre>
-                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
--------------------------------------------------------------------------- 
 
-Modo de uso:  python mgh.py nombre_archivo.mgh opcion
-                                                                          
-Opciones:
-                                                                           
--n: modo normal, por defecto, imprime tablas de datos de entrada y salida
+                        METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
+    -------------------------------------------------------------------------- 
+    
+    Modo de uso:  python mgh.py nombre_archivo.mgh opcion
+                                                                              
+    Opciones:
+                                                                               
+    -n: modo normal, por defecto, imprime tablas de datos de entrada y salida
+    
+    -q: modo silencioso, solo imprime los vectores H y Q finales
+    
+    -v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
+        tores y matrices y los resultados de cada iteración                                      
+    
+    Nota:
+    La salida del programa va dirigida a la consola: "stdout".
+    Si desea enviar a archivo use redirección con > o con >>
+    
+    Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
+    
 
--q: modo silencioso, solo imprime los vectores H y Q finales
-
--v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
-    tores y matrices y los resultados de cada iteración                                      
-
-Nota:
-La salida del programa va dirigida a la consola: "stdout".
-Si desea enviar a archivo use redirección con > o con >>
-
-Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
-
-</pre>
-<hr>
+----------
 
 Carlos Camacho Soto, 2022
