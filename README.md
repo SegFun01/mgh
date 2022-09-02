@@ -249,6 +249,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
   <li>Mostrar licencia y versión por medio de una opción, ejm: mgh -lv
   <li>Entrada y salida de datos por medio de archivos JSON
   <li>Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
+  <li> Imprimir archivo usado una opción -f
+  <li> Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
   </ol>
 <br>  
 <h3>Contenido</h3>
@@ -276,7 +278,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 <tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
 </table>
 
-<h3>Modo de uso</h3>
+### Modo de uso
+
 
                         METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
     -------------------------------------------------------------------------- 
