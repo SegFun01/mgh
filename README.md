@@ -295,20 +295,22 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
     
     Modo de uso:  python mgh.py nombre_archivo.mgh opcion
                                                                               
-    Opciones:
-                                                                               
-    -n: modo normal, por defecto, imprime tablas de datos de entrada y salida
-    
-    -q: modo silencioso, solo imprime los vectores H y Q finales
-    
+    Opciones:                                               
+    -n: modo normal, por defecto, imprime tablas de datos de entrada y salida.
+    -q: modo silencioso, solo imprime los vectores H y Q finales.
     -v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
-        tores y matrices y los resultados de cada iteración                                      
+        tores y matrices y los resultados de cada iteración.                                      
     
-    Nota:
-    La salida del programa va dirigida a la consola: "stdout".
-    Si desea enviar a archivo use redirección con > o con >>
+    Notas:
+      La salida del programa va dirigida a la consola: "stdout"
+      Si desea enviar a archivo use redirección con > o con >>
+      La extensión y directorio de entrada por defecto son .mgh y ./input 
+      
+    Ejemplos:
+      python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
+      python3 mgh.py default -n > ./output/default.mgh.out 
+      python3 mgh.py ./input/default.mgh -q
     
-    Ejemplo: python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
     
 
 ----------
