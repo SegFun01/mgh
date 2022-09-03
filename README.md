@@ -1,14 +1,14 @@
 # mgh
-<h2>Método del Gradiente Hidráulico</h2>
+## Método del Gradiente Hidráulico
 Implementación en python3 de la metodología de análisis de redes propuesta por Pilati y Todini, 1987 
 <hr>
 Prof. Carlos Camacho Soto<br><br>
 
-<h3>Licencia y Copyright</h3>
+### Licencia y Copyright
 Publicado bajo la licencia GPL-3: GNU General Public License - versión 3 del 29 Junio de 2007 <br>
-Copyright © 2022 Carlos Camacho Soto
-<br><br>
-This file "README.md" is part of mgh<br>
+Copyright © 2022 Carlos Camacho Soto <br>
+<br>
+This file "README.md" is part of mgh <br>
 mgh is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option) any later version. <br>
 mgh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
@@ -17,15 +17,15 @@ See the GNU General Public License for more details.<br>
 You should have received a copy of the GNU General Public License along with mgh.<br> 
 <br>
 
-<h3>Objetivos</h3>
-<ul>
-<li>Implementar una herramienta de docencia sobre diseño y análisis de redes hidráulicas, específicamente en los cursos de hidráulica y mecánica de fluidos
-<li>Servir de base para modelos en tiempo real para toma decisiones a través de herramientas SCADA. 
-<li>No pretende ser un software completo y potente como EPANet, sino una herramienta liviana para implementar SCRIPTS de python para usar con modelos diagramáticos y simples.
-<li>Poder montar SCRIPTS en un SCADA que permitan predecir el funcionamiento de un acueducto, modelado como una red diagramática a partir de datos en tiempo real: Predecir horarios de desabastecimiento, recuperación de los sistemas y resultado de posibles acciones operativas y maniobras de campo.
-<li>Contar con una herramienta para solución rápida de ejercicios de los cursos de Mecánica de Fluidos e Hidráulica
-<li>Eventualmente se buscará ajustar los caudales del modelo cuando ocurran presiones negativas en algunos nodos, tratando de estimar los posibles caudales realistas
-</ul>
+### Objetivos
+
+- Implementar una herramienta de docencia sobre diseño y análisis de redes hidráulicas, específicamente en los cursos de hidráulica y mecánica de fluidos
+- Servir de base para modelos en tiempo real para toma decisiones a través de herramientas SCADA. 
+- No pretende ser un software completo y potente como EPANet, sino una herramienta liviana para implementar SCRIPTS de python para usar con modelos diagramáticos y simples.
+- Poder montar SCRIPTS en un SCADA que permitan predecir el funcionamiento de un acueducto, modelado como una red diagramática a partir de datos en tiempo real: Predecir horarios de desabastecimiento, recuperación de los sistemas y resultado de posibles acciones operativas y maniobras de campo.
+- Contar con una herramienta para solución rápida de ejercicios de los cursos de Mecánica de Fluidos e Hidráulica
+- Eventualmente se buscará ajustar los caudales del modelo cuando ocurran presiones negativas en algunos nodos, tratando de estimar los posibles caudales realistas
+  
 <br>
 
 <h3>Sobre la implementación</h3>
@@ -41,7 +41,8 @@ Requiere de:<br>
 </pre>
 <br><br>
 
-<h3>Descripción</h3>
+### Descripción
+
 Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
 El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:<br>
 <table border="0"><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
@@ -54,30 +55,30 @@ Si se consideran las pérdidas locales, bombas o elementos especiales la ecuaci�
 Por lo tanto &alpha; será:<br>
 <table border="0"><tr><td><img src="img/f05.png"></td><td>(5)</td></tr></table><br><br>
 
-<h3>Definición de variables y matrices</h3>
-<ul>
-<li>t: número tuberías en la red
-<li>n: número de nudos de demanda (carga desconocida)
-<li>ns: número de nudos de carga fija (carga conocida: tanques y embalses)
-<li>[A]: matriz [t,t] con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal, según ecuaciones 4 y 5  
-<li>[A1]: matriz [A'] con los valores &alpha;*Q en la diagonal sin &beta; ni &gamma;
-<li>[B]: matriz [t,n] de topología nudo a tramo para los nudos de demanda 
-<li>[B<sup>T</sup>]: matriz transpuesta de [B] requerida para operaciones de multiplicación
-<li>[C]: matriz topológica nudo-tramo [t,ns] de los nudos de carga fija 
-<li>[Q]: vector [t,1] de caudales en los tramos (contendrá los datos de la iteración anterior)
-<li>[H]: vector [n,1] de cargas deconocidas en los nudos de demanda (contendrá los datos de la iteración anterior)
-<li>[Ho]: vector [ns,1] de cargas conocidas en los nudos de carga fija 
-<li>[q]: vector [n,1] de demandas en los nudos 
-<li>[N]: matriz [t,t] de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
-<li>[dE]: vector [t,1] que representa el desbalance de energía en cada tramo de la red 
-<li>[dq]: vector [n,1] que representa el desbalance de caudal en cada nudo de la red 
-<li>[dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la anterior
-<li>[dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la anterior
-<li>[I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
-<li>[M1], [M2], [M3], [M4] y [M5]: matrices intermedias del cálculo 
-<li>[Hi]: Cargas en los nudos de la iteración actual
-<li>[Qi]: Caudales en los tramos de la iteración actual
-</ul>
+### Definición de variables y matrices
+
+- t: número tuberías en la red
+- n: número de nudos de demanda (carga desconocida)
+- ns: número de nudos de carga fija (carga conocida: tanques y embalses)
+- [A]: matriz [t,t] con los valores &alpha;*Q+&beta;+&gamma;/Q en la diagonal, según ecuaciones 4 y 5  
+- [A1]: matriz [A'] con los valores &alpha;*Q en la diagonal sin &beta; ni &gamma;
+- [B]: matriz [t,n] de topología nudo a tramo para los nudos de demanda 
+- [B<sup>T</sup>]: matriz transpuesta de [B] requerida para operaciones de multiplicación
+- [C]: matriz topológica nudo-tramo [t,ns] de los nudos de carga fija 
+- [Q]: vector [t,1] de caudales en los tramos (contendrá los datos de la iteración anterior)
+- [H]: vector [n,1] de cargas deconocidas en los nudos de demanda (contendrá los datos de la iteración anterior)
+- [Ho]: vector [ns,1] de cargas conocidas en los nudos de carga fija 
+- [q]: vector [n,1] de demandas en los nudos 
+- [N]: matriz [t,t] de coeficientes de la ecuación de pérdidas, en este caso tiene el valor 2 en la diagonal
+- [dE]: vector [t,1] que representa el desbalance de energía en cada tramo de la red 
+- [dq]: vector [n,1] que representa el desbalance de caudal en cada nudo de la red 
+- [dQ]: vector cuyos valores son las diferencias de caudal en cada tramo entre una iteración y la anterior
+- [dH]: vector cuyos valores son las diferencias de carga en cada nudo entre una iteración y la anterior
+- [I]: matriz identidad (1 en la diagonal) de tamaño [t,t]
+- [M1], [M2], [M3], [M4] y [M5]: matrices intermedias del cálculo 
+- [Hi]: Cargas en los nudos de la iteración actual
+- [Qi]: Caudales en los tramos de la iteración actual
+  
 <br>
 La pérdida de carga en cada tramo de la red, correspondiente a la ecuación de conservación de la energía, es:<br>
 <table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table>
@@ -99,15 +100,16 @@ Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (
 <tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table>
 <br>
 El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la figura siguiente:  
-<ul>
-<li>Primero, con los datos del archivo de entrada se construyen las matrices topológicas: [B], [B<sup>T</sup>] y [C]
-<li>Se asumen valores arbitrarios para la matriz [Q] caudales en los tramos: 0.1 l/s, por ejemplo
-<li>Con esos valores de [Q] y las características de los tubos y elevaciones de los nudos se determina una matriz inicial [A] y [A1] con los valores de &alpha; que corresponden al valor de resistencia de la tubería al flujo.
-<li>Luego se itera en el calculo de [Hi] y [Qi], correspondientes a la iteración i. Para esto se requiere el uso de matrices temporales [M1], [M2], [M3], [M4] y [M5]
-<li>En cada iteración se compara [Hi] con [H] y [Qi] con [Q] para verificar convergencia: [dQ] y [dH]. Además hay un contador de iteraciones máximas.
-<li>El algoritmo se detiene cuando los valores de [dQ] sean menores a una tolerancia de cálculo dada, en caso contrario, incrementa el contador, copia los valores de [Hi] en [H] y los de [Qi] en [Q] y vuelve a iterar, primero recalculando las matrices [A] y [A1] y resolviendo de nuevo [Hi] y [Qi] 
-</ul><br>
-<h3>Diagrama de flujo del cálculo de Hi y Qi</h3>
+   
+- Primero, con los datos del archivo de entrada se construyen las matrices topológicas: [B], [B<sup>T</sup>] y [C]
+- Se asumen valores arbitrarios para la matriz [Q] caudales en los tramos: 0.1 l/s, por ejemplo
+- Con esos valores de [Q] y las características de los tubos y elevaciones de los nudos se determina una matriz inicial [A] y [A1] con los valores de &alpha; que corresponden al valor de resistencia de la tubería al flujo.
+- Luego se itera en el calculo de [Hi] y [Qi], correspondientes a la iteración i. Para esto se requiere el uso de matrices temporales [M1], [M2], [M3], [M4] y [M5]
+- En cada iteración se compara [Hi] con [H] y [Qi] con [Q] para verificar convergencia: [dQ] y [dH]. Además hay un contador de iteraciones máximas.
+- El algoritmo se detiene cuando los valores de [dQ] sean menores a una tolerancia de cálculo dada, en caso contrario, incrementa el contador, copia los valores de [Hi] en [H] y los de [Qi] en [Q] y vuelve a iterar, primero recalculando las matrices [A] y [A1] y resolviendo de nuevo [Hi] y [Qi] 
+
+
+#### Diagrama de flujo del cálculo de Hi y Qi
 <img src="./img/Algoritmo_matrices_MGH.jpg"><br>
  <br>  
 
@@ -118,7 +120,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 - Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 - Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 - El formato del archivo de entrada es el que sigue:
-- 
+  
 <table border="0"><tr><td>
 <pre>
  1
@@ -193,13 +195,13 @@ La descripción de cada línea se hará con base en su número:
     20. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
 
 
-<li>Tipos de nudo: <ul>
+- Tipos de nudo: <ul>
   <li> NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido.
      Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (T o E) el tipo no está implementado
   <li>ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto pre4sión dependiente de la demanda
      Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
   </ul>
-<li>Tipos de tramo: <ul>
+- Tipos de tramo: <ul>
   <li>Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto.
      Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta
      TC= Tubería Cerrada, Opciones (no tiene)
@@ -209,7 +211,7 @@ La descripción de cada línea se hará con base en su número:
   <li>Bomba en un tramo de tubería: Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL,
      BO = Bomba, Coeficientes de la curva: alfa, beta, gama
   </ul>
-<li>Tipos de corrida:<ul>
+- Tipos de corrida:<ul>
   <li>quiet o silencioso: muestra únicamente los valores de las tablas de cargas en los nodos y los caudales en los tramos de la última iteración 
   <li>normal: muestra las tablas de nudos y de tramos para la última iteración 
   <li>detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
