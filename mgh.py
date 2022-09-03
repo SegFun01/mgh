@@ -64,11 +64,13 @@ fi= []   # factores de variación horaria de cada nudo de demanda
 #-----Verificar los parámetros de entrada
 if len(sys.argv) < 2 :   #cuando solo se escribe mgh, imprime el modo de uso y termina
    io.uso()
-   fin = "input/default.mgh"
+   fin = ".input/default.mgh"
    sys.exit()
 else:                     #cuando se da el comando más un nombre de archivo, lo ejecuta en modo normal
    fin = sys.argv[1]
-   fout = fin + ".out"
+   fin = io.input_check(fin)
+   fout = io.output_check(fin)
+   #print(f"F input: {fin}   F output: {fout} ")
    modo = "-n"
 if len(sys.argv) == 3 :  #se da comando, archivo, modo
    modo = sys.argv[2]
@@ -264,7 +266,7 @@ def calcula_Hi_Qi():
 
 #---> Impresión de reporte final
 def imprime_reporte():                       # pasar a f_io con valores de entrada 
-   print("MÉTODO DEL GRADIENTE HIDRÁULICO                 v.0.1")
+   print("MÉTODO DEL GRADIENTE HIDRÁULICO              v1.0.0-alpha")
    print("")
    print("Archivo de entrada:", fin)
    print("Titulo:     ",titulo)
@@ -388,9 +390,3 @@ else:
     Publicado bajo licencia GPL v3.0
 """
 # EOF ------
-
-
-
-
-
-
