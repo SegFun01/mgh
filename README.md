@@ -109,14 +109,16 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 </ul><br>
 <h3>Diagrama de flujo del cálculo de Hi y Qi</h3>
 <img src="./img/Algoritmo_matrices_MGH.jpg"><br>
-<br>
-<h3>Características</h3>
-<ol>
-<li>Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
-<li>Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
-<li>Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
-<li>Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
-<li>El formato del archivo de entrada es el que sigue:
+ <br>  
+
+### Características
+  
+- Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
+-  Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
+- Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
+- Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
+- El formato del archivo de entrada es el que sigue:
+- 
 <table border="0"><tr><td>
 <pre>
  1
@@ -165,29 +167,31 @@ V0.01
 El anterior archivo de entrada corresponde al ejemplo mostrado en la siguiente figura:
 <img src="/img/f17.png"><br>
 Se incluye en el contenido de la carpeta principal, un archivo con la solución del ejercicio anterior por medio de una hoja eletrónica, llamado "GradienteHidráulico.xlsx", el cual fue usado como comprobación del funcionamiento de mgh.<br>
-<h4>Descripción del formato del archivo de entrada</h4>
+
+#### Descripción del formato del archivo de entrada
 La descripción de cada línea se hará con base en su número:
-<ol type="1">
-<li>TÍTULO: del archivo o nombre de la red o proyecto
-<li>AUTOR: autor del modelo
-<li>FECHA: de la modelación
-<li>VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturno, etc
-<li>VISCOSIDAD, DESBALANCE, ITERACIONES, ECUACIÓN: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales, Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones y Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
-<li>NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
-<li>NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
-<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-<li>NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones 
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-<li>TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-</ol>
+
+
+    1. TÍTULO: del archivo o nombre de la red o proyecto
+    2. AUTOR: autor del modelo
+    3. FECHA: de la modelación
+    4. VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturno, etc
+    5 VISCOSIDAD, DESBALANCE, ITERACIONES, ECUACIÓN: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales, Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones y Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
+    6. NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
+    7. NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
+    8. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+    9. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+    10. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+    11. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+    12. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
+    13. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones 
+    14. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+    15. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+    16. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+    18. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+    19. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+    20. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
+
 
 <li>Tipos de nudo: <ul>
   <li> NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido.
@@ -238,22 +242,25 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Crear un archivo de configuración para tipo ecuación, cantidad de iteraciones, tolerancias, etc &#10007;
 - Leer datos de demandas de un archivo independiente o vectores &#10007;
 
+
+
+### Por desarrollar
+
+- Una interfaz de usuario para construir cada modelo y hacer los archivos de entrada de forma amigable.
+- Implementar un tramo tipo "Válvula de retención o check"
+- Implementar emisores en los nudos de demanda
+- Ajuste de presiones negativas.  Es realmente importante qu el sistema se reponga del error de obtener presiones negativas cuando las consideraciones de demanda lo llevan más allá de las posibilidades físicas de caudal y carga.  Debe hacerse un algoritmo que iniciando con los nudos negativos ajuste los caudales de demanda para que la presión en los nodos no tenga valores negativos en ninguna parte de la red.  Esto implica que existirán lugares con demanda cero a causa del incremento de la demanda en otros nudos, empezando a afectar de arriba a abajo. 
+-Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
+- Mostrar licencia y versión por medio de una opción, ejm:  `mgh -lv`
+- Entrada y salida de datos por medio de archivos JSON
+- Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
+- Imprimir archivo usado una opción -f
+- Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
+
 <br>
-<h3>Por desarrollar</h3>
-<ol>
-  <li>Una interfaz de usuario para construir cada modelo y hacer los archivos de entrada de forma amigable.
-  <li>Implementar un tramo tipo "Válvula de retención o check"
-  <li>Implementar emisores en los nudos de demanda
-  <li>Ajuste de presiones negativas.  Es realmente importante qu el sistema se reponga del error de obtener presiones negativas cuando las consideraciones de demanda lo llevan más allá de las posibilidades físicas de caudal y carga.  Debe hacerse un algoritmo que iniciando con los nudos negativos ajuste los caudales de demanda para que la presión en los nodos no tenga valores negativos en ninguna parte de la red.  Esto implica que existirán lugares con demanda cero a causa del incremento de la demanda en otros nudos, empezando a afectar de arriba a abajo. 
-    <li>Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
-  <li>Mostrar licencia y versión por medio de una opción, ejm: mgh -lv
-  <li>Entrada y salida de datos por medio de archivos JSON
-  <li>Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
-  <li> Imprimir archivo usado una opción -f
-  <li> Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
-  </ol>
-<br>  
-<h3>Contenido</h3>
+
+### Contenido
+
 <table><tr><th>Archivo</th><th>Descripción</th></tr>
 <tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
 <tr><td>f_hid.py</td><td>Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales</td></tr>
