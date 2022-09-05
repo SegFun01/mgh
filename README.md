@@ -255,37 +255,50 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 -Modelar en tiempo extendido, para considerar vaciado/llenado de tanques. Es necesario cambiar el archivo de entrada para incluir área de tanque y altura máxima
 - Mostrar licencia y versión por medio de una opción, ejm:  `mgh -lv`
 - Entrada y salida de datos por medio de archivos JSON
-- Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. <b>Opcionalmente</b>: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
+- Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. **Opcionalmente**: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
 - Imprimir archivo usado una opción -f
 - Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
+- opción para correr en modo interactivo `-i`  que permita construir el modelo y salvarlo en `fin.mgh` y correrlo 
+- opción para salida a archivo por defecto con:  `-f`  sale a  `fin.out`
+- opción para especificar archivo de salida `-o fout`
+- incluir en el archivo de entrada `fin` referecia(s) a curva de demanda, puede ser en el mismo archivo o en archivo externo
+- correr el modelo en tiempo extendido, para lo que se requiere incluir el tiempo: 24, 48, 72 horas. Puede ser útil especificar hora de inicio y hora de fin
+- crear un archivo de configuración, posiblemente `config.json` donde se definan variables:
+  - imbalance
+  - tiempo extendido ???
+  - MaxIt: número máximo de iteraciones
+  - Ecuación a usar (Colebrook-White/Swamee-Jain)
+  - Tolerancia del cálculo de f en Colebrook-White
 
 <br>
 
 ### Contenido
 
-<table><tr><th>Archivo</th><th>Descripción</th></tr>
-<tr><td>mgh.py</td><td>Archivo ejecutable en python con el método del gradiente hidráulico.</td></tr>
-<tr><td>f_hid.py</td><td>Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales</td></tr>
-<tr><td>f_io.py </td><td>Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados</td></tr>
-<tr><td>LICENSE</td><td>Texto de la licencia GPL-3</td></tr>
-<tr><td>README.md</td><td>Este documento</td></tr>
-<tr><td>GradienteHidráulico.xlsx</td><td>Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación</td></tr>
-<tr><td>img</td><td>Carpeta que contiene las imágenes de este README y otras</td></tr>
-<tr><td>input</td><td>Carpeta para los archivos de entrada de los modelos de redes a correr:</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; default.mgh</td><td>Archivo de entrada de pruebas con una red simple</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; default-error-topol.mgh</td><td>Archivo de entrada para probar error topológico de una red</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; default.mgh.json</td><td>Archivo de entrada en formato JSON a usar en futuras versiones</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; EjemploBomba.mgh</td><td>Red simple con una bomba</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; EjemploVRP.mgh</td><td>Red simple con una Válvula reductora de presión</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; P3Tanques.mgh </td><td>Solución al problema de los tres tanques</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh</td><td>Determinación del caudal máximo en una tubería</td></tr>
-<tr><td>output</td><td>Carpeta a usar para el envío de los archivos de salida:</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; default.mgh.out</td><td>Archivo de salida de pruebas con una red simple</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; EjemploBomba.mgh.out</td><td>Salida de red simple con una bomba</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; EjemploVRP.mgh.out</td><td>Salida de red simple con una Válvula reductora de presión</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; P3Tanques.mgh.out</td><td>Salida de solución al problema de los tres tanques</td></tr>
-<tr><td>&nbsp;&nbsp;&#9493; CaudalMax.mgh.out</td><td>Salida de determinación del caudal máximo en una tubería</td></tr>
-</table>
+| Archivo                               |   Descripción                                                                      |
+|---------------------------------------|------------------------------------------------------------------------------------|
+| `mgh.py`                              |Archivo ejecutable en python con el método del gradiente hidráulico.                |
+| `f_hid.py`                            |Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales      |
+| `f_io.py`                             |Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados|
+| `LICENSE`                             |Texto de la licencia GPL-3                                                          |  
+| `README.md`                           |Este documento                                                                      |
+| `GradienteHidráulico.xlsx`            |Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación|
+| `img`                                 |Carpeta que contiene las imágenes de este README y otras                            |
+|`input`                                |Carpeta para los archivos de entrada de los modelos de redes a correr:              |
+|&nbsp;&#9493; `default.mgh`            |Archivo de entrada de pruebas con una red simple                                    |
+|&nbsp;&#9493; `default-error-topol.mgh`|Archivo de entrada para probar error topológico de una red                          |
+|&nbsp;&#9493; `default.mgh.json`       |Archivo de entrada en formato JSON a usar en futuras versiones                      |
+|&nbsp;&#9493; `EjemploBomba.mgh`       |Red simple con una bomba                                                            |
+|&nbsp;&#9493; `EjemploVRP.mgh`         |Red simple con una Válvula reductora de presión                                     |
+|&nbsp;&#9493; `P3Tanques.mgh`          |Solución al problema de los tres tanques                                            |
+|&nbsp;&#9493; `CaudalMax.mgh`          |Determinación del caudal máximo en una tubería                                      |
+|`output`                               |Carpeta a usar para el envío de los archivos de salida:                             |
+|&nbsp;&#9493; `default.mgh.out`        |Archivo de salida de pruebas con una red simple                                     |
+|&nbsp;&#9493; `EjemploBomba.mgh.out`   |Salida de red simple con una bomba                                                  |
+|&nbsp;&#9493; `EjemploVRP.mgh.out`     |Salida de red simple con una Válvula reductora de presión                           |
+|&nbsp;&#9493; `P3Tanques.mgh.out`      |Salida de solución al problema de los tres tanques                                  |
+|&nbsp;&#9493; `CaudalMax.mgh.out`      |Salida de determinación del caudal máximo en una tubería                            |
+
+<br>
 
 ### Modo de uso
 
