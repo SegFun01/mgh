@@ -256,7 +256,6 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Mostrar licencia y versión por medio de una opción, ejm:  `mgh -lv`
 - Entrada y salida de datos por medio de archivos JSON
 - Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. **Opcionalmente**: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
-- Imprimir archivo usado una opción -f
 - Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
 - opción para correr en modo interactivo `-i`  que permita construir el modelo y salvarlo en `fin.mgh` y correrlo 
 - opción para salida a archivo por defecto con:  `-f`  sale a  `fin.out`
