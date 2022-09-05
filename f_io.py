@@ -190,3 +190,48 @@ def output_check(fout):
    fout = "./output/" + fout  # se cambia el directorio por ./output/    
    fout = fout + ".out"       # se especifica extensión .mgh.out
    return fout    
+
+def crea_red(fout):
+   nn=[]
+   e=[]
+   q=[]
+   f=[]
+   nt=[]
+   print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
+   print("     Construcción de red en modo interactivo")
+   titulo = input("Título de la red a modelar: ")
+   autor  = input("Autor del modelo          : ")
+   fecha  = input("Fecha                     : ")
+   version = input("Versión de corrida       : ")
+   viscosidad = float(input("Viscosidad cinemática :"))
+   imbalance = floar(input("Desbalance de caudales aceptado : "))
+   MaxIt = int(input("Cantidad de iteraciones permitidas : "))
+   ecuacion= input("Ecuación para f [C/S]: ")
+   print("----------------")
+   ns = int(input("Cantidad de nodos de carga fija : "))
+   print ("Nudo  Elev.   Carga ") 
+   for i in range(ns):
+      cadena = input("{i} :")
+      lista = cadena.strip()
+      nn.append(i)
+      e.append(float(lista[0]))
+      q.append(float(lista[1]))
+   print("----------------")
+   n = int(input("Cantidad de nodos de demanda : "))
+   print ("Nudo  Elev. Demanda Factor ") 
+   for i in range(n):
+      cadena = input("{i+ns} :")
+      lista = cadena.strip()
+      nn.append(i+ns)
+      e.append(float(lista[0]))
+      q.append(float(lista[1]))
+      f.append(float(lista[2]))
+   t = int(input("Cantidad de tramos : "))
+   print ("Nudo  Elev. Demanda Factor ") 
+   for i in range(t):
+      cadena = input("{i+ns} :")
+      lista = cadena.strip()
+      nn.append(i+ns)
+      e.append(float(lista[0]))
+      q.append(float(lista[1]))
+      f.append(float(lista[2]))
