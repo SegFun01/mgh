@@ -137,7 +137,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo,ns):
               if LGHv < LGHobj: 
                   g = LGHobj-LGHv
               else: 
-                 q = 0 
+                 g = 0 
               gQ = g / Q[i]
               m[i,i]=a11[i,i] + gQ
               #if ($modo=="2"){
