@@ -131,11 +131,11 @@ def imprime_matrices_2(matrices,nombres):
 def imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t):
    print("Variables hidráulicas de los tramos")   
    print("")
-   print("  N  De->A    L    D    ks    kL    Es    A      v       Re     f       hf    hL     alfa")
-   print("------------------------------------------------------------------------------------------")
+   print("  N  De->A    L    D    ks    kL    Es    A      v       Re     f       hf    hL      alfa")
+   print("-------------------------------------------------------------------------------------------")
    for i in range(t):
-       print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:5.0f} {d[i]:4.0f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {At[i]:7.4f} {v[i]:6.2f} {Re[i]:7.0f} {f[i]:6.5f} {hf[i]:5.2f} {hm[i]:5.2f} {alfa[i]:8.2f}" )
-   print("------------------------------------------------------------------------------------------")
+       print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:5.0f} {d[i]:4.0f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {At[i]:7.4f} {v[i]:6.2f} {Re[i]:7.0f} {f[i]:6.5f} {hf[i]:5.2f} {hm[i]:5.2f} {alfa[i]:9.2f}" )
+   print("-------------------------------------------------------------------------------------------")
 
 #---------->>>>>>>>>> Imprimir matrices para verificación
 def matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1):
