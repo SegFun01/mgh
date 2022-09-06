@@ -330,7 +330,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  T   de->a      V       Q       hf      hL      hT       S")
    print("--------------------------------------------------------------")    
    for i in range(t):
-       print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f}", (A1[i,i]-A[i,i])*At[i]*19.62/Qi[i] if "VR" in es[i] else "-" )
+       print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f}", (A1[i,i]-A[i,i])*Qi[i] if "VR" in es[i] else "" )
        
    print("--------------------------------------------------------------")    
    print("")
