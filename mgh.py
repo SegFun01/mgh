@@ -210,7 +210,7 @@ for i in range(t):
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])        # Iniciar matriz de alfas
 BT = np.transpose(B)                         # iniciar matriz B transpuesta
 A1= hid.construir_A1(alfa,Q,t)               #iniciar matriz A'
-A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo) # iniciar matriz A       
+A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo,ns) # iniciar matriz A       
 
 #---------->>>>>>>>>> Check de matrices:   comentar
 #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
@@ -372,7 +372,7 @@ while dqT > imbalance and it < MaxIt:
   qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)      # calcula el caudal de los nudos de carga fija
   recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
   A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
-  A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo)  # vuelve a reconstruir la matriz alfa [A]   
+  A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo,ns)  # vuelve a reconstruir la matriz alfa [A]   
   if modo == "-v":       # modo de impresión detallado
      print("")
      print(f"-----Iteración número: {it:3} -----")

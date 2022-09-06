@@ -102,7 +102,7 @@ def construir_A1(alfa,q,t):
        #print("m[i,i],alfa[i],Q[i] ",m[i,i],alfa[i],q[i])
    return m
 
-def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):  
+def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo,ns):  
     # toma A1 y reemplaza alfa, beta y gama de acuerdo a [es] y [op]
     m = np.zeros([t,t],dtype=float) # aquí se guarda A1 temporalmente para ser devuelta
     for i in range(t):
@@ -110,7 +110,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
     # Se necesitan los vectores e, de, a para computar el nuevo valor (a+b+c)
     for i in range(t):
          if es[i].strip()=="VR":  # VALVULA REDUCTORA
-              j=de[i]
+              j=de[i]-ns+1
               k=a[i]
               cota1 = e[j]
               cota2 = e[k]
@@ -126,7 +126,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
               #if modo=="2")   #revisar impresion
                 #printf("Tramo %d, de %d a %d : VR, se ajusta A11[%d][%d] con &gamma;=%f, &gamma;/Q=%f, valor=%f<br>",$i+1, $j, $k, $i, $i,$g,$gQ,$A11[$i][$i]);          
          if es[i].strip()=="VS":  # //VALVULA SOSTENEDORA
-              j=de[i]
+              j=de[i]-ns+1
               k=a[i]
               cota1 = e[j]
               cota2 = e[k]
