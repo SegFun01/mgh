@@ -323,7 +323,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación   Q Base    FVH   Q Neto     Carga   Presión")
    print("-----------------------------------------------------------")
    for i in range(n):
-       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i+ns]:6.2f}  {(qi[i]*1000):6.2f}    {H[i]:6.2f}  {(Hi[i]-e[i]):7.2f}")
+       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i+ns]:6.2f}  {(qi[i]*1000):6.2f}    {H[i]:6.2f}  {(Hi[i]-e[i+ns]):7.2f}")
    print("-----------------------------------------------------------")
    print("")
    print("Tramos")

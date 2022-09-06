@@ -216,11 +216,11 @@ def crea_red():
    autor  = input("Autor del modelo          : ")
    fecha  = input("Fecha                     : ")
    version = input("Versión de corrida        : ")
-   viscosidad = input("Viscosidad cinemática     :")
+   viscosidad = input("Viscosidad cinemática     : ")
    imbalance = input("Desbalance de Q aceptado  : ")
    MaxIt = input("Iteraciones permitidas    : ")
    ecuacion= input("Ecuación para f: C ó S    : ")
-   factor_global = input("Factor global de demanda: ")
+   factor_global = input("Factor global de demanda  : ")
    print("----------------")
    ns = int(input("Cantidad de nodos de carga fija : "))
    print ("Nudo  Elev Carga ") 
@@ -269,7 +269,7 @@ def crea_red():
       for i in range(n):
          print(f"{nn[i+ns]}, {e[i+ns]}, {q[i+ns]}, {fi[i]} ")
       for i in range(t):
-         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]} , {d[i]} , {ks[i]}, {km[i]} , {es[i]}, {op[i]}")
+         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]}, {d[i]}, {ks[i]}, {km[i]}, {es[i]}, {op[i]}")
       print("EOF - crcs-2022")            
       # Reset the standard output
       sys.stdout = original_stdout 
