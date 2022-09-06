@@ -225,7 +225,7 @@ def crea_red():
    ns = int(input("Cantidad de nodos de carga fija : "))
    print ("Nudo  Elev Carga ") 
    for i in range(ns):
-      cadena = input(f"{i}   :")
+      cadena = input(f"{i}   :  ")
       lista = cadena.strip()
       nn.append(i)
       e.append(float(lista[0]))
@@ -243,7 +243,7 @@ def crea_red():
    t = int(input("Cantidad de tramos : "))
    print ("Tramo de  a  L  D   Ks  KL Es Op") 
    for i in range(t):
-      cadena = input(f"{i}  : ")
+      cadena = input(f"{i}  :  ")
       lista = cadena.strip()
       nt.append(i)
       de.append(lista[0])
@@ -256,7 +256,7 @@ def crea_red():
       op.append(lista[7].strip())
    # Saving the reference of the standard output
    original_stdout = sys.stdout    
-   with open(fout, 'w') as arch:
+   with open(fin, 'w') as arch:
       sys.stdout = arch 
       print(f"{titulo}")
       print(f"{autor}")
