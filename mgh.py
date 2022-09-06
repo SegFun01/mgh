@@ -77,6 +77,11 @@ if len(sys.argv) == 3 :  #se da comando, archivo, modo
    modo.strip()
    if modo not in ["-n","-q","-v"]:
       modo="-n"
+#antes de abrir archivo verificar si se desea incluir datos interactivamente
+if "-i" in sys.argv:
+    fin = io.crear_red()
+    fout = io.output_check(fin)
+
 #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
 try:
     f = open(fin,'r')

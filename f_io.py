@@ -191,7 +191,7 @@ def output_check(fout):
    fout = fout + ".out"       # se especifica extensión .mgh.out
    return fout    
 
-def crea_red(fout):
+def crea_red():
    nn=[]
    e=[]
    q=[]
@@ -208,14 +208,18 @@ def crea_red(fout):
    fi= []   # factores de variación horaria de cada nudo de demanda
    print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
    print("     Construcción de red en modo interactivo")
+   fin = input("Escriba el nombre del archivo de entrada a crear: ")
+   fin = input_check(fin)
+   print("-----")
    titulo = input("Título de la red a modelar: ")
    autor  = input("Autor del modelo          : ")
    fecha  = input("Fecha                     : ")
    version = input("Versión de corrida       : ")
    viscosidad = float(input("Viscosidad cinemática :"))
-   imbalance = floar(input("Desbalance de caudales aceptado : "))
+   imbalance = float(input("Desbalance de caudales aceptado : "))
    MaxIt = int(input("Cantidad de iteraciones permitidas : "))
    ecuacion= input("Ecuación para f [C/S]: ")
+   factor_global = float(input("Factor de variación global de demanda: "))
    print("----------------")
    ns = int(input("Cantidad de nodos de carga fija : "))
    print ("Nudo  Elev.   Carga ") 
@@ -238,9 +242,34 @@ def crea_red(fout):
    t = int(input("Cantidad de tramos : "))
    print ("Nudo  Elev. Demanda Factor ") 
    for i in range(t):
-      cadena = input("{i+ns} :")
+      cadena = input("{i} :")
       lista = cadena.strip()
-      nn.append(i+ns)
-      e.append(float(lista[0]))
-      q.append(float(lista[1]))
-      f.append(float(lista[2]))
+      nt.append(i)
+      de.append(float(lista[0]))
+      a.append(float(lista[1]))
+      l.append(float(lista[2]))
+      d.append(int(valores[3]))
+      ks.append(float(valores[4]))    
+      km.append(float(valores[5]))    
+      es.append(valores[6])    
+      op.append(valores[7].strip())
+   # Saving the reference of the standard output
+   original_stdout = sys.stdout    
+   with open(fout, 'w') as arch:
+      sys.stdout = arch 
+      print(f"{titulo}")
+      print(f"{autor}")
+      print(f"{fecha}")
+      print(f"{version}")
+      print(f"{viscosidad}, {imbalance}, {MaxIt}, {ecuacion}")
+      print(f"{ns}, {n}, {t}, {factor_global} ")
+      for i in range(ns):
+         print(f"{nn[i]}, {e[i]}, {q[i]}, * ")
+      for i in range(n):
+         print(f"{nn[i+ns]}, {e[i+ns]}, {q[i+ns]}, {fi[i]} ")
+      for i in range(t):
+         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]} , {d[i]} , {ks[i]}, {km[i]} , {es[i]}, {op[i]}")
+      print("EOF - crcs-2022")            
+      # Reset the standard output
+      sys.stdout = original_stdout 
+   return fin
