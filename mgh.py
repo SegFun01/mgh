@@ -327,16 +327,16 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("-----------------------------------------------------------")
    print("")
    print("Tramos")
-   print("  T   de->a      V       Q       hf      hL      hT       S")
-   print("--------------------------------------------------------------")    
+   print("  T   de->a      V       Q       hf      hL      hT       S     H")
+   print("------------------------------------------------------------------")    
    for i in range(t):
        if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:
           hv = (A1[i,i]-A[i,i])*Qi[i]
        else:
-          hv=""
+          hv=0
        print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f} {hv:5.2f}")
        
-   print("--------------------------------------------------------------")    
+   print("------------------------------------------------------------------")    
    print("")
    print("Fecha y hora de esta corrida: ",time.strftime("%c"))
    print("crcs-2022")
