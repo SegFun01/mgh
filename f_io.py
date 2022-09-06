@@ -195,7 +195,6 @@ def crea_red(fout):
    nn=[]
    e=[]
    q=[]
-   fi=[]
    nt=[]
    de= []   # id del nudo de inicio del tramo
    a = []   # id del nudo final del tramo
