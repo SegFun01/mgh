@@ -195,8 +195,18 @@ def crea_red(fout):
    nn=[]
    e=[]
    q=[]
-   f=[]
+   fi=[]
    nt=[]
+   de= []   # id del nudo de inicio del tramo
+   a = []   # id del nudo final del tramo
+   l = []   # longitudes de cada tramo en [m]
+   d = []   # diametro de cada tramo en [mm]
+   ks= []   # coeficiente de rugosidad del tra¿mo en [mm]
+   km= []   # coeficiente de perdidas locales del tramo
+   es= []   # estado del tramo: TA abierto, TC cerrado, BO bomba, VRP válvula, etc
+   tmp=[]   # temporal para guardar valores de las opciones del tramo
+   op= []   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
+   fi= []   # factores de variación horaria de cada nudo de demanda
    print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
    print("     Construcción de red en modo interactivo")
    titulo = input("Título de la red a modelar: ")
