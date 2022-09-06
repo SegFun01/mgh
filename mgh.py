@@ -330,7 +330,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  T   de->a      V       Q       hf      hL      hT       S   ")
    print("---------------------------------------------------------------")    
    for i in range(t):
-       if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:
+       if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
           hv =  f'{((A1[i,i]-A[i,i])*Qi[i]):.2f}'
           hv = "H"+ es[i].strip() + "=" + hv
        else:

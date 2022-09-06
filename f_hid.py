@@ -131,7 +131,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo):
               cota1 = e[j]
               cota2 = e[k]
               cota1 = (cota1 + cota2)/2
-              LGHobj = cota1 + op[i]
+              LGHobj = cota1 + float(op[i])
               LGH1 = H[j]
               LGHv = LGH1 - 0.5*(hm[i]+hf[i])
               if LGHv < LGHobj: 
