@@ -332,6 +332,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    for i in range(t):
        if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:
           hv =  f'{((A1[i,i]-A[i,i])*Qi[i]):.2f}'
+          hv = "H"+ es[i] + "=" + hv
        else:
           hv=""
        print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f} {hv}")
