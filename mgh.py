@@ -278,7 +278,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Autor:      ",autor)
    print("Fecha:      ",fecha)
    print("Versión:    ",version)
-   print("Viscosidad:",viscosidad)
+   print("Viscosidad: ",viscosidad)
    print("Desbalance: ",imbalance)
    print("Máximo iteraciones permitidas: ",MaxIt)
    if ecuacion=="C":
