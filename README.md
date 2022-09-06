@@ -290,12 +290,15 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 |&nbsp;&#9493; `EjemploVRP.mgh`         |Red simple con una Válvula reductora de presión                                     |
 |&nbsp;&#9493; `P3Tanques.mgh`          |Solución al problema de los tres tanques                                            |
 |&nbsp;&#9493; `CaudalMax.mgh`          |Determinación del caudal máximo en una tubería                                      |
+|&nbsp;&#9493; `Red-mixta.mgh`          |Red mixta (abierta y cerrada) para pruebas                                          |
 |`output`                               |Carpeta a usar para el envío de los archivos de salida:                             |
 |&nbsp;&#9493; `default.mgh.out`        |Archivo de salida de pruebas con una red simple                                     |
 |&nbsp;&#9493; `EjemploBomba.mgh.out`   |Salida de red simple con una bomba                                                  |
 |&nbsp;&#9493; `EjemploVRP.mgh.out`     |Salida de red simple con una Válvula reductora de presión                           |
 |&nbsp;&#9493; `P3Tanques.mgh.out`      |Salida de solución al problema de los tres tanques                                  |
 |&nbsp;&#9493; `CaudalMax.mgh.out`      |Salida de determinación del caudal máximo en una tubería                            |
+
+
 
 <br>
 
