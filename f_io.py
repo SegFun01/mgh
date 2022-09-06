@@ -224,7 +224,7 @@ def crea_red():
    ns = int(input("Cantidad de nodos de carga fija : "))
    print ("Nudo  Elev.   Carga ") 
    for i in range(ns):
-      cadena = input("{i} :")
+      cadena = input(f"{i} :")
       lista = cadena.strip()
       nn.append(i)
       e.append(float(lista[0]))
@@ -233,8 +233,7 @@ def crea_red():
    n = int(input("Cantidad de nodos de demanda : "))
    print ("Nudo Elev Demanda Factor ") 
    for i in range(n):
-      print(i)
-      cadena = input(" :")
+      cadena = input(f"{i+ns} :")
       lista = cadena.strip()
       nn.append(i+ns)
       e.append(float(lista[0]))
