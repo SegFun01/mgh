@@ -142,7 +142,7 @@ for i in range(0,t):
    d.append(float(valores[4]))        
    ks.append(float(valores[5]))    
    km.append(float(valores[6]))    
-   es.append(valores[7])    
+   es.append(valores[7].strip())    
    op.append(valores[8].strip())
 f.close()  
 

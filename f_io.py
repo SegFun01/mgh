@@ -112,7 +112,7 @@ def revisar_topologia(t,fin,n,ns,nn,de,a,titulo,autor,fecha,version,modo):
 #---------->>>>>>>>>> Imprimir matrices de una lista
 def imprime_matrices(matrices,nombres):
    # a partir de una lista de matrices y una lista de sus nombres imprime cada matriz de la lista
-   np.set_printoptions(precision=2,linewidth=100)
+   np.set_printoptions(precision=2,linewidth=120)
    j=0
    for i in matrices:
       print(f"Matriz [{nombres[j]}]")
@@ -123,7 +123,7 @@ def imprime_matrices(matrices,nombres):
 #---------->>>>>>>>>> Imprimir matrices de una lista
 def imprime_matrices_2(matrices,nombres):
    # a partir de una lista de matrices y una lista de sus nombres imprime cada matriz de la lista
-   np.set_printoptions(precision=2,linewidth=100)
+   np.set_printoptions(precision=2,linewidth=120)
    j=0
    for i in matrices:
       print(f"Matriz [{nombres[j]}]")
