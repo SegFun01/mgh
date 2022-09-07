@@ -230,7 +230,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Contrucción de matrices ALPHA: A y A1 &#10003;
 - Construcción de otras matrices y vectores: N, I &#10003;
 - Algoritmo de cálculo de Hi y Qi por iteración &#10003;
-- Inclusión de accesorios especiales: Tubería Cerrada, Válvula Sostenedora, Válvula Reductora, Bomba, Check &#128269;
+- Inclusión de accesorios especiales: Válvula Sostenedora, Válvula Reductora, Bomba &#10003; 
+- Inclusión de accesorios especiales: Tubería Cerrada, Check &#128269;
 - Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
 - Selección de ecuación a usar (S-J ó C-W): &#10003;
 - Impresión de resultados en tablas &#10003;
@@ -243,7 +244,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Usar diccionarios para nudos tramos y datos generales &#10007;
 - Crear un archivo de configuración para tipo ecuación, cantidad de iteraciones, tolerancias, etc &#10007;
 - Leer datos de demandas de un archivo independiente o vectores &#10007;
-
+- Construcción de la red desde terminal (muy rudimentariamente) y correr la red &#10003;
 
 
 ### Por desarrollar
@@ -314,7 +315,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
     -n: modo normal, por defecto, imprime tablas de datos de entrada y salida.
     -q: modo silencioso, solo imprime los vectores H y Q finales.
     -v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
-        tores y matrices y los resultados de cada iteración.                                      
+        tores y matrices y los resultados de cada iteración. 
+    -i: modo interactivo, permite construir y correr la red                                         
     
     Notas:
       La salida del programa va dirigida a la consola: "stdout"
@@ -325,6 +327,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
       python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
       python3 mgh.py default -n > ./output/default.mgh.out 
       python3 mgh.py ./input/default.mgh -q
+      python3 mgh.py -i
     
     
 
