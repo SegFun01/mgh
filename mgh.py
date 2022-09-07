@@ -350,7 +350,7 @@ if modo == "-v":                                        # modo de impresión det
      print("")
      print("----- Iteración inicial -----")
      # imprime las matrices iniciales
-     io.imprime_matrices([q,Ho,qi,B,C,Q], ["q","Ho","qi","B","C","Q"] )
+     io.imprime_matrices([q,Ho,qi,B,C,Q*1000], ["q","Ho","qi","B","C","Q"] )
      print("")
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t)
      print("")
@@ -378,7 +378,7 @@ while dqT > imbalance and it < MaxIt:
      print(f"-----Iteración número: {it:3} -----")
      print("")
      io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
-     io.imprime_matrices([A,A1,qfi,Hi,Qi,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
+     io.imprime_matrices([A,A1,qfi,Hi,Qi*1000,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
      print("")
      print(f"-----Fin iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
      print("")
