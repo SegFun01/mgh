@@ -194,31 +194,23 @@ La descripción de cada línea se hará con base en su número:
     19. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
     20. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
 
+- Tipos de nudo: 
+  - NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (T o E) el tipo no está implementado
+  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto pre4sión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
 
-- Tipos de nudo: <ul>
-  <li> NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido.
-     Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (T o E) el tipo no está implementado
-  <li>ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto pre4sión dependiente de la demanda
-     Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
-  </ul>
-- Tipos de tramo: <ul>
-  <li>Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto.
-     Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta
-     TC= Tubería Cerrada, Opciones (no tiene)
-  <li>Válvula de control: Puede ser una válvula reductora de presión VR o una válvula sostenedora de presión VS.
-     Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, Tipo VS= Válvula Sostenedora
-     VR= Válvula Reductora, Consigna [m] 
-  <li>Bomba en un tramo de tubería: Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL,
-     BO = Bomba, Coeficientes de la curva: alfa, beta, gama
-  </ul>
-- Tipos de corrida:<ul>
-  <li>quiet o silencioso: muestra únicamente los valores de las tablas de cargas en los nodos y los caudales en los tramos de la última iteración 
-  <li>normal: muestra las tablas de nudos y de tramos para la última iteración 
-  <li>detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
-  </ul></ol>
+- Tipos de tramo: 
+  - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta, TC= Tubería Cerrada, Opciones (no tiene)
+  - Válvula de control: Puede ser una válvula reductora de presión VR o una válvula sostenedora de presión VS. Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, Tipo VS= Válvula Sostenedora, VR= Válvula Reductora, Consigna [m] 
+  - Bomba en un tramo de tubería: Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, BO = Bomba, Coeficientes de la curva: alfa, beta, gama
+
+- Tipos de corrida:
+  - quiet o silencioso: muestra únicamente los valores de las tablas de cargas en los nodos y los caudales en los tramos de la última iteración 
+  - normal: muestra las tablas de nudos y de tramos para la última iteración 
+  - detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
+  - interactivo: pregunta los datos de la red, del modelo, los nudos y los tramos y ejecuta una corrida y salva el archivo de entrada
 <br>
 
-### Estado Actual
+### Estado Actual y en desarrollo
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
 Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa de pruebas.<br>
   
@@ -230,8 +222,11 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Contrucción de matrices ALPHA: A y A1 &#10003;
 - Construcción de otras matrices y vectores: N, I &#10003;
 - Algoritmo de cálculo de Hi y Qi por iteración &#10003;
-- Inclusión de accesorios especiales: Válvula Sostenedora, Válvula Reductora, Bomba &#10003; 
-- Inclusión de accesorios especiales: Tubería Cerrada, Check &#128269;
+- Inclusión de accesorios especiales: 
+   - Válvula Sostenedora `VS`, Válvula Reductora `VR`, Bomba `BO` &#10003; 
+   - Tubería Cerrada `TC`, Válvula de retención o Check `CK`, Válvula limitadora de caudal `VQ` &#10007;
+   - Nudos tipo Embalse o Reservorio `RE`, Tanque `TQ`, Emisor `EM`, Fuente `FU` &#128269;
+   - Nudos de demanda con capacidad de "aportar" caudal para modelar nacientes o pozos &#10003;
 - Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
 - Selección de ecuación a usar (S-J ó C-W): &#10003;
 - Impresión de resultados en tablas &#10003;
@@ -245,9 +240,13 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Crear un archivo de configuración para tipo ecuación, cantidad de iteraciones, tolerancias, etc &#10007;
 - Leer datos de demandas de un archivo independiente o vectores &#10007;
 - Construcción de la red desde terminal (muy rudimentariamente) y correr la red &#10003;
+- Agregar variable para el nombre descriptivo de cada elemento, ya sea tipo nudo o tramo {"nombre": "T-01-M01: Curridabat"} &#10007;
+- Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta &#128269;
+- Opción para correr en modo interactivo `-i`  que permita construir el modelo, salvarlo en `fin.mgh` y correrlo &#128269;
+- Programa para convertir archivos de entrada CSV en .JSON &#128269;
 
 
-### Por desarrollar
+### Por desarrollar en el futuro
 
 - Una interfaz de usuario para construir cada modelo y hacer los archivos de entrada de forma amigable.
 - Implementar un tramo tipo "Válvula de retención o check"
@@ -257,8 +256,6 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Mostrar licencia y versión por medio de una opción, ejm:  `mgh -lv`
 - Entrada y salida de datos por medio de archivos JSON
 - Hacer un SCRIPT que tome datos aleatorios a partir la distribución de probabilidades de FVH para cada nudo, los asigne a los nudos de demanda, que ejecute mgh y devuelva vectores de Q, H, P, qi.  Que realice esto una gran cantidad de veces y luego obtenga el comportamiento medio de la red. Aplicación de Montecarlo a la red. **Opcionalmente**: Obtener el caudal probabílistico de cada nudo usando Montecarlo y luego hacer solamente una simulación de la red usando los caudales probables en cada nudo. 
-- Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta
-- opción para correr en modo interactivo `-i`  que permita construir el modelo y salvarlo en `fin.mgh` y correrlo 
 - opción para salida a archivo por defecto con:  `-f`  sale a  `fin.out`
 - opción para especificar archivo de salida `-o fout`
 - incluir en el archivo de entrada `fin` referecia(s) a curva de demanda, puede ser en el mismo archivo o en archivo externo
@@ -269,10 +266,17 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
   - MaxIt: número máximo de iteraciones
   - Ecuación a usar (Colebrook-White/Swamee-Jain)
   - Tolerancia del cálculo de f en Colebrook-White
+- En ejecución de tiempo extendido permitir niveles de tanque sobre rebalse y bajo piso para estimar tiempo y volumen de recuperación o pérdida
+- Crear y usar patrones de demanda y oferta para los nudos:
+  - Factor de variación horaria: `FVH`
+  - Factor de variación según día de la semana: `FVdow`
+  - Factor de variación según mes del año: `FVm`
+  - Factor de variación de la producción: `FVP` : `['normal': 1.0, 'lavado':0.75, 'sobrecarga': 1.25]`
+
 
 <br>
 
-### Contenido
+### Contenido de la carpeta
 
 | Archivo                               |   Descripción                                                                      |
 |---------------------------------------|------------------------------------------------------------------------------------|
@@ -292,6 +296,10 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 |&nbsp;&#9493; `P3Tanques.mgh`          |Solución al problema de los tres tanques                                            |
 |&nbsp;&#9493; `CaudalMax.mgh`          |Determinación del caudal máximo en una tubería                                      |
 |&nbsp;&#9493; `Red-mixta.mgh`          |Red mixta (abierta y cerrada) para pruebas                                          |
+|&nbsp;&#9493; `EjemploVSP.mgh`         |Red simple con váñlvula sostenedora de presión                                      |
+|&nbsp;&#9493; `Qmax-VRP.mgh`           |Caudal máximo en tubería simple con Válvula Reductora                               |
+|&nbsp;&#9493; `Qmax-VSP.mgh`           |Caudal máximo en tubería simple con Válvula Sostenedora                             |
+|&nbsp;&#9493; `Naciente.mgh`           |Utilización de los nodos de demanda como fuente tipo manantial o naciente Q=cte     |
 |`output`                               |Carpeta a usar para el envío de los archivos de salida:                             |
 |&nbsp;&#9493; `default.mgh.out`        |Archivo de salida de pruebas con una red simple                                     |
 |&nbsp;&#9493; `EjemploBomba.mgh.out`   |Salida de red simple con una bomba                                                  |
