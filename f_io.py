@@ -37,6 +37,7 @@ def uso():
    print("-q: modo silencioso, solo imprime los vectores H y Q finales")
    print("-v: modo detallado, imprime tablas de datos de entrada y salida, los vec-")
    print("    tores y matrices y los resultados de cada iteración")
+   print("-i: modo interactivo, permite construir y correr la red")
    print("")
    print("Observaciones:")
    print("  La salida del programa va dirigida a la consola: \"stdout\".")
@@ -47,6 +48,7 @@ def uso():
    print("  python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out")
    print("  python3 mgh.py default -n > ./output/default.mgh.out")
    print("  python3 mgh.py ./input/default.mgh -q")
+   print("  python3 mgh.py -i")
    print("-------------------------------------------------------------------------")
 #----------Fin de uso()
 
