@@ -1,0 +1,119 @@
+{
+    "titulo": "Titulo",
+    "autor": "Autor",
+    "fecha": "8-set-2022",
+    "version": "8-set-2022",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 50,
+    "ecuacion": "C",
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 1,
+            "elevacion": 90.0,
+            "demanda": -40.0,
+            "factor": 1.0
+        },
+        {
+            "id": 2,
+            "elevacion": 87.0,
+            "demanda": 6.0,
+            "factor": 1.0
+        },
+        {
+            "id": 3,
+            "elevacion": 85.0,
+            "demanda": 7.0,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 80.0,
+            "demanda": 4.0,
+            "factor": 1.0
+        },
+        {
+            "id": 5,
+            "elevacion": 88.0,
+            "demanda": 6.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 1,
+            "hasta": 0,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 3.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 2,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 750.0,
+            "diametro": 150.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 3,
+            "desde": 2,
+            "hasta": 4,
+            "longitud": 500.0,
+            "diametro": 150.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 4,
+            "desde": 3,
+            "hasta": 5,
+            "longitud": 750.0,
+            "diametro": 150.0,
+            "ks": 0.0015,
+            "kL": 10.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 5,
+            "desde": 4,
+            "hasta": 5,
+            "longitud": 500.0,
+            "diametro": 100.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        }
+    ],
+    "signature": "#EOF- crcs-2022"
+}
