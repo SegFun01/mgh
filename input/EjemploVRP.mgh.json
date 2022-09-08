@@ -21,7 +21,7 @@
             "id": 1,
             "elevacion": 70.0,
             "demanda": 20.0,
-            "factor": 1.0
+            "factor": 1.5
         },
         {
             "id": 2,
@@ -51,7 +51,7 @@
             "id": 6,
             "elevacion": 40.0,
             "demanda": 10.0,
-            "factor": 1.0
+            "factor": 1.4
         }
     ],
     "tramos": [

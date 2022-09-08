@@ -24,13 +24,11 @@ import time
 import numpy as np 
 import f_hid as hid   # funciones hidráulicas
 import f_io as io     # funciones de impresion
-import json
 #import json_io as jio # funciones de entrada y salida de datos en JSON
-
 
 #---------->>>>>>>>>> Variables globales que se inicializan por defecto
 fin = "input/default.mgh"       # archivo de entrada 
-fout = "output/default.mgh.out" # archivo de salida   
+fout = fin + ".out"             # archivo de salida   
 titulo= "Titulo de la red"      # titulo del modelo de red
 autor= "Carlos Camacho Soto"    # autor del modelo
 fecha= "21/03/1966"             # fecha de creacion
@@ -63,68 +61,15 @@ tmp=[]   # temporal para guardar valores de las opciones del tramo
 op= []   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
 fi= []   # factores de variación horaria de cada nudo de demanda
 
-#---------->>>>>>>>>> Funcion para leer desde json
-def leer_json(fin):
-    global nn,nt,e,q,fi,h,de,a,l,d,ks,km,es,op
-    global titulo, autor, fecha, version, viscosidad, descripcion
-    global imbalance, MaxIt, factor, ecuacion, tol, duracion
-    global ns, n, t 
-    with open(fin,'r') as red:
-       j_red = json.load(red)
-    # print(j_red)
-    # x=input("pulse enter")
-    ns = len(j_red['nudos_carga'])
-    n  = len(j_red['nudos_demanda'])
-    t  = len(j_red['tramos'])
-    # print(ns , n , t)
-    # x=input("pulse enter")
-    titulo = j_red.get('titulo')
-    autor = j_red.get('autor')
-    fecha = j_red.get('fecha')
-    version = j_red.get('version')
-    viscosidad = j_red.get('viscosidad')
-    imbalance = j_red.get('imbalance')
-    MaxIt = j_red.get('max_iteraciones')
-    tol = j_red.get('tolerancia')
-    factor = j_red.get('factor_demanda_global')
-    ecuacion = j_red.get('ecuacion')
-    duracion = j_red.get('duracion')
-    descripcion = j_red.get('descripcion')
-    
-    for i in (j_red['nudos_carga']): # leer los nudos de carga del JSON
-       nn.append(i.get('id'))
-       e.append(i.get('elevacion'))
-       q.append(i.get('carga'))
-       h.append(i.get('carga'))  
-
-    for i in (j_red['nudos_demanda']): # leer los nudos de demanda del JSON
-       nn.append(i.get('id'))
-       e.append(i.get('elevacion'))
-       q.append(i.get('demanda'))
-       fi.append(i.get('factor'))
-
-    for i in (j_red['tramos']):  # leer los tramos del JSON
-       nt.append(i.get('id'))
-       de.append(i.get('desde'))
-       a.append(i.get('hasta'))
-       l.append(i.get('longitud'))
-       d.append(i.get('diametro'))
-       ks.append(i.get('ks'))
-       km.append(i.get('kL'))
-       es.append(i.get('estado'))
-       op.append(i.get('opciones'))
-
 #---------->>>>>>>>>> Carga de datos desde archivo CSV
 #-----Verificar los parámetros de entrada
 if len(sys.argv) < 2 :   #cuando solo se escribe mgh, imprime el modo de uso y termina
    io.uso()
-   fin = ".input/default.mgh.json"
+   fin = ".input/default.mgh"
    sys.exit()
 else:                     #cuando se da el comando más un nombre de archivo, lo ejecuta en modo normal
    fin = sys.argv[1]
    fin = io.input_check(fin)
-   if ".json" not in fin:
-      fin = fin + ".json"
    fout = io.output_check(fin)
    #print(f"F input: {fin}   F output: {fout} ")
    modo = "-n"
@@ -151,8 +96,56 @@ except:
     print("--------------------------------------------------")
     sys.exit()    
 #-----Cargar los datos globales de la corrida
-f.close()
-leer_json(fin)
+titulo = f.readline().strip()
+autor = f.readline().strip()
+fecha = f.readline().strip()
+version = f.readline().strip()
+linea = f.readline()
+valores = linea.split(",")
+viscosidad = float(valores[0])
+imbalance = float(valores[1])    
+MaxIt = int(valores[2])
+if valores[3].strip() in "C c":
+    ecuacion="C"
+linea = f.readline()
+valores = linea.split(",")
+ns = int(valores[0])          # nodos de carga fija NS
+n = int(valores[1])           # nodos de demanda NN
+t = int(valores[2])           # numero de tramos NT
+factor = float(valores[3])    # factor de demanda de todos los nudos   
+#-----Lee los nudos de carga fija
+for i in range(0,ns):
+   linea = f.readline()
+   valores = linea.split(",")
+   nn.append(int(valores[0]))
+   e.append(float(valores[1]))
+   #trash = valores[2].split(" ")
+   q.append(float(valores[2]))          # este q es la carga de los nudos de carga fija. Usar más adelante para guardar q de los tanques
+   h.append(float(valores[2]))          # copiando la altura en el vector h también  REVISAR ESTO PARA USAR SOLO H, ahora no es posible
+   fi.append(0)
+#-----Leer los nudos de demanda
+for i in range(0,n):
+   linea = f.readline()
+   valores = linea.split(",")
+   #trash = valores[2]
+   nn.append(int(valores[0]))
+   e.append(float(valores[1]))
+   q.append(float(valores[2]))
+   fi.append(float(valores[3]))
+#-----Leer los datos de los tramos
+for i in range(0,t):
+   linea = f.readline()
+   valores = linea.split(",")
+   nt.append(int(valores[0]))
+   de.append(int(valores[1]))
+   a.append(int(valores[2]))
+   l.append(float(valores[3]))    
+   d.append(float(valores[4]))        
+   ks.append(float(valores[5]))    
+   km.append(float(valores[6]))    
+   es.append(valores[7].strip())    
+   op.append(valores[8].strip())
+f.close()  
 
 #---------->>>>>>>>>> Revisar topología de la red
 if modo=="-v":
@@ -193,7 +186,7 @@ np.fill_diagonal(N,2)                # iniciar matriz N con 2 en la diagonal
 for i in range(0,ns):                
     Ho[i]=(h[i])                     # iniciar matriz alturas fijas 
 for i in range(ns,n+ns):
-    qi[i-ns]=(q[i]/1000*factor*fi[i-ns]) # iniciar matriz demandas en nudos   
+    qi[i-ns]=(q[i]/1000*factor*fi[i]) # iniciar matriz demandas en nudos   
 for i in range(t):
     for j in range(ns):
         if de[i]==j and es[i]!="TC":
@@ -308,7 +301,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación   Demanda    FVH")
    print("---------------------------------")
    for i in range(n):
-      print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}   {fi[i]:6.2f} ")
+      print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}   {fi[i+ns]:6.2f} ")
    print("---------------------------------")
    print("")
    print("Tramos")
@@ -331,7 +324,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación   Q Base    FVH    Q Neto      Carga   Presión")
    print("-------------------------------------------------------------")
    for i in range(n):
-       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i]:6.2f}  {(qi[i]*1000):7.2f}    {H[i]:7.2f}  {(Hi[i]-e[i+ns]):7.2f}")
+       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i+ns]:6.2f}  {(qi[i]*1000):7.2f}    {H[i]:7.2f}  {(Hi[i]-e[i+ns]):7.2f}")
    print("-------------------------------------------------------------")
    print("")
    print("Tramos")
@@ -350,47 +343,6 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Fecha y hora de esta corrida: ",time.strftime("%c"))
    print("crcs-2022")
 #----------------------------------------------------------------------
-
-#--------------------->>>>>>>>>>>> Imprimir salida en formato json a archivo
-def imprime_salida_json(fout):
-   d_red={}
-   d_red["titulo"]=titulo
-   d_red["autor"]=autor
-   d_red["fecha"]=fecha
-   d_red["version"]= version
-   d_red["viscosidad"]=float(viscosidad)
-   d_red["imbalance"]=float(imbalance)
-   d_red["max_iteraciones"]=int(MaxIt)
-   d_red["ecuacion"]= ecuacion
-   d_red["tolerancia"]= tol
-   d_red["factor_demanda_global"]= float(factor)
-   #-----Lee los nudos de carga fija
-   nc = []
-   for i in range(0,ns):
-      nc.append({ "id": nn[i], "elevacion": e[i], "carga": q[i], "nivel": e[i]-q[i], "caudal": qfi[i]*1000 })
-   d_red["nudos_carga"]=nc
-   #-----Leer los nudos de demanda
-   nd=[]
-   for i in range(0,n):
-      nd.append({ "id": nn[i+ns], "elevacion": e[i+ns], "demanda": q[i+ns],"factor": fi[i], "demanda_neta": qi[i]*1000, "altura_piezometrica": Hi[i], "presion": Hi[i]-e[i+ns] })
-   d_red["nudos_demanda"]=nd
-   #-----Leer los datos de los tramos
-   tr=[]
-   for i in range(0,t):
-      if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
-          hv =  ((A1[i,i]-A[i,i])*Qi[i])
-      else:
-          hv=0
-      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
-   d_red["tramos"]=tr
-   d_red["signature"]="crcs-2022"
-   
-   # Serializing json
-   json_object = json.dumps(d_red, indent=4)
-   
-   # Writing to sample.json
-   with open(fout, "w") as outfile:
-       outfile.write(json_object)
 
 #--- FIN DE FUNCIONES GLOBALES
 
@@ -444,8 +396,6 @@ if modo=="-q":
     io.imprime_salida_quiet(Q,H,e,ns)
 else:
     imprime_reporte()
-
-imprime_salida_json(fout)
 
 """
     Copyright © 2022 Carlos Camacho Soto

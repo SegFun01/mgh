@@ -191,8 +191,12 @@ def output_check(fout):
    lista = fout.split("/")
    x = len(lista)
    fout = lista[x-1]
+   fout = fout.replace(".mgh","")
+   fout = fout.replace(".json","")
    fout = "./output/" + fout  # se cambia el directorio por ./output/    
-   fout = fout + ".out"       # se especifica extensión .mgh.out
+   fout = fout + ".mgh.out.json"       # se especifica extensión .mgh.out
+   #print(fout)
+   #x = input("Pausa en check output")
    return fout    
 
 def crea_red():
@@ -278,3 +282,4 @@ def crea_red():
       # Reset the standard output
       sys.stdout = original_stdout 
    return fin
+

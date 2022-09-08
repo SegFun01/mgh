@@ -30,7 +30,7 @@ import json
 
 #---------->>>>>>>>>> Variables globales que se inicializan por defecto
 fin = "input/default.mgh"       # archivo de entrada 
-fout = fin + ".out"             # archivo de salida   
+fout = "output/default.mgh.out" # archivo de salida   
 titulo= "Titulo de la red"      # titulo del modelo de red
 autor= "Carlos Camacho Soto"    # autor del modelo
 fecha= "21/03/1966"             # fecha de creacion
@@ -122,8 +122,10 @@ if len(sys.argv) < 2 :   #cuando solo se escribe mgh, imprime el modo de uso y t
    sys.exit()
 else:                     #cuando se da el comando más un nombre de archivo, lo ejecuta en modo normal
    fin = sys.argv[1]
-   fin = io.input_check(fin)+ ".json"
-   fout = io.output_check(fin) + ".json"
+   fin = io.input_check(fin)
+   if ".json" not in fin:
+      fin = fin + ".json"
+   fout = io.output_check(fin)
    #print(f"F input: {fin}   F output: {fout} ")
    modo = "-n"
 if len(sys.argv) == 3 :  #se da comando, archivo, modo
@@ -306,7 +308,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación   Demanda    FVH")
    print("---------------------------------")
    for i in range(n):
-      print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}   {fi[i+ns]:6.2f} ")
+      print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}   {fi[i]:6.2f} ")
    print("---------------------------------")
    print("")
    print("Tramos")
@@ -329,7 +331,7 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  N  Elevación   Q Base    FVH    Q Neto      Carga   Presión")
    print("-------------------------------------------------------------")
    for i in range(n):
-       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i+ns]:6.2f}  {(qi[i]*1000):7.2f}    {H[i]:7.2f}  {(Hi[i]-e[i+ns]):7.2f}")
+       print(f"{nn[i+ns]:>3}  {e[i+ns]:7.2f}    {q[i+ns]:7.2f}  {fi[i]:6.2f}  {(qi[i]*1000):7.2f}    {H[i]:7.2f}  {(Hi[i]-e[i+ns]):7.2f}")
    print("-------------------------------------------------------------")
    print("")
    print("Tramos")
@@ -348,6 +350,47 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("Fecha y hora de esta corrida: ",time.strftime("%c"))
    print("crcs-2022")
 #----------------------------------------------------------------------
+
+#--------------------->>>>>>>>>>>> Imprimir salida en formato json a archivo
+def imprime_salida_json(fout):
+   d_red={}
+   d_red["titulo"]=titulo
+   d_red["autor"]=autor
+   d_red["fecha"]=fecha
+   d_red["version"]= version
+   d_red["viscosidad"]=float(viscosidad)
+   d_red["imbalance"]=float(imbalance)
+   d_red["max_iteraciones"]=int(MaxIt)
+   d_red["ecuacion"]= ecuacion
+   d_red["tolerancia"]= tol
+   d_red["factor_demanda_global"]= float(factor)
+   #-----Lee los nudos de carga fija
+   nc = []
+   for i in range(0,ns):
+      nc.append({ "id": nn[i], "elevacion": e[i], "carga": q[i], "nivel": e[i]-q[i], "caudal": qfi[i]*1000 })
+   d_red["nudos_carga"]=nc
+   #-----Leer los nudos de demanda
+   nd=[]
+   for i in range(0,n):
+      nd.append({ "id": nn[i+ns], "elevacion": e[i+ns], "demanda": q[i+ns],"factor": fi[i], "demanda_neta": qi[i]*1000, "altura_piezometrica": Hi[i], "presion": Hi[i]-e[i+ns] })
+   d_red["nudos_demanda"]=nd
+   #-----Leer los datos de los tramos
+   tr=[]
+   for i in range(0,t):
+      if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+          hv =  ((A1[i,i]-A[i,i])*Qi[i])
+      else:
+          hv=0
+      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
+   d_red["tramos"]=tr
+   d_red["signature"]="crcs-2022"
+   
+   # Serializing json
+   json_object = json.dumps(d_red, indent=4)
+   
+   # Writing to sample.json
+   with open(fout, "w") as outfile:
+       outfile.write(json_object)
 
 #--- FIN DE FUNCIONES GLOBALES
 
@@ -401,6 +444,8 @@ if modo=="-q":
     io.imprime_salida_quiet(Q,H,e,ns)
 else:
     imprime_reporte()
+
+imprime_salida_json(fout)
 
 """
     Copyright © 2022 Carlos Camacho Soto

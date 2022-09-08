@@ -262,6 +262,47 @@ def convertir_CSV_JSON(fin):
    with open(fout, "w") as outfile:
        outfile.write(json_object)
 
+def imprime_salida_json(fout,Qi,Hi,v,Re,f,hf,hm,qi,qfi,A,A1):
+   d_red={}
+   d_red["titulo"]=titulo
+   d_red["autor"]=autor
+   d_red["fecha"]=fecha
+   d_red["version"]= version
+   d_red["viscosidad"]=float(viscosidad)
+   d_red["imbalance"]=float(imbalance)
+   d_red["max_iteraciones"]=int(MaxIt)
+   d_red["ecuacion"]= ecuacion
+   d_red["tolerancia"]= tol
+   d_red["factor_demanda_global"]= float(factor)
+   #-----Lee los nudos de carga fija
+   nc = []
+   for i in range(0,ns):
+      nc.append({ "id": nn[i], "elevacion": e[i], "carga": q[i], "nivel": e[i]-q[i], "caudal": qfi[i]*1000 })
+   d_red["nudos_carga"]=nc
+   #-----Leer los nudos de demanda
+   nd=[]
+   for i in range(0,n):
+      nd.append({ "id": q[i+ns], "elevacion": e[i+ns], "demanda": q[i+ns],"factor": fi[i], "demanda_neta": qi[i]*1000, "altura_piezometrica": Hi[i], "presion": Hi[i]-e[i+ns] })
+   d_red["nudos_demanda"]=nd
+   #-----Leer los datos de los tramos
+   tr=[]
+   for i in range(0,t):
+      if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+          hv =  ((A1[i,i]-A[i,i])*Qi[i])
+      else:
+          hv=0
+      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
+   d_red["tramos"]=tr
+   d_red["signature"]="crcs-2022"
+   
+   # Serializing json
+   json_object = json.dumps(d_red, indent=4)
+   # Writing to sample.json
+   fout = fout + '.json'
+   with open(fout, "w") as outfile:
+       outfile.write(json_object)
+   
+   
 
 print("")
 print("----Menú de opciones----")
