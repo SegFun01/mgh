@@ -45,15 +45,15 @@ Requiere de:<br>
 
 Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
 El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:<br>
-<table border="0"><tr><td><img src="img/f01.png"></td><td>(1)</td></tr></table><br>
+<table border="0"><tr><td><img src="./img/f01.png"></td><td>(1)</td></tr></table><br>
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
-<table border="0"><tr><td><img src="img/f02.png"></td><td>(2)</td></tr></table><br>
+<table border="0"><tr><td><img src="./img/f02.png"></td><td>(2)</td></tr></table><br>
 En cada tramo toda la energía se consume en pérdidas:<br>
-<table border="0"><tr><td><img src="img/f03.png"></td><td>(3)</td></tr></table><br>
+<table border="0"><tr><td><img src="./img/f03.png"></td><td>(3)</td></tr></table><br>
 Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:<br>
-<table border="0"><tr><td><img src="img/f04.png"></td><td>(4)</td></tr></table><br>
+<table border="0"><tr><td><img src="./img/f04.png"></td><td>(4)</td></tr></table><br>
 Por lo tanto &alpha; será:<br>
-<table border="0"><tr><td><img src="img/f05.png"></td><td>(5)</td></tr></table><br><br>
+<table border="0"><tr><td><img src="./img/f05.png"></td><td>(5)</td></tr></table><br><br>
 
 ### Definición de variables y matrices
 
@@ -81,23 +81,23 @@ Por lo tanto &alpha; será:<br>
   
 <br>
 La pérdida de carga en cada tramo de la red, correspondiente a la ecuación de conservación de la energía, es:<br>
-<table border="0"><tr><td><img src="img/f06.png"></td><td>(6)</td></tr></table>
+<table border="0"><tr><td><img src="./img/f06.png"></td><td>(6)</td></tr></table>
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
-<table border="0"><tr><td><img src="img/f07.png"> </td><td>(7)</td></tr></table>
+<table border="0"><tr><td><img src="./img/f07.png"> </td><td>(7)</td></tr></table>
 Las ecuaciones (6) y (7) que se deben resolver en el método, pueden escribirse como:<br>
-<table border="0"><tr><td><img src="img/f08.png"></td><td>(8)</td></tr></table>
+<table border="0"><tr><td><img src="./img/f08.png"></td><td>(8)</td></tr></table>
 La anterior ecuación es no-lineal y debe resolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
-<table border="0"><tr><td><img src="img/f09.png"></td><td>(9)</td></tr>
+<table border="0"><tr><td><img src="./img/f09.png"></td><td>(9)</td></tr>
 <tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table>
 En los tramos y nudos, la variación del caudal en el tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
-<table border="0"><tr><td><img src="img/f11.png"></td><td>(11)</td></tr>
+<table border="0"><tr><td><img src="./img/f11.png"></td><td>(11)</td></tr>
 <tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table>
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
-<table border="0"><tr><td><img src="img/f13.png"></td><td>(13)</td></tr></table>
+<table border="0"><tr><td><img src="./img/f13.png"></td><td>(13)</td></tr></table>
 Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, las cuales deben resolverse de forma iterativa. De modo que las matrices [H<sub>i+1</sub>] y [Q<sub>i+1</sub>] cuando coverjan tendrán los valores de Caudales en los tramos y Alturas piezométricas en los nodos<br>
-<table border="0"><tr><td><img src="img/f14.png"></td><td>(14)</td></tr>
-<tr><td><img src="img/f15.png"></td><td>(15)</td></tr></table>
+<table border="0"><tr><td><img src="./img/f14.png"></td><td>(14)</td></tr>
+<tr><td><img src="./img/f15.png"></td><td>(15)</td></tr></table>
 <br>
 El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la figura siguiente:  
    
@@ -167,7 +167,7 @@ V0.01
 </pre>
 </td></tr></table>
 El anterior archivo de entrada corresponde al ejemplo mostrado en la siguiente figura:
-<img src="/img/f17.png"><br>
+<img src="./img/f17.png"><br>
 Se incluye en el contenido de la carpeta principal, un archivo con la solución del ejercicio anterior por medio de una hoja eletrónica, llamado "GradienteHidráulico.xlsx", el cual fue usado como comprobación del funcionamiento de mgh.<br>
 
 #### Descripción del formato del archivo de entrada
@@ -232,18 +232,19 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Impresión de resultados en tablas &#10003;
 - Impresión de matrices en modo detallado &#128269;
 - Impresión de salida quiet: solo tablas de caudales y cargas &#10003;
-- Salida de datos por medio de JSON &#10007;
-- Entrada de datos por medio de JSON &#10007;
+- Salida de datos por medio de JSON &#10003;
+- Entrada de datos por medio de JSON &#10003;
+- Programa rudimentario para crear redes en JSON &#10003; 
 - Aplicación para construir redes usando NCURSES &#10007;
 - Documentación &#128269;
-- Usar diccionarios para nudos tramos y datos generales &#10007;
+- Usar diccionarios para nudos tramos y datos generales &#10003;
 - Crear un archivo de configuración para tipo ecuación, cantidad de iteraciones, tolerancias, etc &#10007;
 - Leer datos de demandas de un archivo independiente o vectores &#10007;
 - Construcción de la red desde terminal (muy rudimentariamente) y correr la red &#10003;
 - Agregar variable para el nombre descriptivo de cada elemento, ya sea tipo nudo o tramo {"nombre": "T-01-M01: Curridabat"} &#10007;
 - Leer por defecto de input y guardar por defecto en output, permitiendo además escoger una ruta &#128269;
 - Opción para correr en modo interactivo `-i`  que permita construir el modelo, salvarlo en `fin.mgh` y correrlo &#128269;
-- Programa para convertir archivos de entrada CSV en .JSON &#128269;
+- Programa para convertir archivos de entrada CSV en .JSON &#10003;
 
 
 ### Por desarrollar en el futuro
@@ -280,14 +281,15 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 
 | Archivo                               |   Descripción                                                                      |
 |---------------------------------------|------------------------------------------------------------------------------------|
-| `mgh.py`                              |Archivo ejecutable en python con el método del gradiente hidráulico.                |
+| `mgh.py`                              |Programa en python con el método del gradiente hidráulico : **MGH**.                |
 | `f_hid.py`                            |Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales      |
 | `f_io.py`                             |Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados|
+| `json_io.py`                          |Ejecutable para crear redes en formato .json y convertir CSV en json: rudimentario  |
 | `LICENSE`                             |Texto de la licencia GPL-3                                                          |  
 | `README.md`                           |Este documento                                                                      |
 | `GradienteHidráulico.xlsx`            |Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación|
 | `img`                                 |Carpeta que contiene las imágenes de este README y otras                            |
-|`input`                                |Carpeta para los archivos de entrada de los modelos de redes a correr:              |
+| `input`                               |Carpeta para los archivos de entrada de los modelos de redes a correr:              |
 |&nbsp;&#9493; `default.mgh`            |Archivo de entrada de pruebas con una red simple                                    |
 |&nbsp;&#9493; `default-error-topol.mgh`|Archivo de entrada para probar error topológico de una red                          |
 |&nbsp;&#9493; `default.mgh.json`       |Archivo de entrada en formato JSON a usar en futuras versiones                      |
@@ -300,12 +302,13 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 |&nbsp;&#9493; `Qmax-VRP.mgh`           |Caudal máximo en tubería simple con Válvula Reductora                               |
 |&nbsp;&#9493; `Qmax-VSP.mgh`           |Caudal máximo en tubería simple con Válvula Sostenedora                             |
 |&nbsp;&#9493; `Naciente.mgh`           |Utilización de los nodos de demanda como fuente tipo manantial o naciente Q=cte     |
-|`output`                               |Carpeta a usar para el envío de los archivos de salida:                             |
+| `output`                              |Carpeta a usar para el envío de los archivos de salida:                             |
 |&nbsp;&#9493; `default.mgh.out`        |Archivo de salida de pruebas con una red simple                                     |
 |&nbsp;&#9493; `EjemploBomba.mgh.out`   |Salida de red simple con una bomba                                                  |
 |&nbsp;&#9493; `EjemploVRP.mgh.out`     |Salida de red simple con una Válvula reductora de presión                           |
 |&nbsp;&#9493; `P3Tanques.mgh.out`      |Salida de solución al problema de los tres tanques                                  |
 |&nbsp;&#9493; `CaudalMax.mgh.out`      |Salida de determinación del caudal máximo en una tubería                            |
+|&nbsp;&#9493; ` y otros`               |Salida de determinación del caudal máximo en una tubería                            |
 
 
 
