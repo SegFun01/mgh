@@ -1,0 +1,73 @@
+{
+    "titulo": "Problema de los 3 tanques",
+    "autor": "Ing. Carlos Camacho Soto",
+    "fecha": "08/02/2018",
+    "version": "1.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "S",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 132.0
+        },
+        {
+            "id": 1,
+            "elevacion": 130.0,
+            "carga": 90.0
+        },
+        {
+            "id": 2,
+            "elevacion": 120.0,
+            "carga": 128.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 3,
+            "elevacion": 70.0,
+            "demanda": 100.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "desde": 1,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 2,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-"
+        }
+    ],
+    "signature": "crcs-2022"
+}

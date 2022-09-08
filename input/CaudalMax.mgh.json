@@ -1,0 +1,57 @@
+{
+    "titulo": "Calculo de caudal maximo",
+    "autor": "Ing. Carlos Camacho Soto",
+    "fecha": "08/02/2018",
+    "version": "1.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "S",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0
+        },
+        {
+            "id": 1,
+            "elevacion": 100.0,
+            "carga": 100.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 100.0,
+            "demanda": 0.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 200.0,
+            "diametro": 500.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 1,
+            "longitud": 200.0,
+            "diametro": 500.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        }
+    ],
+    "signature": "crcs-2022"
+}

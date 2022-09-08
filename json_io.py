@@ -1,6 +1,8 @@
 ###### LEER LOS DATOS DEL LA RED DESDE UN ARCHIVO DE JSON 
 
+from ast import FunctionType
 import json
+from lzma import FORMAT_AUTO
 import sys
 
 nn = []
@@ -56,11 +58,8 @@ def output_check(fout):
    fout = fout + ".out"       # se especifica extensión .mgh.out
    return fout    
 
-def crea_red():
-   global fin
+def crea_red(fin):
    d_red = {}
-   miLista = []
-   miDict  = {}
    print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
    print("     Construcción de red en modo interactivo")
    print("-------------------------------------------------")
@@ -129,12 +128,21 @@ def crea_red():
    # Writing to sample.json
    with open(fin, "w") as outfile:
       outfile.write(json_red)
+   return fin
 
 def mostrar_json(fin):
    with open(fin,'r') as red:
       j_red = json.load(red)
+   print("")
+   print("Mostrando archivo JSON...")
+   print("")
    print(json.dumps(j_red, indent=4))
+   print("")
 
+def cargar_json(fin):
+   with open(fin,'r') as red:
+      j_red = json.load(red)
+   return j_red
 
 def leer_json(fin):
     global nn,nt,e,q,fi,h,de,a,l,d,ks,km,es,op
@@ -143,9 +151,6 @@ def leer_json(fin):
     global ns, n, t 
     with open(fin,'r') as red:
        j_red = json.load(red)
-
-    print(json.dumps(j_red, indent=4))
-    print("-----")
     
     ns = len(j_red['nudos_carga'])
     n  = len(j_red['nudos_demanda'])
@@ -186,8 +191,108 @@ def leer_json(fin):
        es.append(i.get('estado'))
        op.append(i.get('opciones'))
 
-crea_red()
-parada = input("Archivo JSON creado! pulse <enter> para verlo en terminal ")
-mostrar_json(fin)
+def convertir_CSV_JSON(fin):
+   d_red = {}
+   #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
+   try:
+       f = open(fin,'r')
+   except:
+       print("--------------------------------------------------")
+       print("        MÉTODO DEL GRADIENTE HIDRÁULICO")
+       print("--------------------------------------------------")
+       print("Archivo de entrada:", fin)
+       print("¡Ocurrió un error al abrir el archivo !!!")
+       print("Programa abortado")
+       print("--------------------------------------------------")
+       sys.exit()    
+   #-----Cargar los datos globales de la corrida
+   titulo = f.readline().strip()
+   autor = f.readline().strip()
+   fecha = f.readline().strip()
+   version = f.readline().strip()
+   linea = f.readline()
+   valores = linea.split(",")
+   viscosidad = float(valores[0])
+   imbalance = float(valores[1])    
+   MaxIt = int(valores[2])
+   ecuacion= valores[3].strip()
+   linea = f.readline()
+   valores = linea.split(",")
+   ns = int(valores[0])          # nodos de carga fija NS
+   n = int(valores[1])           # nodos de demanda NN
+   t = int(valores[2])           # numero de tramos NT
+   factor = float(valores[3])    # factor de demanda de todos los nudos   
+   d_red["titulo"]=titulo
+   d_red["autor"]=autor
+   d_red["fecha"]=fecha
+   d_red["version"]= version
+   d_red["viscosidad"]=float(viscosidad)
+   d_red["imbalance"]=float(imbalance)
+   d_red["max_iteraciones"]=int(MaxIt)
+   d_red["ecuacion"]= ecuacion
+   d_red["tolerancia"]= tol
+   d_red["factor_demanda_global"]= float(factor)
+   #-----Lee los nudos de carga fija
+   nc = []
+   for i in range(0,ns):
+      linea = f.readline()
+      valores = linea.split(",")
+      nc.append({ "id": int(valores[0]), "elevacion": float(valores[1]),"carga": float(valores[2]) })
+   d_red["nudos_carga"]=nc
+   #-----Leer los nudos de demanda
+   nd=[]
+   for i in range(0,n):
+      linea = f.readline()
+      valores = linea.split(",")
+      nd.append({ "id": int(valores[0]), "elevacion": float(valores[1]), "demanda": float(valores[2]),"factor": float(valores[3])})
+   d_red["nudos_demanda"]=nd
+   #-----Leer los datos de los tramos
+   tr=[]
+   for i in range(0,t):
+      linea = f.readline()
+      valores = linea.split(",")
+      tr.append({ "id": int(valores[0]), "desde": int(valores[1]), "hasta": int(valores[2]), "longitud": float(valores[3]), "diametro": float(valores[4]),"ks": float(valores[5]),"kL": float(valores[6]),"estado": valores[7].strip(),"opciones": valores[8].strip() })
+   d_red["tramos"]=tr
+   d_red["signature"]="crcs-2022"
+   f.close()  
+   # Serializing json
+   json_object = json.dumps(d_red, indent=4)
+   # Writing to sample.json
+   fout = fin + '.json'
+   with open(fout, "w") as outfile:
+       outfile.write(json_object)
+
+
+print("")
+print("----Menú de opciones----")
+print(" 1) Crear archivo de entrada de red en formato JSON desde terminal")
+print(" 2) Mostrar archivo de entrada de red en la terminal")
+print(" 3) Cargar archivo JSON y devolver un diccionario")
+print(" 4) Convertir archivo en CSV a JSON ")
+print("")
+x = input("Opción:")
+if x not in ['1','2','3','4']:
+   print("Exit")
+   sys.exit()
+else:
+   if x== '1':
+      crea_red('./input/nueva_red.mgh.json')
+   if x== '2':
+      fin = input("Nombre de archivo: ")
+      fin = input_check(fin)
+      mostrar_json(fin)
+   if x== '3':
+      fin = input("Nombre de archivo: ")
+      fin = input_check(fin)
+      diccionario = cargar_json(fin)
+      print("")
+      print("Imprimiendo diccionario")
+      print(diccionario)
+   if x== '4':
+      fin = input("Nombre de archivo, incluya ruta completa y extensión: ")
+      convertir_CSV_JSON(fin)
+#crea_red()
+#parada = input("Archivo JSON creado! pulse <enter> para verlo en terminal ")
+#mostrar_json(fin)
 
 # leer_json(fin)

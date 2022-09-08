@@ -1,0 +1,137 @@
+{
+    "titulo": "Ejemplo con valvula de control",
+    "autor": "Carlos Camacho",
+    "fecha": "02/02/2019",
+    "version": "1.0.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "S",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 90.0,
+            "carga": 100.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 1,
+            "elevacion": 70.0,
+            "demanda": 20.0,
+            "factor": 1.0
+        },
+        {
+            "id": 2,
+            "elevacion": 70.0,
+            "demanda": 20.0,
+            "factor": 1.0
+        },
+        {
+            "id": 3,
+            "elevacion": 40.0,
+            "demanda": 30.0,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 40.0,
+            "demanda": 30.0,
+            "factor": 1.0
+        },
+        {
+            "id": 5,
+            "elevacion": 40.0,
+            "demanda": 20.0,
+            "factor": 1.0
+        },
+        {
+            "id": 6,
+            "elevacion": 40.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 1,
+            "longitud": 100.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "desde": 1,
+            "hasta": 2,
+            "longitud": 80.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 6,
+            "longitud": 125.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 3,
+            "desde": 1,
+            "hasta": 4,
+            "longitud": 200.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "VS",
+            "opciones": "30"
+        },
+        {
+            "id": 4,
+            "desde": 4,
+            "hasta": 3,
+            "longitud": 125.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 5,
+            "desde": 4,
+            "hasta": 5,
+            "longitud": 100.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 6,
+            "desde": 6,
+            "hasta": 5,
+            "longitud": 80.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "TA",
+            "opciones": "-"
+        }
+    ],
+    "signature": "crcs-2022"
+}

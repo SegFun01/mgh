@@ -1,0 +1,182 @@
+{
+    "titulo": "Ejemplo con equipo de bombeo",
+    "autor": "Carlos Camacho",
+    "fecha": "02/02/2019",
+    "version": "1.0.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "S",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.5,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 90.0,
+            "carga": 100.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 1,
+            "elevacion": 80.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        },
+        {
+            "id": 2,
+            "elevacion": 80.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        },
+        {
+            "id": 3,
+            "elevacion": 80.0,
+            "demanda": 15.0,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 80.0,
+            "demanda": 15.0,
+            "factor": 1.0
+        },
+        {
+            "id": 5,
+            "elevacion": 150.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        },
+        {
+            "id": 6,
+            "elevacion": 150.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        },
+        {
+            "id": 7,
+            "elevacion": 150.0,
+            "demanda": 15.0,
+            "factor": 1.0
+        },
+        {
+            "id": 8,
+            "elevacion": 150.0,
+            "demanda": 15.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 1,
+            "longitud": 100.0,
+            "diametro": 300.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "desde": 1,
+            "hasta": 3,
+            "longitud": 75.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 4,
+            "longitud": 100.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 4.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 3,
+            "desde": 5,
+            "hasta": 6,
+            "longitud": 100.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 4,
+            "desde": 5,
+            "hasta": 7,
+            "longitud": 75.0,
+            "diametro": 100.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 5,
+            "desde": 7,
+            "hasta": 8,
+            "longitud": 100.0,
+            "diametro": 100.0,
+            "ks": 0.05,
+            "kL": 4.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 6,
+            "desde": 6,
+            "hasta": 8,
+            "longitud": 75.0,
+            "diametro": 100.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 7,
+            "desde": 1,
+            "hasta": 2,
+            "longitud": 100.0,
+            "diametro": 200.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 8,
+            "desde": 2,
+            "hasta": 4,
+            "longitud": 75.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 0.0,
+            "estado": "TA",
+            "opciones": "-"
+        },
+        {
+            "id": 9,
+            "desde": 2,
+            "hasta": 5,
+            "longitud": 100.0,
+            "diametro": 150.0,
+            "ks": 0.05,
+            "kL": 2.0,
+            "estado": "BO",
+            "opciones": "-3125.0 187.5 77.5"
+        }
+    ],
+    "signature": "crcs-2022"
+}
