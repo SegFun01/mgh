@@ -273,6 +273,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
   - Factor de variación según día de la semana: `FVdow`
   - Factor de variación según mes del año: `FVm`
   - Factor de variación de la producción: `FVP` : `['normal': 1.0, 'lavado':0.75, 'sobrecarga': 1.25]`
+- Modelar tramos a canal abierto.  Requiere un algoritmo para determinar si una tubería entra o sale de régimen de flujo a canal abierto 
 
 
 <br>
@@ -308,7 +309,6 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 |&nbsp;&#9493; `EjemploVRP.mgh.out`     |Salida de red simple con una Válvula reductora de presión                           |
 |&nbsp;&#9493; `P3Tanques.mgh.out`      |Salida de solución al problema de los tres tanques                                  |
 |&nbsp;&#9493; `CaudalMax.mgh.out`      |Salida de determinación del caudal máximo en una tubería                            |
-|&nbsp;&#9493; ` y otros`               |Salida de determinación del caudal máximo en una tubería                            |
 
 
 
