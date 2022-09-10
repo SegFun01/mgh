@@ -384,6 +384,7 @@ def imprime_salida_json(fout):
       tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
    d_red["tramos"]=tr
    d_red["signature"]="crcs-2022"
+   d_red["timestamp"]=time.strftime("%c")
    
    # Serializing json
    json_object = json.dumps(d_red, indent=4)

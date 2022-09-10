@@ -1,0 +1,106 @@
+{
+    "titulo": "Ejercicio caudal m\u00e1ximo con valvula de control",
+    "autor": "Carlos Camacho Soto",
+    "fecha": "6-set-2022",
+    "version": "v1.0.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "C",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0,
+            "nivel": -10.0,
+            "caudal": -19.08082673662532
+        },
+        {
+            "id": 1,
+            "elevacion": 50.0,
+            "carga": 55.0,
+            "nivel": -5.0,
+            "caudal": -10.919173263375036
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 50.0,
+            "demanda": 10.0,
+            "factor": 1.0,
+            "demanda_neta": 10.0,
+            "altura_piezometrica": 109.14046339787821,
+            "presion": 59.14046339787821
+        },
+        {
+            "id": 3,
+            "elevacion": 50.0,
+            "demanda": 20.0,
+            "factor": 1.0,
+            "demanda_neta": 20.0,
+            "altura_piezometrica": 55.318419836165475,
+            "presion": 5.318419836165475
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-",
+            "caudal": 19.08082673662532,
+            "velocidad": 0.6073615786827835,
+            "Re": 120627.92029449524,
+            "f": 0.017350485022586386,
+            "hf": 0.8155437350937711,
+            "hL": 0.09400817718145846,
+            "h_accesorio": 0
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 0.0,
+            "estado": "VR",
+            "opciones": "5",
+            "caudal": 9.080826736625248,
+            "velocidad": 0.28905169249899054,
+            "Re": 57408.47914577766,
+            "f": 0.020290896590973672,
+            "hf": 0.21601965917022217,
+            "hL": 0.0,
+            "h_accesorio": -54.03245356829309
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 1,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 4.0,
+            "estado": "TA",
+            "opciones": "-",
+            "caudal": -10.919173263375036,
+            "velocidad": -0.3475680798685998,
+            "Re": 69030.40315165833,
+            "f": 0.019495664707048655,
+            "hf": 0.3000950431871806,
+            "hL": 0.02462865854098784,
+            "h_accesorio": 0
+        }
+    ],
+    "signature": "crcs-2022",
+    "timestamp": "Sat Sep 10 09:36:16 2022"
+}

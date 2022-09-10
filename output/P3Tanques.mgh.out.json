@@ -1,0 +1,104 @@
+{
+    "titulo": "Problema de los 3 tanques",
+    "autor": "Ing. Carlos Camacho Soto",
+    "fecha": "08/02/2018",
+    "version": "1.0",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "S",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 132.0,
+            "nivel": -32.0,
+            "caudal": -219.41873930289762
+        },
+        {
+            "id": 1,
+            "elevacion": 130.0,
+            "carga": 90.0,
+            "nivel": 40.0,
+            "caudal": -90.78882989745213
+        },
+        {
+            "id": 2,
+            "elevacion": 120.0,
+            "carga": 128.0,
+            "nivel": -8.0,
+            "caudal": 210.20756920034972
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 3,
+            "elevacion": 70.0,
+            "demanda": 100.0,
+            "factor": 1.0,
+            "demanda_neta": 100.0,
+            "altura_piezometrica": 79.79370188727358,
+            "presion": 9.793701887273585
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-",
+            "caudal": 219.41873930289762,
+            "velocidad": 4.4699618517821555,
+            "Re": 1109722.4061028191,
+            "f": 0.011566066387526405,
+            "hf": 47.114469184396754,
+            "hL": 5.091885564828684,
+            "h_accesorio": 0
+        },
+        {
+            "id": 1,
+            "desde": 1,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-",
+            "caudal": 90.78882989745213,
+            "velocidad": 1.8495348551307214,
+            "Re": 459169.5270930291,
+            "f": 0.013384574547774484,
+            "hf": 9.334490102096101,
+            "hL": 0.8717582009030118,
+            "h_accesorio": 0
+        },
+        {
+            "id": 2,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 250.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "estado": "TA",
+            "opciones": "-",
+            "caudal": -210.20756920034972,
+            "velocidad": -4.282313435336616,
+            "Re": 1063136.4040061112,
+            "f": 0.011643937896542108,
+            "hf": 43.532917280287435,
+            "hL": 4.673345657101041,
+            "h_accesorio": 0
+        }
+    ],
+    "signature": "crcs-2022",
+    "timestamp": "Sat Sep 10 09:36:16 2022"
+}
