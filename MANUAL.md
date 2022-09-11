@@ -3,6 +3,7 @@
 Programa para la modelación y simulación matemática de redes de distribución de agua a presión. Implementado en python3 usando  la metodología de análisis de redes propuesta por Pilati y Todini, 1987 
 <hr>
 
+## Work in progress !
 #### Prof. Carlos Camacho Soto            
 <br>
 
@@ -22,8 +23,11 @@ You should have received a copy of the GNU General Public License along with mgh
 ## Descripción
 
 ## Descarga e instalación
-Se puede descargar de GitHub, mediante:
+Se puede descargar directamente de GitHub, mediante:<br>
 `git clone https://github.com/SegFun01/mgh.git`
+
+Además, puede obtener un archivo comprimido desde: <br>
+`https://github.com/SegFun01/mgh/archive/refs/heads/main.zip`
 
 ### Requerimientos
 - python3
