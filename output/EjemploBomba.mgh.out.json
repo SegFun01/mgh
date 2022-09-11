@@ -15,7 +15,7 @@
             "elevacion": 90.0,
             "carga": 100.0,
             "nivel": -10.0,
-            "caudal": -150.00000000000352
+            "caudal": -150.0
         }
     ],
     "nudos_demanda": [
@@ -25,8 +25,8 @@
             "demanda": 10.0,
             "factor": 1.0,
             "demanda_neta": 15.0,
-            "altura_piezometrica": 98.86177072104392,
-            "presion": 18.861770721043925
+            "altura_piezometrica": 98.86,
+            "presion": 18.86
         },
         {
             "id": 2,
@@ -34,8 +34,8 @@
             "demanda": 10.0,
             "factor": 1.0,
             "demanda_neta": 15.0,
-            "altura_piezometrica": 95.35821957158761,
-            "presion": 15.358219571587611
+            "altura_piezometrica": 95.36,
+            "presion": 15.36
         },
         {
             "id": 3,
@@ -43,8 +43,8 @@
             "demanda": 15.0,
             "factor": 1.0,
             "demanda_neta": 22.5,
-            "altura_piezometrica": 96.37784903554225,
-            "presion": 16.377849035542255
+            "altura_piezometrica": 96.38,
+            "presion": 16.38
         },
         {
             "id": 4,
@@ -52,8 +52,8 @@
             "demanda": 15.0,
             "factor": 1.0,
             "demanda_neta": 22.5,
-            "altura_piezometrica": 95.34241804942434,
-            "presion": 15.342418049424339
+            "altura_piezometrica": 95.34,
+            "presion": 15.34
         },
         {
             "id": 5,
@@ -61,8 +61,8 @@
             "demanda": 10.0,
             "factor": 1.0,
             "demanda_neta": 15.0,
-            "altura_piezometrica": 157.46922985911567,
-            "presion": 7.469229859115671
+            "altura_piezometrica": 157.47,
+            "presion": 7.47
         },
         {
             "id": 6,
@@ -70,8 +70,8 @@
             "demanda": 10.0,
             "factor": 1.0,
             "demanda_neta": 15.0,
-            "altura_piezometrica": 155.1287477381231,
-            "presion": 5.12874773812311
+            "altura_piezometrica": 155.13,
+            "presion": 5.13
         },
         {
             "id": 7,
@@ -79,8 +79,8 @@
             "demanda": 15.0,
             "factor": 1.0,
             "demanda_neta": 22.5,
-            "altura_piezometrica": 150.53487953617037,
-            "presion": 0.5348795361703651
+            "altura_piezometrica": 150.53,
+            "presion": 0.53
         },
         {
             "id": 8,
@@ -88,8 +88,8 @@
             "demanda": 15.0,
             "factor": 1.0,
             "demanda_neta": 22.5,
-            "altura_piezometrica": 150.4137049701571,
-            "presion": 0.41370497015711294
+            "altura_piezometrica": 150.41,
+            "presion": 0.41
         }
     ],
     "tramos": [
@@ -103,11 +103,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 150.00000000000352,
-            "velocidad": 2.1220659078919875,
-            "Re": 632194.411487186,
+            "caudal": 150.0,
+            "velocidad": 2.12,
+            "Re": 632194.41,
             "f": 0.014877579311613166,
-            "hf": 1.1382292789560715,
+            "hf": 1.14,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -121,11 +121,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 42.25925745772569,
-            "velocidad": 2.3913847878364747,
-            "Re": 356214.2186449565,
+            "caudal": 42.26,
+            "velocidad": 2.39,
+            "Re": 356214.22,
             "f": 0.017043861781742824,
-            "hf": 2.4839218593451244,
+            "hf": 2.48,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -139,12 +139,12 @@
             "kL": 4.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 19.759257457725173,
-            "velocidad": 1.118145243101283,
-            "Re": 166555.89519880083,
+            "caudal": 19.76,
+            "velocidad": 1.12,
+            "Re": 166555.9,
             "f": 0.01837334025650392,
-            "hf": 0.7805384412512034,
-            "hL": 0.25489271858716156,
+            "hf": 0.78,
+            "hL": 0.25,
             "h_accesorio": 0
         },
         {
@@ -157,11 +157,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 35.25532590205999,
-            "velocidad": 1.9950433378234953,
-            "Re": 297176.2668058831,
+            "caudal": 35.26,
+            "velocidad": 2.0,
+            "Re": 297176.27,
             "f": 0.017305747389651273,
-            "hf": 2.340479094827351,
+            "hf": 2.34,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -175,11 +175,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 24.744674097939093,
-            "velocidad": 3.1505897583079943,
-            "Re": 312868.89357576903,
+            "caudal": 24.74,
+            "velocidad": 3.15,
+            "Re": 312868.89,
             "f": 0.018275127892428168,
-            "hf": 6.934360232895875,
+            "hf": 6.93,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -193,12 +193,12 @@
             "kL": 4.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 2.2446740979391735,
-            "velocidad": 0.28580078265388853,
-            "Re": 28381.408406543047,
+            "caudal": 2.24,
+            "velocidad": 0.29,
+            "Re": 28381.41,
             "f": 0.025107227513250476,
-            "hf": 0.10452654185752801,
-            "hL": 0.01665282107351177,
+            "hf": 0.1,
+            "hL": 0.02,
             "h_accesorio": 0
         },
         {
@@ -211,11 +211,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 20.255325902060598,
-            "velocidad": 2.5789881930001983,
-            "Re": 256106.07676268107,
+            "caudal": 20.26,
+            "velocidad": 2.58,
+            "Re": 256106.08,
             "f": 0.018544870685998034,
-            "hf": 4.715033442546023,
+            "hf": 4.72,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -229,11 +229,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 92.74074254227568,
-            "velocidad": 2.9520295203232005,
-            "Re": 586301.7915239723,
+            "caudal": 92.74,
+            "velocidad": 2.95,
+            "Re": 586301.79,
             "f": 0.01577596945388515,
-            "hf": 3.503551052283251,
+            "hf": 3.5,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -247,11 +247,11 @@
             "kL": 0.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 2.7407425422762532,
-            "velocidad": 0.1550943016339604,
-            "Re": 23102.42824736252,
+            "caudal": 2.74,
+            "velocidad": 0.16,
+            "Re": 23102.43,
             "f": 0.025777152402768448,
-            "hf": 0.015801474828250714,
+            "hf": 0.02,
             "hL": 0.0,
             "h_accesorio": 0
         },
@@ -265,15 +265,15 @@
             "kL": 2.0,
             "estado": "BO",
             "opciones": "-3125.0 187.5 77.5",
-            "caudal": 74.99999999999952,
-            "velocidad": 4.244131815783848,
-            "Re": 632194.411487167,
+            "caudal": 75.0,
+            "velocidad": 4.24,
+            "Re": 632194.41,
             "f": 0.01639931265073586,
-            "hf": 10.037212330234752,
-            "hL": 1.8361523822373802,
-            "h_accesorio": 73.98437500000014
+            "hf": 10.04,
+            "hL": 1.84,
+            "h_accesorio": 73.98
         }
     ],
     "signature": "crcs-2022",
-    "timestamp": "Sat Sep 10 09:36:16 2022"
+    "timestamp": "Sun Sep 11 15:12:27 2022"
 }

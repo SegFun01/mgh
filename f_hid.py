@@ -48,19 +48,26 @@ def fSJ(k, d, R):
     f = 0.25 / ( math.log10(k/d/3.7 + 5.74/Re)**2)
     return f
 
-#---< Calcula el factor de friccion con Colebrook White
-def fCW(k, d, R, tol): # parámetros de entrada ks/D, Re, t
-   # Calcular el factor de f por Colebrook-White
-   f1= 0.01
-   f=0
-   dif = 0.1
-   #it=0
-   while dif>tol:
-      f= ( 1 / ( -2* math.log10(k/d/3.7 + 2.51/(R * math.sqrt(f1) ) ) ))**2
-      dif=abs(f1-f)
-      f1=f
-      #it=it+1
-      #print("Iteracion:",it, " factor: ",f)
+
+def fCW(k, d, R, tol, ec): # parámetros de entrada ks/D, Re, t
+   # primero se calcula f por S-W
+   Re = pow(abs(R),0.9)
+   f1 = 0.25 / ( math.log10(k/d/3.7 + 5.74/Re)**2)
+   # print(f"f según Swamee-Jain: {f1:8.6f}")
+   if ec=="C":
+      # Calcular el factor de f por Colebrook-White
+      f1= 0.01
+      f=0
+      dif = 0.1
+      #it=0
+      while dif>tol:
+         f= ( 1 / ( -2* math.log10(k/d/3.7 + 2.51/(R * math.sqrt(f1) ) ) ))**2
+         dif=abs(f1-f)
+         f1=f
+         # it=it+1
+         # print(f"Iteracion:{it}   factor: {f:8.6f}")
+   else:
+      f=f1
    return f
 
 #---> Calcula las perdidas por friccion en un tramo

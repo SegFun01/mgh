@@ -6,7 +6,7 @@
     "viscosidad": 1.007e-06,
     "imbalance": 1e-05,
     "max_iteraciones": 40,
-    "ecuacion": "S",
+    "ecuacion": "C",
     "tolerancia": 1e-06,
     "factor_demanda_global": 1.0,
     "nudos_carga": [

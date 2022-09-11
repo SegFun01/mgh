@@ -15,14 +15,14 @@
             "elevacion": 100.0,
             "carga": 110.0,
             "nivel": -10.0,
-            "caudal": -19.08082673662532
+            "caudal": -19.08
         },
         {
             "id": 1,
             "elevacion": 50.0,
             "carga": 55.0,
             "nivel": -5.0,
-            "caudal": -10.919173263375036
+            "caudal": -10.92
         }
     ],
     "nudos_demanda": [
@@ -32,8 +32,8 @@
             "demanda": 10.0,
             "factor": 1.0,
             "demanda_neta": 10.0,
-            "altura_piezometrica": 109.14046339787821,
-            "presion": 59.14046339787821
+            "altura_piezometrica": 109.14,
+            "presion": 59.14
         },
         {
             "id": 3,
@@ -41,8 +41,8 @@
             "demanda": 20.0,
             "factor": 1.0,
             "demanda_neta": 20.0,
-            "altura_piezometrica": 55.318419836165475,
-            "presion": 5.318419836165475
+            "altura_piezometrica": 55.32,
+            "presion": 5.32
         }
     ],
     "tramos": [
@@ -56,12 +56,12 @@
             "kL": 5.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 19.08082673662532,
-            "velocidad": 0.6073615786827835,
-            "Re": 120627.92029449524,
+            "caudal": 19.08,
+            "velocidad": 0.61,
+            "Re": 120627.92,
             "f": 0.017350485022586386,
-            "hf": 0.8155437350937711,
-            "hL": 0.09400817718145846,
+            "hf": 0.82,
+            "hL": 0.09,
             "h_accesorio": 0
         },
         {
@@ -74,13 +74,13 @@
             "kL": 0.0,
             "estado": "VR",
             "opciones": "5",
-            "caudal": 9.080826736625248,
-            "velocidad": 0.28905169249899054,
-            "Re": 57408.47914577766,
+            "caudal": 9.08,
+            "velocidad": 0.29,
+            "Re": 57408.48,
             "f": 0.020290896590973672,
-            "hf": 0.21601965917022217,
+            "hf": 0.22,
             "hL": 0.0,
-            "h_accesorio": -54.03245356829309
+            "h_accesorio": -54.03
         },
         {
             "id": 2,
@@ -92,15 +92,15 @@
             "kL": 4.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": -10.919173263375036,
-            "velocidad": -0.3475680798685998,
-            "Re": 69030.40315165833,
+            "caudal": -10.92,
+            "velocidad": -0.35,
+            "Re": 69030.4,
             "f": 0.019495664707048655,
-            "hf": 0.3000950431871806,
-            "hL": 0.02462865854098784,
+            "hf": 0.3,
+            "hL": 0.02,
             "h_accesorio": 0
         }
     ],
     "signature": "crcs-2022",
-    "timestamp": "Sat Sep 10 09:36:16 2022"
+    "timestamp": "Sun Sep 11 15:12:27 2022"
 }

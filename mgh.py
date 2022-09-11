@@ -209,10 +209,7 @@ for i in range(t):
     At[i]=hid.area(d[i])             # iniciar matriz Areas de Tubos
     v[i]=hid.ve(Q[i],At[i])          # iniciar matriz de velocidades en tubos
     Re[i]=hid.reynolds(v[i],d[i],viscosidad) # iniciar matriz Reynolds
-    if ecuacion=="C":
-        f[i]= hid.fCW(ks[i],d[i],Re[i],tol)    # iniciar matriz factor fricción usando Colebrook-White
-    else:
-        f[i]=hid.fSJ(ks[i],d[i],Re[i])       # iniciar matriz factor fricción usando Swamee-Jain
+    f[i]= hid.fCW(ks[i],d[i],Re[i],tol,ecuacion)    # iniciar matriz factor fricción usando Colebrook-White/Swamee-Jain
     hf[i]=hid.hfr(f[i],l[i],v[i],d[i])       # iniciar matriz pérdidas fricción
     hm[i]=hid.hme(km[i],v[i])                # iniciar matriz pérdidas locales 
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])        # Iniciar matriz de alfas
@@ -232,10 +229,7 @@ def recalcular_alfa():
    for i in range(t):
        v[i]= hid.ve(Q[i],At[i])
        Re[i]=hid.reynolds(v[i],d[i],viscosidad)
-       if ecuacion=="C":
-          f[i]= hid.fCW(ks[i],d[i],Re[i],tol)        # f usando Colebrook-White
-       else:   
-          f[i]= hid.fSJ(ks[i],d[i],Re[i])          # f usando Swamee-Jain
+       f[i]= hid.fCW(ks[i],d[i],Re[i],tol,ecuacion)        # f usando Colebrook-White/Swamee-Jain
        hf[i]=hid.hfr(f[i], l[i], v[i], d[i]) 
        hm[i]= hid.hme(km[i],v[i])
        alfa[i]=hid.alf(hf[i]+hm[i],Q[i])
@@ -367,12 +361,12 @@ def imprime_salida_json(fout):
    #-----Lee los nudos de carga fija
    nc = []
    for i in range(0,ns):
-      nc.append({ "id": nn[i], "elevacion": e[i], "carga": q[i], "nivel": e[i]-q[i], "caudal": qfi[i]*1000 })
+      nc.append({ "id": nn[i], "elevacion": e[i], "carga": q[i], "nivel": e[i]-q[i], "caudal": round(qfi[i]*1000,2) })
    d_red["nudos_carga"]=nc
    #-----Leer los nudos de demanda
    nd=[]
    for i in range(0,n):
-      nd.append({ "id": nn[i+ns], "elevacion": e[i+ns], "demanda": q[i+ns],"factor": fi[i], "demanda_neta": qi[i]*1000, "altura_piezometrica": Hi[i], "presion": Hi[i]-e[i+ns] })
+      nd.append({ "id": nn[i+ns], "elevacion": e[i+ns], "demanda": q[i+ns],"factor": fi[i], "demanda_neta": qi[i]*1000, "altura_piezometrica": round(Hi[i],2), "presion": round(Hi[i]-e[i+ns],2) })
    d_red["nudos_demanda"]=nd
    #-----Leer los datos de los tramos
    tr=[]
@@ -381,7 +375,7 @@ def imprime_salida_json(fout):
           hv =  ((A1[i,i]-A[i,i])*Qi[i])
       else:
           hv=0
-      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
+      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": round(Qi[i]*1000,2), "velocidad": round(v[i],2), "Re": round(Re[i],2), "f": f[i], "hf": round(hf[i],2), "hL": round(hm[i],2), "h_accesorio": round(hv,2) })
    d_red["tramos"]=tr
    d_red["signature"]="crcs-2022"
    d_red["timestamp"]=time.strftime("%c")

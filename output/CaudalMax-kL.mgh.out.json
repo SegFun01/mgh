@@ -15,14 +15,14 @@
             "elevacion": 100.0,
             "carga": 110.0,
             "nivel": -10.0,
-            "caudal": -607.922647525559
+            "caudal": -607.92
         },
         {
             "id": 1,
             "elevacion": 100.0,
             "carga": 100.0,
             "nivel": 0.0,
-            "caudal": 607.9226475255575
+            "caudal": 607.92
         }
     ],
     "nudos_demanda": [
@@ -32,8 +32,8 @@
             "demanda": 0.0,
             "factor": 1.0,
             "demanda_neta": 0.0,
-            "altura_piezometrica": 104.99999999999999,
-            "presion": 4.999999999999986
+            "altura_piezometrica": 105.0,
+            "presion": 5.0
         }
     ],
     "tramos": [
@@ -47,12 +47,12 @@
             "kL": 5.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 607.922647525559,
-            "velocidad": 3.0961246198785504,
-            "Re": 1537301.201528575,
+            "caudal": 607.92,
+            "velocidad": 3.1,
+            "Re": 1537301.2,
             "f": 0.013084220342240722,
-            "hf": 2.557088170544932,
-            "hL": 2.4429122481697494,
+            "hf": 2.56,
+            "hL": 2.44,
             "h_accesorio": 0
         },
         {
@@ -65,15 +65,15 @@
             "kL": 5.0,
             "estado": "TA",
             "opciones": "-",
-            "caudal": 607.9226475255575,
-            "velocidad": 3.0961246198785424,
-            "Re": 1537301.201528571,
+            "caudal": 607.92,
+            "velocidad": 3.1,
+            "Re": 1537301.2,
             "f": 0.01308422034224073,
-            "hf": 2.5570881705449207,
-            "hL": 2.4429122481697374,
+            "hf": 2.56,
+            "hL": 2.44,
             "h_accesorio": 0
         }
     ],
     "signature": "crcs-2022",
-    "timestamp": "Sat Sep 10 09:36:15 2022"
+    "timestamp": "Sun Sep 11 15:12:26 2022"
 }
