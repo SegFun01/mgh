@@ -53,15 +53,27 @@ def uso():
 #----------Fin de uso()
 
 #---------->>>>>>>>>> Función para imprimir los datos de salida en modo quiet
-def imprime_salida_quiet(Q,H,e,ns):      # Imprime caudales en los tramos y presiones en los nudos de demanda
-   print("  [Q] l/s")
-   for i in range(Q.size):
-      print(f"| {(Q[i]*1000):7.2f} |")
-   print("")   
-   print("  [P] m")
-   for i in range(H.size):
-      print(f"| {(H[i]-e[i+ns]):7.2f} |")
-   print("") 
+def imprime_salida_quiet(Q,H,e,ns,fmt,dstn,fout):      # Imprime caudales en los tramos y presiones en los nudos de demanda
+   ori_stdout = sys.stdout
+   if fmt=="-t":
+      fout = fout.replace(".json", ".txt")
+      print("  [Q] l/s")
+      for i in range(Q.size):
+         print(f"| {(Q[i]*1000):7.2f} |")
+      print("")   
+      print("  [P] m")
+      for i in range(H.size):
+         print(f"| {(H[i]-e[i+ns]):7.2f} |")
+      print("")
+   if fmt=="-c":
+      fout = fout.replace(".json",".csv")
+      print("Q")
+      l=""
+      for i in range(Q.size):
+         print("")
+   if fmt=="-j":
+      q_dict = {}
+
   
 #-----------
 

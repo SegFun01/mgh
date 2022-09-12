@@ -120,83 +120,176 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 - Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
 - Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 - El formato del archivo de entrada es el que sigue:
-  
-<table border="0"><tr><td>
-<pre>
- 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td>
- <td>
-<pre>
-Red de ejemplo 1                              
-Ing. Carlos Camacho                           
-28/01/2019                                    
-V0.01                                         
-1.007E-6, 1.0E-5, 40, S                            
-1, 5, 7, 1                                       
-0, 100, 110, *                                    
-1,  90,  60, 1                                 
-2,  90,  20, 1                               
-3,  90,  30, 1                                 
-4,  90,  30, 1                                 
-5,  90,  40, 1                                 
-0,  0,  1,  500,  250,  0.0015,  2,  TA, -    
-1,  1,  2,  500,  150,  0.0015,  1,  TA, -   
-2,  3,  2,  200,  100,  0.0015,  2,  TA, -    
-3,  4,  3,  400,  150,  0.0015,  3,  TA, -    
-4,  1,  4,  200,  100,  0.0015,  8,  TA, -    
-5,  5,  4,  700,  200,  0.0015,  0,  TA, -    
-6,  0,  5,  300,  250,  0.0015,  0,  TA, -    
-</pre>
-</td></tr></table>
+        
+       {
+      	"titulo": "Ejemplo del libro de texto",
+      	"autor": "Carlos Camacho Soto",
+      	"fecha": "28/01/2019",
+      	"version": "v0.0.1",
+      	"descripcion": "Anotar datos sobre el modelo, corrida, objetivo, etc",
+      	"viscosidad": 1.007E-6,
+      	"imbalance": 1E-5,
+      	"max_iteraciones": 40,
+      	"ecuacion": "S",
+      	"duracion": 24,
+      	"tolerancia": 1.0E-5,
+      	"nc": 1,
+      	"nd": 5,
+      	"nt": 7,
+      	"factor_demanda_global": 1,
+      	"nudos_carga": [{
+      		"id": "0",
+      		"elevacion": 100,
+      		"carga": 110,
+      		"base": 900,
+      		"hmax": 5.45
+      	}],
+      	"nudos_demanda": [{
+      			"id": "1",
+      			"elevacion": 90,
+      			"demanda": 60,
+      			"factor": 1
+      		},
+      		{
+      			"id": "2",
+      			"elevacion": 90,
+      			"demanda": -40,
+      			"factor": 1
+      		},
+      		{
+      			"id": "3",
+      			"elevacion": 90,
+      			"demanda": 30,
+      			"factor": 1
+      		},
+      		{
+      			"id": "4",
+      			"elevacion": 90,
+      			"demanda": 30,
+                  "factor": 1
+      		},
+      		{
+      			"id": "5",
+      			"elevacion": 90,
+      			"demanda": 40,
+      			"factor": 1
+      		}
+      	],
+      	"tramos": [{
+      			"id": "0",
+      			"desde": "0",
+      			"hasta": "1",
+      			"longitud": 500,
+      			"diametro": 250,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "1",
+      			"desde": "1",
+      			"hasta": "2",
+      			"longitud": 400,
+      			"diametro": 150,
+      			"ks": 0.0015,
+      			"kL": 10,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "2",
+      			"desde": "3",
+      			"hasta": "2",
+      			"longitud": 200,
+      			"diametro": 100,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "3",
+      			"desde": "4",
+      			"hasta": "3",
+      			"longitud": 400,
+      			"diametro": 150,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "4",
+      			"desde": "1",
+      			"hasta": "4",
+      			"longitud": 200,
+      			"diametro": 100,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "5",
+      			"desde": "5",
+      			"hasta": "4",
+      			"longitud": 600,
+      			"diametro": 200,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		},
+      		{
+      			"id": "6",
+      			"desde": "0",
+      			"hasta": "5",
+      			"longitud": 300,
+      			"diametro": 250,
+      			"ks": 0.0015,
+      			"kL": 0,
+      			"estado": "TA",
+      			"opciones": "-"
+      		}
+      	],
+      	"curvas_demanda":[{
+      		"id": 1,
+      		"nombre": "Curva de demanda genérica 1",
+      		"fvh":[{"0": 0.53, "1":0.56,  "2":0.59,  "3":0.62,  "4":0.66,  "5":0.74,
+      		        "6":1.06,  "7":1.38,  "8":1.53,  "9":1.68, "10":1.48, "11":1.29,
+      		       "12":1.21, "13":1.14, "14":1.11, "15":1.09, "16":1.07, "17":1.04,
+      			   "18":1.01, "19":0.99, "20":0.94, "21":0.89, "22":0.76, "23":0.63}]
+      	}]
+      }
+<br>
 El anterior archivo de entrada corresponde al ejemplo mostrado en la siguiente figura:
 <img src="./img/f17.png"><br>
 Se incluye en el contenido de la carpeta principal, un archivo con la solución del ejercicio anterior por medio de una hoja eletrónica, llamado "GradienteHidráulico.xlsx", el cual fue usado como comprobación del funcionamiento de mgh.<br>
 
+
 #### Descripción del formato del archivo de entrada
-La descripción de cada línea se hará con base en su número:
+El archivo está en formato JSON, por lo que su contenido es autoexplicativo, contiene las siguientes variables de entrada:
+    
+    Título del archivo o nombre de la red o proyecto
+    Autor del modelo
+    Fecha de referencia de la modelación
+    Versión del modelo: puede usar números o texto: máxima demanda, mínimo nocturno, etc
+    Viscosidad cinemática en [m2/s] a usar en cálculos de pérdidas
+    Desbalance de caudales como presición de las iteraciones
+    Número de iteraciones permitidas para usar como parámetro de parada
+    Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
+    Factor de variación horaria global
+    Nudos de carga fija: Lista de nudos con: id, Elevación topográfica [m], Carga hidráulica [m], hmax [m], Volumen[m3]
+    Nudos de demanda: Lista de nudos con: id, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo, Ecuacion_emisor
+    Tramos: Lista de objetos tipo línea, con: id, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones, Estado 
+    Los tipos de tramo pueden ser: TB=tubo simple, BO=Bomba, VS=Válvula sostenedora, VR=Válvula reductora, CK=Válvula de retención
+    Curvas de demanda: una lista de los patrones de demanda a usar en la ejecución de tiempo extendido
 
-
-    1. TÍTULO: del archivo o nombre de la red o proyecto
-    2. AUTOR: autor del modelo
-    3. FECHA: de la modelación
-    4. VERSIÓN: la versión del modelo, puede usar números o indicar notas: máxima demanda, mínimo nocturno, etc
-    5 VISCOSIDAD, DESBALANCE, ITERACIONES, ECUACIÓN: Viscosidad a usar en cálculos de pérdidas, Desbalance de caudales, Número de iteraciones permitidas para usar como parámetro de parada de las iteraciones y Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
-    6. NC, ND, NT, FVH: Número de nodos de carga fija, Número de nodos de demanda, Número de tramos y Factor de variación horaria global
-    7. NUDO DE CARGA FIJA: en este caso solo este renglón: Número de nudo, Elevación topográfica [m], Carga hidráulica [m], asterisco (null)
-    8. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-    9. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-    10. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-    11. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-    12. NUDO DE DEMANDA: número de nudo, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo
-    13. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones 
-    14. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-    15. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-    16. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-    18. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-    19. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
-    20. TRAMO DE TUBERÍA: Número de tramo, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones
 
 - Tipos de nudo: 
   - NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (T o E) el tipo no está implementado
-  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto pre4sión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
+  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
 
 - Tipos de tramo: 
   - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta, TC= Tubería Cerrada, Opciones (no tiene)
@@ -320,24 +413,25 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
                         METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
     -------------------------------------------------------------------------- 
     
-    Modo de uso:  python mgh.py nombre_archivo.mgh opcion
+    Modo de uso:  python mgh.py nombre_archivo opcion
                                                                               
     Opciones:                                               
-    -n: modo normal, por defecto, imprime tablas de datos de entrada y salida.
-    -q: modo silencioso, solo imprime los vectores H y Q finales.
+    -n: modo normal, imprime tablas de datos de entrada y salida (DEFAULT)
+    -q: modo silencioso, solo imprime los vectores H y Q finales
     -v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
-        tores y matrices y los resultados de cada iteración. 
+        tores y matrices y los resultados de cada iteración en TXT 
+    -j: formato de salida JSON
+    -c: formato de salida CSV
+    -t: formato de salida tabular en TXT (DEFAULT)
+    -s: direccionamiento de salida a terminal o stdout (DEFAULT)
+    -f: direcionamiento de salida a archivo por defecto
     -i: modo interactivo, permite construir y correr la red                                         
     
-    Notas:
-      La salida del programa va dirigida a la consola: "stdout"
-      Si desea enviar a archivo use redirección con > o con >>
-      La extensión y directorio de entrada por defecto son .mgh y ./input 
-      
     Ejemplos:
-      python3 mgh.py ./input/default.mgh -v > ./output/default.mgh.out
-      python3 mgh.py default -n > ./output/default.mgh.out 
-      python3 mgh.py ./input/default.mgh -q
+      python3 mgh.py ./input/default -njf          
+      python3 mgh.py default.mgh -vf
+      python3 mgh.py default -nts  
+      python3 mgh.py ./input/default.mgh.json -qc
       python3 mgh.py -i
     
     

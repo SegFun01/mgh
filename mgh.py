@@ -48,6 +48,7 @@ dstn="-s"                       # destino de salida
 inter=False                     # modo interactivo
 ecuacion= "S"                   # Ecuación por defecto a usar Swamee-Jain, alternativa C=Colebrook-White
 tol= 1E-6                       # tolerancia para el calculo de la f con Colebrok-White
+orig_stdout=sys.stdout          # guarda la salida por defecto de stdout
 
 #---------->>>>>>>>> Vectores de carga de datos desde el archivo
 nn= []   # id de los nudos
@@ -179,6 +180,12 @@ if len(sys.argv) == 3 :  #se da comando, archivo, modo
 if inter:
     fin = io.crea_red()
     fout = io.output_check(fin)
+
+#---> Si la salida se envía a archivo se debe redirigir stdout
+if dstn=="-f" and fmt=="-t" and modo=="-v":
+   fout_txt= fout.replace(".json",".txt")
+   f_sal= open(fout_txt,"w")
+   sys.stdout = f_sal 
 
 #-----Abrir el archivo: falta revisar si el archivo existe, si no, debe salir... 
 try:
@@ -485,12 +492,28 @@ if modo == "-v":                                        # modo de impresión det
      print("----- FIN DEL CÁLCULO -----")
      print("")
      print("")
+     imprime_reporte()
+
+if dstn=="-f" and fmt=="-t" and modo=="-v":
+   sys.stdout = orig_stdout 
+   f_sal.close()
+
+
 
 # ---> Una vez que converge el proceso de ieraciones, muestra los resultados
 if modo=="-q":
-    io.imprime_salida_quiet(Q,H,e,ns)
-if modo=="-n" or modo=="-v":
-    imprime_reporte()
+    io.imprime_salida_quiet(Q,H,e,ns,fmt,dstn,fout)
+
+if modo=="-n" and fmt=="-t":
+   if dstn=="-f":
+       fout_txt= fout.replace(".json",".txt")
+       f_sal= open(fout_txt,"w")
+       sys.stdout = f_sal 
+       imprime_reporte()
+       sys.stdout = orig_stdout 
+       f_sal.close()
+   else:
+      imprime_reporte() 
 
 if fmt=="-j":
     imprime_salida_json(fout)
