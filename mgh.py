@@ -43,6 +43,9 @@ n= 5                            # cantidad de nudos de demanda
 t= 7                            # cantidad de tramos         
 factor= 1                       # factor global de demanda del modelo  
 modo="-n"                       # modo de impresión
+fmt="-t"                        # formato de salida
+dstn="-s"                       # destino de salida
+inter=False                     # modo interactivo
 ecuacion= "S"                   # Ecuación por defecto a usar Swamee-Jain, alternativa C=Colebrook-White
 tol= 1E-6                       # tolerancia para el calculo de la f con Colebrok-White
 
@@ -114,7 +117,39 @@ def leer_json(fin):
        es.append(i.get('estado'))
        op.append(i.get('opciones'))
 
-#---------->>>>>>>>>> Carga de datos desde archivo CSV
+#---------->>>>>>>>>> Carga de datos desde archivo JSON,    CSV deprecado
+def asigna_modo(opcn):
+   if "q" in opcn:
+      modo="-q"
+   elif "v" in opcn:
+      modo="-v"
+   else:
+      modo="-n"
+   return modo
+
+def asigna_fmt(opcn):
+   if "j" in opcn:
+      fmt="-j"
+   elif "c" in opcn:
+      fmt="-c"
+   else:
+      fmt="-t"
+   return fmt
+
+def asigna_dstn(opcn):
+   if "f" in opcn:
+      dstn="-f"
+   else:
+      dstn="-s"
+   return dstn
+
+def asigna_inter(opcn):
+   if "i" in opcn:
+      inter=True
+   else:
+      inter=False
+   return inter
+
 #-----Verificar los parámetros de entrada
 if len(sys.argv) < 2 :   #cuando solo se escribe mgh, imprime el modo de uso y termina
    io.uso()
@@ -129,12 +164,19 @@ else:                     #cuando se da el comando más un nombre de archivo, lo
    #print(f"F input: {fin}   F output: {fout} ")
    modo = "-n"
 if len(sys.argv) == 3 :  #se da comando, archivo, modo
-   modo = sys.argv[2]
-   modo.strip()
-   if modo not in ["-n","-q","-v"]:
-      modo="-n"
+   opcn = sys.argv[2]
+   opcn.strip()
+   modo=asigna_modo(opcn)
+   # print(f"Modo {modo}")
+   fmt= asigna_fmt(opcn)
+   # print(f"Formato {fmt}")
+   dstn=asigna_dstn(opcn)
+   # print(f"Destino {dstn}")
+   inter=asigna_inter(opcn)
+   # print(f"Interactivo {inter}")
+   # parada=input("Pulse enter.... o ctrl-c")
 #antes de abrir archivo verificar si se desea incluir datos interactivamente
-if "-i" in sys.argv:
+if inter:
     fin = io.crea_red()
     fout = io.output_check(fin)
 
@@ -382,12 +424,22 @@ def imprime_salida_json(fout):
    
    # Serializing json
    json_object = json.dumps(d_red, indent=4)
-   
-   # Writing to sample.json
-   with open(fout, "w") as outfile:
-       outfile.write(json_object)
-
+   if dstn=="-f":
+      # Writing to sample.json
+      with open(fout, "w") as outfile:
+          outfile.write(json_object)
+   else:
+      print(json_object)
 #--- FIN DE FUNCIONES GLOBALES
+
+"""
+>>>> AQUI INICIA EL PROCESO DE CÁLCULO <<<<<
+Si se trata de una ejecución en tiempo extendido, se inicia el contador "veces" y se ejecuta de acuerdo a la 
+variable duración.   En cada caso se debe reiniciar los vectores qi y Ho
+Se debe hacer vectores para salida extendida Qx, qfix, Hx, qix, Px
+
+while veces < duracion:
+"""
 
 if modo == "-v":                                        # modo de impresión detallado
      print("----- INICIO DEL CÁLCULO -----")
@@ -437,11 +489,15 @@ if modo == "-v":                                        # modo de impresión det
 # ---> Una vez que converge el proceso de ieraciones, muestra los resultados
 if modo=="-q":
     io.imprime_salida_quiet(Q,H,e,ns)
-else:
+if modo=="-n" or modo=="-v":
     imprime_reporte()
 
-imprime_salida_json(fout)
-
+if fmt=="-j":
+    imprime_salida_json(fout)
+"""
+   Aquí terminaría el while de veces
+   se debe actualizar los vectores q, qi, qfi, Ho e insertar valores de Q,H, etc en los vectores x
+"""
 """
     Copyright © 2022 Carlos Camacho Soto
     Publicado bajo licencia GPL v3.0

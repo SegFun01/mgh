@@ -1,4 +1,6 @@
 {
+    "descripcion": "Configuraciones generales",
+    "fecha": "12/09/2022",
     "viscosidad": 1.007E-6,
     "tolerancia": 1.000E-6,
     "maximo_iteraciones": 50,
