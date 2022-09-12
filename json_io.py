@@ -302,36 +302,39 @@ def imprime_salida_json(fout,Qi,Hi,v,Re,f,hf,hm,qi,qfi,A,A1):
    with open(fout, "w") as outfile:
        outfile.write(json_object)
    
-   
+salir= False   
+while not salir:
+   print("")
+   print("----Menú de opciones----")
+   print(" 1) Crear archivos JSON de proyecto desde terminal")
+   print(" 2) Mostrar archivos de entrada de red en la terminal")
+   print(" 3) Cargar archivo JSON y devolver un diccionario")
+   print(" 4) Convertir archivo CSV a JSON ")
+   print(" 0) Salir")
+   print("")
+   x = input("Opción:")
 
-print("")
-print("----Menú de opciones----")
-print(" 1) Crear archivo de entrada de red en formato JSON desde terminal")
-print(" 2) Mostrar archivo de entrada de red en la terminal")
-print(" 3) Cargar archivo JSON y devolver un diccionario")
-print(" 4) Convertir archivo en CSV a JSON ")
-print("")
-x = input("Opción:")
-if x not in ['1','2','3','4']:
-   print("Exit")
-   sys.exit()
-else:
-   if x== '1':
-      crea_red('./input/nueva_red.mgh.json')
-   if x== '2':
-      fin = input("Nombre de archivo: ")
-      fin = input_check(fin)
-      mostrar_json(fin)
-   if x== '3':
-      fin = input("Nombre de archivo: ")
-      fin = input_check(fin)
-      diccionario = cargar_json(fin)
-      print("")
-      print("Imprimiendo diccionario")
-      print(diccionario)
-   if x== '4':
-      fin = input("Nombre de archivo, incluya ruta completa y extensión: ")
-      convertir_CSV_JSON(fin)
+   if x not in ['1','2','3','4']:
+      salir=True
+      print("Exit")
+      sys.exit()
+   else:
+      if x== '1':
+         crea_red('./input/nueva_red.mgh.json')
+      if x== '2':
+         fin = input("Nombre de archivo: ")
+         fin = input_check(fin)
+         mostrar_json(fin)
+      if x== '3':
+         fin = input("Nombre de archivo: ")
+         fin = input_check(fin)
+         diccionario = cargar_json(fin)
+         print("")
+         print("Imprimiendo diccionario")
+         print(diccionario)
+      if x== '4':
+         fin = input("Nombre de archivo, incluya ruta completa y extensión: ")
+         convertir_CSV_JSON(fin)
 #crea_red()
 #parada = input("Archivo JSON creado! pulse <enter> para verlo en terminal ")
 #mostrar_json(fin)

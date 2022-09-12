@@ -1,0 +1,42 @@
+{
+    "titulo": "Parámetros de entrada para modelación",
+    "hora": 1,
+    "dow": 1,
+    "mes": 1,
+    "duracion": 24,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "nivel": 10.0,
+            "fvp": 1
+        },
+        {
+            "id": 1,
+            "nivel": 0.0,
+            "fvp": 1
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 100.0,
+            "demanda": 0.0,
+            "fvh": 1,
+            "fdow":1,
+            "fvm": 1
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "estado": 1,
+            "opciones": "-"
+        },
+        {
+            "id": 1,
+            "estado": 1,
+            "opciones": "-"
+        }
+    ],
+    "signature": "crcs-2022"
+}
