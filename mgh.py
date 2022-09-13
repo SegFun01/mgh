@@ -502,7 +502,7 @@ if dstn=="-f" and fmt=="-t" and modo=="-v":
 
 # ---> Una vez que converge el proceso de ieraciones, muestra los resultados
 if modo=="-q":
-    io.imprime_salida_quiet(Q,H,e,ns,fmt,dstn,fout)
+    io.imprime_salida_quiet(Q,H,qfi,e,ns,fmt,dstn,fout)
 
 if modo=="-n" and fmt=="-t":
    if dstn=="-f":
@@ -515,7 +515,7 @@ if modo=="-n" and fmt=="-t":
    else:
       imprime_reporte() 
 
-if fmt=="-j":
+if fmt=="-j" and modo=="-n":
     imprime_salida_json(fout)
 """
    Aquí terminaría el while de veces

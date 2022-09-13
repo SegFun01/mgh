@@ -18,7 +18,9 @@
 
 #import math
 import sys
+import time
 import numpy as np
+import json
 
 
 # Hacer las funciones de impresión de salida aquí
@@ -53,10 +55,13 @@ def uso():
 #----------Fin de uso()
 
 #---------->>>>>>>>>> Función para imprimir los datos de salida en modo quiet
-def imprime_salida_quiet(Q,H,e,ns,fmt,dstn,fout):      # Imprime caudales en los tramos y presiones en los nudos de demanda
-   ori_stdout = sys.stdout
+def imprime_salida_quiet(Q,H,qfi,e,ns,fmt,dstn,fout):      # Imprime caudales en los tramos y presiones en los nudos de demanda
+   orig_stdout = sys.stdout
    if fmt=="-t":
       fout = fout.replace(".json", ".txt")
+      if dstn=="-f":
+         f_sal= open(fout,"w")
+         sys.stdout = f_sal 
       print("  [Q] l/s")
       for i in range(Q.size):
          print(f"| {(Q[i]*1000):7.2f} |")
@@ -65,16 +70,56 @@ def imprime_salida_quiet(Q,H,e,ns,fmt,dstn,fout):      # Imprime caudales en los
       for i in range(H.size):
          print(f"| {(H[i]-e[i+ns]):7.2f} |")
       print("")
+      print("  [Qo] l/s")
+      for i in range(qfi.size):
+         print(f"| {(qfi[i]*1000):7.2f} |")
+      print("")
+      if dstn=="-f":
+         sys.stdout = orig_stdout 
+         f_sal.close()
    if fmt=="-c":
       fout = fout.replace(".json",".csv")
-      print("Q")
-      l=""
+      if dstn=="-f":
+         f_sal= open(fout,"w")
+         sys.stdout = f_sal 
+      print("Caudales en tramos Q [l/s]")
       for i in range(Q.size):
-         print("")
+         print(f"{i}, {Q[i]*1000:7.2f}")
+      print("Presiones en nodos P [m]")
+      for i in range(H.size):
+         print(f"{i+ns}, {H[i]-e[i+ns]:7.2f}")
+      print("Caudales en nudos de carga (Tanques/Embalses) Qo [l/s]")   
+      for i in range(qfi.size):
+         print(f"{i}, {qfi[i]*1000:7.2f}")
+      print(f"timestamp,", time.strftime("%c"))   
+      print(f"signature, crcs-2022")   
+      if dstn=="-f":
+         sys.stdout = orig_stdout 
+         f_sal.close()   
    if fmt=="-j":
       q_dict = {}
-
-  
+      qt=[]
+      ht=[]
+      qit=[]
+      for i in range(Q.size):
+         qt.append({"id": i, "caudal": round(Q[i]*1000,2)})
+      q_dict["caudal_tramos"]=qt
+      for i in range(H.size):
+         ht.append({"id": i+ns, "presion": round(H[i]-e[i-ns],2)})
+      q_dict["presion_nudos"]=ht
+      for i in range(qfi.size):
+         qit.append({"id": i, "caudal": round(qfi[i]*1000,2)})      
+      q_dict["caudal_tanques"]=qit
+      q_dict["timestamp"]=time.strftime("%c")
+      q_dict["signature"]="crcs-2022"
+      # Serializing json
+      json_object = json.dumps(q_dict, indent=4)
+      if dstn=="-f":
+         # Writing to sample.json
+         with open(fout, "w") as outfile:
+             outfile.write(json_object)
+      else:
+         print(json_object)
 #-----------
 
 #---------->>>>>>>>>> Función que imprime la salida normal: tablas de nudos y tramos
