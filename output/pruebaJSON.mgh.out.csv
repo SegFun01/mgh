@@ -1,0 +1,50 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO v1.0.0-alpha
+Titulo, Titulo
+Autor, Autor
+Fecha, 8-set-2022
+Versión, 1.0.1
+Viscosidad, 1.007e-06
+Desbalance, 1e-05
+Máximo iteraciones, 50
+Ecuación, Colebrook-White
+Factor global, 1.0
+DATOS DE ENTRADA
+Nudos de carga fija
+N, Elevación, Carga, Nivel
+  0,  100.00,  110.00,   10.00
+Nudos de demanda
+N, Elevación, Demanda, FVH
+  1,   90.00, -40.00,  1.00
+  2,   87.00,   6.00,  1.00
+  3,   85.00,   7.00,  1.00
+  4,   80.00,   4.00,  1.00
+  5,   88.00,   6.00,  1.00
+Tramos
+T, desde, hasta, L, D, A, ks, kL, Estado, Op
+  0,   1,   0,    1000,   200,  0.0314, 0.0015,   5.0,  TA, -
+  1,   0,   2,    1000,   200,  0.0314, 0.0015,   3.0,  TA, -
+  2,   2,   3,     750,   150,  0.0177, 0.0015,   2.0,  TA, -
+  3,   2,   4,     500,   150,  0.0177, 0.0015,   2.0,  TA, -
+  4,   3,   5,     750,   150,  0.0177, 0.0015,  10.0,  TA, -
+  5,   4,   5,     500,   100,  0.0079, 0.0015,   2.0,  TA, -
+RESULTADOS
+Nudos de carga fija
+N, Elevación, Carga, Nivel, Caudal
+  0,  100.00,  110.00,   10.00,   17.00
+Nudos de demanda
+N, Elevación, Q Base, FVH, Q Neto, Carga, Presión
+  1,   90.00,  -40.00,   1.00,  -40.00,  116.62,   26.62
+  2,   87.00,    6.00,   1.00,    6.00,  107.64,   20.64
+  3,   85.00,    7.00,   1.00,    7.00,  106.17,   21.17
+  4,   80.00,    4.00,   1.00,    4.00,  107.03,   27.03
+  5,   88.00,    6.00,   1.00,    6.00,  106.01,   18.01
+Tramos
+T, desde, hasta, V, Q, hf, hL, hT, S
+  0,  1,   0,   1.27,  40.00,   6.20,   0.41,   6.62, 0.00662, 
+  1,  0,   2,   0.73,  23.00,   2.28,   0.08,   2.36, 0.00236, 
+  2,  2,   3,   0.55,   9.66,   1.43,   0.03,   1.47, 0.00195, 
+  3,  2,   4,   0.42,   7.34,   0.59,   0.02,   0.60, 0.00121, 
+  4,  3,   5,   0.15,   2.66,   0.15,   0.01,   0.16, 0.00021, 
+  5,  4,   5,   0.43,   3.34,   1.00,   0.02,   1.02, 0.00204, 
+timestamp,  Tue Sep 13 18:55:49 2022
+signature, crcs-2022

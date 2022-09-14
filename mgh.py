@@ -437,6 +437,58 @@ def imprime_salida_json(fout):
           outfile.write(json_object)
    else:
       print(json_object)
+
+#---> Impresión de reporte final en CSV
+def imprime_reporte_csv():                       # pasar a f_io con valores de entrada 
+   print("MÉTODO DEL GRADIENTE HIDRÁULICO v1.0.0-alpha")
+   print("Titulo,",titulo)
+   print("Autor,",autor)
+   print("Fecha,",fecha)
+   print("Versión,",version)
+   print("Viscosidad,",viscosidad)
+   print("Desbalance,",imbalance)
+   print("Máximo iteraciones,",MaxIt)
+   if ecuacion=="C":
+      print("Ecuación, Colebrook-White")
+   else:
+      print("Ecuación,Swamee-Jain")
+   print("Factor global,", factor)
+   print("DATOS DE ENTRADA")
+   print("Nudos de carga fija")
+   print("N, Elevación, Carga, Nivel")
+   for i in range(ns):
+      print(f"{nn[i]:>3}, {e[i]:7.2f}, {h[i]:7.2f}, {(h[i]-e[i]):7.2f}")
+   print("Nudos de demanda")
+   print("N, Elevación, Demanda, FVH")
+   for i in range(n):
+      print(f"{nn[i+ns]:>3}, {e[i+ns]:7.2f},{q[i+ns]:7.2f},{fi[i]:6.2f}")
+   print("Tramos")
+   print("T, desde, hasta, L, D, A, ks, kL, Estado, Op")
+   for i in range(t):
+      print(f"{nt[i]:>3}, {de[i]:>3}, {a[i]:>3}, {l[i]:7.0f}, {d[i]:5.0f}, {At[i]:7.4f}, {ks[i]:5.4f}, {km[i]:5.1f}, {es[i]:>3}, {op[i]}")
+   print("RESULTADOS")
+   print("Nudos de carga fija")  
+   print("N, Elevación, Carga, Nivel, Caudal")
+   for i in range(ns):
+       print(f"{nn[i]:>3}, {e[i]:7.2f}, {h[i]:7.2f}, {(h[i]-e[i]):7.2f}, {(qfi[i]*1000):7.2f}")
+   print("Nudos de demanda")
+   print("N, Elevación, Q Base, FVH, Q Neto, Carga, Presión")
+   for i in range(n):
+       print(f"{nn[i+ns]:>3}, {e[i+ns]:7.2f}, {q[i+ns]:7.2f}, {fi[i]:6.2f}, {(qi[i]*1000):7.2f}, {H[i]:7.2f}, {(Hi[i]-e[i+ns]):7.2f}")
+   print("Tramos")
+   print("T, desde, hasta, V, Q, hf, hL, hT, S")
+   for i in range(t):
+       if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+          hv =  f'{((A1[i,i]-A[i,i])*Qi[i]):.2f}'
+          hv = "H"+ es[i].strip() + "=" + hv
+       else:
+          hv=""
+       print(f"{nt[i]:>3},{de[i]:>3}, {a[i]:>3}, {v[i]:6.2f}, {(Qi[i]*1000):6.2f}, {hf[i]:6.2f}, {hm[i]:6.2f}, {(hf[i]+hm[i]):6.2f}, {((hf[i]+hm[i])/l[i]):7.5f}, {hv}")
+   print("timestamp, ",time.strftime("%c"))
+   print("signature, crcs-2022")
+#----------------------------------------------------------------------
+
+
 #--- FIN DE FUNCIONES GLOBALES
 
 """
@@ -517,6 +569,17 @@ if modo=="-n" and fmt=="-t":
 
 if fmt=="-j" and modo=="-n":
     imprime_salida_json(fout)
+
+if fmt=="-c" and modo=="-n":
+   if dstn=="-f":
+       fout_txt= fout.replace(".json",".csv")
+       f_sal= open(fout_txt,"w")
+       sys.stdout = f_sal 
+       imprime_reporte_csv()
+       sys.stdout = orig_stdout 
+       f_sal.close()
+   else:
+       imprime_reporte_csv()
 """
    Aquí terminaría el while de veces
    se debe actualizar los vectores q, qi, qfi, Ho e insertar valores de Q,H, etc en los vectores x

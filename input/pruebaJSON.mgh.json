@@ -2,7 +2,7 @@
     "titulo": "Titulo",
     "autor": "Autor",
     "fecha": "8-set-2022",
-    "version": "8-set-2022",
+    "version": "1.0.1",
     "viscosidad": 1.007e-06,
     "imbalance": 1e-05,
     "max_iteraciones": 50,
