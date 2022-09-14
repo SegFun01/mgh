@@ -288,19 +288,28 @@ El archivo está en formato JSON, por lo que su contenido es autoexplicativo, co
 
 
 - Tipos de nudo: 
-  - NC: Nudos de carga. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (T o E) el tipo no está implementado
-  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda
-
+  - NC: Nudos de carga fija. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (Tanque o Emisor) el tipo Emisor no está implementado. En el tipo Tanque hay que agregar las características: volumen,aŕea, altura
+  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda, curva de demanda.  Este tipo de nudo se usa para representar fuentes de producción como toma, manantial, asignando una demanda negativa [l/S]
+<br>
 - Tipos de tramo: 
   - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta, TC= Tubería Cerrada, Opciones (no tiene)
   - Válvula de control: Puede ser una válvula reductora de presión VR o una válvula sostenedora de presión VS. Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, Tipo VS= Válvula Sostenedora, VR= Válvula Reductora, Consigna [m] 
   - Bomba en un tramo de tubería: Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, BO = Bomba, Coeficientes de la curva: alfa, beta, gama
-
+<br>
 - Tipos de corrida:
   - quiet o silencioso: muestra únicamente los valores de las tablas de cargas en los nodos y los caudales en los tramos de la última iteración 
   - normal: muestra las tablas de nudos y de tramos para la última iteración 
   - detallado (verbose): muestra las matrices del modelo, y las tablas de los datos de nudos y tramos de cada iteración
   - interactivo: pregunta los datos de la red, del modelo, los nudos y los tramos y ejecuta una corrida y salva el archivo de entrada
+<br>
+- Formatos de salida:
+  - Formato de tablas en texto plano: .TXT
+  - Formato en valores separados por comas: .CSV
+  - Formato de archivo JavaScript Object Notation: .JSON
+<br>
+- Direccionamiento de la salida:
+  - salida estandard a ternminal: STDOUT
+  - salida a archivo, cuya extensión será de acuerdo al formato de salida elegido.  Por defecto la salida de archivos va dirigida a ./output/
 <br>
 
 ### Estado Actual y en desarrollo
@@ -321,11 +330,12 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
    - Nudos tipo Embalse o Reservorio `RE`, Tanque `TQ`, Emisor `EM`, Fuente `FU` &#128269;
    - Nudos de demanda con capacidad de "aportar" caudal para modelar nacientes o pozos &#10003;
 - Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
+- Cambio del campo `Estado` por `tipo` y agregar el espacio `estado` que contemple 1=ON 0=OFF para usarse en tuberías, válvulas y bombas &#10007;
 - Selección de ecuación a usar (S-J ó C-W): &#10003;
 - Impresión de resultados en tablas &#10003;
-- Impresión de matrices en modo detallado &#128269;
+- Impresión de matrices en modo detallado &#10003;
 - Impresión de salida quiet: solo tablas de caudales y cargas &#10003;
-- Salida de datos por medio de JSON &#10003;
+- Salida de datos por medio de JSON, CSV y TXT &#10003;
 - Entrada de datos por medio de JSON &#10003;
 - Programa rudimentario para crear redes en JSON &#10003; 
 - Aplicación para construir redes usando NCURSES &#10007;
