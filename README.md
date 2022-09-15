@@ -121,8 +121,8 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 - Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
 - El formato del archivo de entrada es el que sigue:
         
-       {
-      	"titulo": "Ejemplo del libro de texto",
+      {
+      	"titulo": "Ejemplo de libro",
       	"autor": "Carlos Camacho Soto",
       	"fecha": "28/01/2019",
       	"version": "v0.0.1",
@@ -133,134 +133,130 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       	"ecuacion": "S",
       	"duracion": 24,
       	"tolerancia": 1.0E-5,
-      	"nc": 1,
-      	"nd": 5,
-      	"nt": 7,
-      	"factor_demanda_global": 1,
+      	"factor_demanda_global": 1.0,
       	"nudos_carga": [{
-      		"id": "0",
+      		"id": 0,
       		"elevacion": 100,
       		"carga": 110,
       		"base": 900,
       		"hmax": 5.45
       	}],
       	"nudos_demanda": [{
-      			"id": "1",
+      			"id": 1,
       			"elevacion": 90,
       			"demanda": 60,
-      			"factor": 1
+      			"factor": 1.0
       		},
       		{
-      			"id": "2",
+      			"id": 2,
       			"elevacion": 90,
       			"demanda": -40,
-      			"factor": 1
+      			"factor": 1.0
       		},
       		{
-      			"id": "3",
+      			"id": 3,
       			"elevacion": 90,
       			"demanda": 30,
-      			"factor": 1
+      			"factor": 1.0
       		},
       		{
-      			"id": "4",
+      			"id": 4,
       			"elevacion": 90,
       			"demanda": 30,
-                  "factor": 1
+                  "factor": 1.0
       		},
       		{
-      			"id": "5",
+      			"id": 5,
       			"elevacion": 90,
       			"demanda": 40,
-      			"factor": 1
+      			"factor": 1.0
       		}
       	],
       	"tramos": [{
-      			"id": "0",
-      			"desde": "0",
-      			"hasta": "1",
+      			"id": 0,
+      			"desde": 0,
+      			"hasta": 1,
       			"longitud": 500,
       			"diametro": 250,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "1",
-      			"desde": "1",
-      			"hasta": "2",
+      			"id": 1,
+      			"desde": 1,
+      			"hasta": 2,
       			"longitud": 400,
       			"diametro": 150,
       			"ks": 0.0015,
       			"kL": 10,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "2",
-      			"desde": "3",
-      			"hasta": "2",
+      			"id": 2,
+      			"desde": 3,
+      			"hasta": 2,
       			"longitud": 200,
       			"diametro": 100,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "3",
-      			"desde": "4",
-      			"hasta": "3",
+      			"id": 3,
+      			"desde": 4,
+      			"hasta": 3,
       			"longitud": 400,
       			"diametro": 150,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "4",
-      			"desde": "1",
-      			"hasta": "4",
+      			"id": 4,
+      			"desde": 1,
+      			"hasta": 4,
       			"longitud": 200,
       			"diametro": 100,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "5",
-      			"desde": "5",
-      			"hasta": "4",
+      			"id": 5,
+      			"desde": 5,
+      			"hasta": 4,
       			"longitud": 600,
       			"diametro": 200,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		},
       		{
-      			"id": "6",
-      			"desde": "0",
-      			"hasta": "5",
+      			"id": 6,
+      			"desde": 0,
+      			"hasta": 5,
       			"longitud": 300,
       			"diametro": 250,
       			"ks": 0.0015,
       			"kL": 0,
-      			"estado": "TA",
-      			"opciones": "-"
+      			"tipo": "TA",
+      			"opciones": "-",
+      			"estado": 1
       		}
-      	],
-      	"curvas_demanda":[{
-      		"id": 1,
-      		"nombre": "Curva de demanda genérica 1",
-      		"fvh":[{"0": 0.53, "1":0.56,  "2":0.59,  "3":0.62,  "4":0.66,  "5":0.74,
-      		        "6":1.06,  "7":1.38,  "8":1.53,  "9":1.68, "10":1.48, "11":1.29,
-      		       "12":1.21, "13":1.14, "14":1.11, "15":1.09, "16":1.07, "17":1.04,
-      			   "18":1.01, "19":0.99, "20":0.94, "21":0.89, "22":0.76, "23":0.63}]
-      	}]
+      	]
       }
 <br>
 El anterior archivo de entrada corresponde al ejemplo mostrado en la siguiente figura:
