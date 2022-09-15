@@ -54,8 +54,9 @@
             "diametro": 200.0,
             "ks": 0.0015,
             "kL": 5.0,
-            "estado": "TA",
+            "tipo": "TA",
             "opciones": "-",
+            "estado": 1,
             "caudal": 104.98,
             "velocidad": 3.34,
             "Re": 663699.92,
@@ -72,8 +73,9 @@
             "diametro": 200.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "VS",
+            "tipo": "VS",
             "opciones": "40",
+            "estado": 1,
             "caudal": 94.98,
             "velocidad": 3.02,
             "Re": 600480.48,
@@ -90,8 +92,9 @@
             "diametro": 200.0,
             "ks": 0.0015,
             "kL": 4.0,
-            "estado": "TA",
+            "tipo": "TA",
             "opciones": "-",
+            "estado": 1,
             "caudal": 74.98,
             "velocidad": 2.39,
             "Re": 474041.59,
@@ -102,5 +105,5 @@
         }
     ],
     "signature": "crcs-2022",
-    "timestamp": "Mon Sep 12 10:16:02 2022"
+    "timestamp": "Thu Sep 15 10:26:35 2022"
 }

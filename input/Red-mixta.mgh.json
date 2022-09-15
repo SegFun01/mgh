@@ -75,8 +75,9 @@
             "diametro": 200.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 1,
@@ -86,8 +87,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 2,
@@ -97,8 +99,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 3,
@@ -108,8 +111,9 @@
             "diametro": 100.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 4,
@@ -119,8 +123,9 @@
             "diametro": 100.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 5,
@@ -130,8 +135,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 6,
@@ -141,8 +147,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 7,
@@ -152,8 +159,9 @@
             "diametro": 100.0,
             "ks": 0.0015,
             "kL": 3.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 8,
@@ -163,8 +171,9 @@
             "diametro": 75.0,
             "ks": 0.0015,
             "kL": 10.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         }
     ],
     "signature": "crcs-2022"

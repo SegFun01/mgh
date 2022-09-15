@@ -45,8 +45,9 @@
             "diametro": 500.0,
             "ks": 0.05,
             "kL": 5.0,
-            "estado": "TA",
+            "tipo": "TA",
             "opciones": "-",
+            "estado": 1,
             "caudal": 607.92,
             "velocidad": 3.1,
             "Re": 1537301.2,
@@ -63,8 +64,9 @@
             "diametro": 500.0,
             "ks": 0.05,
             "kL": 5.0,
-            "estado": "TA",
+            "tipo": "TA",
             "opciones": "-",
+            "estado": 1,
             "caudal": 607.92,
             "velocidad": 3.1,
             "Re": 1537301.2,
@@ -75,5 +77,5 @@
         }
     ],
     "signature": "crcs-2022",
-    "timestamp": "Mon Sep 12 10:16:00 2022"
+    "timestamp": "Thu Sep 15 09:38:13 2022"
 }

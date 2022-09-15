@@ -57,8 +57,9 @@
             "diametro": 250.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 1,
@@ -68,8 +69,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 10.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 2,
@@ -79,8 +81,9 @@
             "diametro": 100.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 3,
@@ -90,8 +93,9 @@
             "diametro": 150.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 4,
@@ -101,8 +105,9 @@
             "diametro": 100.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 5,
@@ -112,8 +117,9 @@
             "diametro": 200.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 6,
@@ -123,8 +129,9 @@
             "diametro": 250.0,
             "ks": 0.0015,
             "kL": 0.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         }
     ],
     "signature": "crcs-2022"

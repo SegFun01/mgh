@@ -1,0 +1,63 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO              v1.0.0-alpha
+
+Archivo de entrada: ./input/Qmax-VS.mgh.json
+Titulo:      Ejercicio caudal máximo con valvula de control
+Autor:       Carlos Camacho Soto
+Fecha:       6-set-2022
+Versión:     v1.0.0
+Viscosidad:  1.007e-06
+Desbalance:  1e-05
+Máximo iteraciones permitidas:  40
+Ecuación de pérdidas de fricción: Colebrook-White
+Factor global de demanda:  1.0
+
+DATOS DE ENTRADA
+
+Nudos de carga fija
+  N  Elevación    Carga    Nivel
+---------------------------------
+  0   100.00     110.00    10.00 
+  1    50.00      55.00     5.00 
+---------------------------------
+
+Nudos de demanda
+  N  Elevación   Demanda    FVH
+---------------------------------
+  2    50.00      10.00     1.00 
+  3    50.00      20.00     1.00 
+---------------------------------
+
+Tramos
+  T   de->a      L     D     A       ks     kL   Tipo    Op 
+---------------------------------------------------------------
+  0    0  2     500   200  0.0314  0.0015   5.0    TA   - 
+  1    2  3     500   200  0.0314  0.0015   0.0    VS   40 
+  2    3  1     500   200  0.0314  0.0015   4.0    TA   - 
+---------------------------------------------------------------
+
+RESULTADOS
+
+Nudos de carga fija
+  N  Elevación    Carga    Nivel   Caudal
+------------------------------------------
+  0   100.00     110.00    10.00  -104.98
+  1    50.00      55.00     5.00    74.98
+------------------------------------------
+
+Nudos de demanda
+  N  Elevación   Q Base    FVH    Q Neto      Carga   Presión
+-------------------------------------------------------------
+  2    50.00      10.00    1.00    10.00      89.17    39.17
+  3    50.00      20.00    1.00    20.00      65.88    15.88
+-------------------------------------------------------------
+
+Tramos
+  T   de->a      V       Q       hf      hL      hT       S   
+---------------------------------------------------------------
+  0    0  2     3.34  104.98   17.98    2.85   20.83   0.04166 
+  1    2  3     3.02   94.98   14.97    0.00   14.97   0.02994 HVS=-8.31
+  2    3  1     2.39   74.98    9.72    1.16   10.88   0.02176 
+---------------------------------------------------------------
+
+Fecha y hora de esta corrida:  Thu Sep 15 10:26:44 2022
+crcs-2022

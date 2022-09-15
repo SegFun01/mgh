@@ -43,8 +43,9 @@
             "diametro": 250.0,
             "ks": 0.0015,
             "kL": 5.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 1,
@@ -54,8 +55,9 @@
             "diametro": 250.0,
             "ks": 0.0015,
             "kL": 5.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         },
         {
             "id": 2,
@@ -65,8 +67,9 @@
             "diametro": 250.0,
             "ks": 0.0015,
             "kL": 5.0,
-            "estado": "TA",
-            "opciones": "-"
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
         }
     ],
     "signature": "crcs-2022"

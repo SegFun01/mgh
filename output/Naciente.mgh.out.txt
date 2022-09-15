@@ -1,0 +1,63 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO              v1.0.0-alpha
+
+Archivo de entrada: ./input/Naciente.mgh.json
+Titulo:      Ejercicio caudal máximo con valvula de control
+Autor:       Carlos Camacho Soto
+Fecha:       6-set-2022
+Versión:     v1.0.0
+Viscosidad:  1.007e-06
+Desbalance:  1e-05
+Máximo iteraciones permitidas:  40
+Ecuación de pérdidas de fricción: Colebrook-White
+Factor global de demanda:  1.0
+
+DATOS DE ENTRADA
+
+Nudos de carga fija
+  N  Elevación    Carga    Nivel
+---------------------------------
+  0   150.00     160.00    10.00 
+  1    90.00     100.00    10.00 
+---------------------------------
+
+Nudos de demanda
+  N  Elevación   Demanda    FVH
+---------------------------------
+  2    90.00      10.00     1.00 
+  3   160.00    -100.00     1.00 
+---------------------------------
+
+Tramos
+  T   de->a      L     D     A       ks     kL   Tipo    Op 
+---------------------------------------------------------------
+  0    0  2     500   200  0.0314  0.0015   5.0    TA   - 
+  1    2  1     500   200  0.0314  0.0015   4.0    TA   - 
+  2    3  0     500   200  0.0314  0.0015   4.0    TA   - 
+---------------------------------------------------------------
+
+RESULTADOS
+
+Nudos de carga fija
+  N  Elevación    Carga    Nivel   Caudal
+------------------------------------------
+  0   150.00     160.00    10.00   -33.60
+  1    90.00     100.00    10.00   123.60
+------------------------------------------
+
+Nudos de demanda
+  N  Elevación   Q Base    FVH    Q Neto      Carga   Presión
+-------------------------------------------------------------
+  2    90.00      10.00    1.00    10.00     127.41    37.41
+  3   160.00    -100.00    1.00  -100.00     178.52    18.52
+-------------------------------------------------------------
+
+Tramos
+  T   de->a      V       Q       hf      hL      hT       S   
+---------------------------------------------------------------
+  0    0  2     4.25  133.60   27.98    4.61   32.59   0.06518 
+  1    2  1     3.93  123.60   24.26    3.16   27.41   0.05482 
+  2    3  0     3.18  100.00   16.45    2.07   18.52   0.03703 
+---------------------------------------------------------------
+
+Fecha y hora de esta corrida:  Thu Sep 15 10:22:53 2022
+crcs-2022

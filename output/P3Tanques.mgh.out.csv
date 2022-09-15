@@ -1,0 +1,40 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO v1.0.0-alpha
+Titulo, Problema de los 3 tanques
+Autor, Ing. Carlos Camacho Soto
+Fecha, 08/02/2018
+Versión, 1.0
+Viscosidad, 1.007e-06
+Desbalance, 1e-05
+Máximo iteraciones, 40
+Ecuación,Swamee-Jain
+Factor global, 1.0
+DATOS DE ENTRADA
+Nudos de carga fija
+N, Elevación, Carga, Nivel
+  0,  100.00,  132.00,   32.00
+  1,  130.00,   90.00,  -40.00
+  2,  120.00,  128.00,    8.00
+Nudos de demanda
+N, Elevación, Demanda, FVH
+  3,   70.00, 100.00,  1.00
+Tramos
+T, desde, hasta, L, D, A, ks, kL, tipo, Op
+  0,   0,   3,    1000,   250,  0.0491, 0.0015,   5.0,  TA, -
+  1,   1,   3,    1000,   250,  0.0491, 0.0015,   5.0,  TA, -
+  2,   2,   3,    1000,   250,  0.0491, 0.0015,   5.0,  TA, -
+RESULTADOS
+Nudos de carga fija
+N, Elevación, Carga, Nivel, Caudal
+  0,  100.00,  132.00,   32.00, -219.42
+  1,  130.00,   90.00,  -40.00,  -90.79
+  2,  120.00,  128.00,    8.00,  210.21
+Nudos de demanda
+N, Elevación, Q Base, FVH, Q Neto, Carga, Presión
+  3,   70.00,  100.00,   1.00,  100.00,   79.79,    9.79
+Tramos
+T, desde, hasta, V, Q, hf, hL, hT, S
+  0,  0,   3,   4.47, 219.42,  47.11,   5.09,  52.21, 0.05221, 
+  1,  1,   3,   1.85,  90.79,   9.33,   0.87,  10.21, 0.01021, 
+  2,  2,   3,  -4.28, -210.21,  43.53,   4.67,  48.21, 0.04821, 
+timestamp,  Thu Sep 15 10:24:40 2022
+signature, crcs-2022

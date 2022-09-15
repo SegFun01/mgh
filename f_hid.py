@@ -109,14 +109,14 @@ def construir_A1(alfa,q,t):
        #print("m[i,i],alfa[i],Q[i] ",m[i,i],alfa[i],q[i])
    return m
 
-def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo,ns):  
+def construir_A(a11,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns):  
     # toma A1 y reemplaza alfa, beta y gama de acuerdo a [es] y [op]
     m = np.zeros([t,t],dtype=float) # aquí se guarda A1 temporalmente para ser devuelta
     for i in range(t):
        m[i,i]=a11[i,i]   #copia A1
     # Se necesitan los vectores e, de, a para computar el nuevo valor (a+b+c)
     for i in range(t):
-         if es[i].strip()=="VR":  # VALVULA REDUCTORA
+         if tp[i].strip()=="VR":  # VALVULA REDUCTORA
               j=de[i]
               k=a[i]
               cota1 = e[j]
@@ -132,7 +132,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo,ns):
               m[i,i]=a11[i,i]+gQ
               #if modo=="2")   #revisar impresion
                 #printf("Tramo %d, de %d a %d : VR, se ajusta A11[%d][%d] con &gamma;=%f, &gamma;/Q=%f, valor=%f<br>",$i+1, $j, $k, $i, $i,$g,$gQ,$A11[$i][$i]);          
-         if es[i].strip()=="VS":  # //VALVULA SOSTENEDORA
+         if tp[i].strip()=="VS":  # //VALVULA SOSTENEDORA
               j=de[i]
               k=a[i]
               cota1 = e[j]
@@ -149,7 +149,7 @@ def construir_A(a11,t,es,op,e,de,a,hf,hm,H,Q,modo,ns):
               m[i,i]=a11[i,i] + gQ
               #if ($modo=="2"){
               #printf("En el tramo %d hay una VS, se ajusta A11[%d][%d] con &gamma;=%f, &gamma;/Q=%f, valor=%f<br>",$i+1, $j, $k, $i, $i,$g,$gQ,$A11[$i][$i]);
-         if es[i].strip()=="BO":  # BOMBA
+         if tp[i].strip()=="BO":  # BOMBA
              abc = op[i].split() 
              m[i,i]= a11[i,i]-(float(abc[0])*Q[i] + float(abc[1]) + float(abc[2])/Q[i]);
              # if ($modo=="2"){

@@ -62,10 +62,11 @@ l = []   # longitudes de cada tramo en [m]
 d = []   # diametro de cada tramo en [mm]
 ks= []   # coeficiente de rugosidad del tra¿mo en [mm]
 km= []   # coeficiente de perdidas locales del tramo
-es= []   # estado del tramo: TA abierto, TC cerrado, BO bomba, VRP válvula, etc
+es= []   # estado del tramo: 1=ON, 0=OFF
 tmp=[]   # temporal para guardar valores de las opciones del tramo
 op= []   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
 fi= []   # factores de variación horaria de cada nudo de demanda
+tp=[]    # tipo de tramo TB, EM, VS, VR, CK, BO, VQ
 
 #---------->>>>>>>>>> Funcion para leer desde json
 def leer_json(fin):
@@ -117,6 +118,7 @@ def leer_json(fin):
        km.append(i.get('kL'))
        es.append(i.get('estado'))
        op.append(i.get('opciones'))
+       tp.append(i.get('tipo'))
 
 #---------->>>>>>>>>> Carga de datos desde archivo JSON,    CSV deprecado
 def asigna_modo(opcn):
@@ -264,7 +266,7 @@ for i in range(t):
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])        # Iniciar matriz de alfas
 BT = np.transpose(B)                         # iniciar matriz B transpuesta
 A1= hid.construir_A1(alfa,Q,t)               #iniciar matriz A'
-A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo,ns) # iniciar matriz A       
+A = hid.construir_A(A1,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns) # iniciar matriz A       
 
 #---------->>>>>>>>>> Check de matrices:   comentar
 #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
@@ -355,10 +357,10 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("---------------------------------")
    print("")
    print("Tramos")
-   print("  T   de->a      L     D     A       ks     kL   Estado   Op ")
+   print("  T   de->a      L     D     A       ks     kL   Tipo    Op ")
    print("---------------------------------------------------------------")
    for i in range(t):
-      print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f}  {ks[i]:5.4f} {km[i]:5.1f}   {es[i]:>3}   {op[i]} ")
+      print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3} {l[i]:7.0f} {d[i]:5.0f} {At[i]:7.4f}  {ks[i]:5.4f} {km[i]:5.1f}   {tp[i]:>3}   {op[i]} ")
    print("---------------------------------------------------------------")
    print("")   
    print("RESULTADOS")
@@ -381,9 +383,9 @@ def imprime_reporte():                       # pasar a f_io con valores de entra
    print("  T   de->a      V       Q       hf      hL      hT       S   ")
    print("---------------------------------------------------------------")    
    for i in range(t):
-       if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+       if "VR" in tp[i] or "VS" in tp[i] or "BO" in tp[i]:  # si hay un accesorio imprime la carga del accesorio
           hv =  f'{((A1[i,i]-A[i,i])*Qi[i]):.2f}'
-          hv = "H"+ es[i].strip() + "=" + hv
+          hv = "H"+ tp[i].strip() + "=" + hv
        else:
           hv=""
        print(f"{nt[i]:>3}  {de[i]:>3}{a[i]:>3}   {v[i]:6.2f}  {(Qi[i]*1000):6.2f}  {hf[i]:6.2f}  {hm[i]:6.2f}  {(hf[i]+hm[i]):6.2f}   {((hf[i]+hm[i])/l[i]):7.5f} {hv}")
@@ -420,11 +422,11 @@ def imprime_salida_json(fout):
    #-----Leer los datos de los tramos
    tr=[]
    for i in range(0,t):
-      if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+      if "VR" in tp[i] or "VS" in tp[i] or "BO" in tp[i]:  # si hay un accesorio imprime la carga del accesorio
           hv =  ((A1[i,i]-A[i,i])*Qi[i])
       else:
           hv=0
-      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": round(Qi[i]*1000,2), "velocidad": round(v[i],2), "Re": round(Re[i],2), "f": f[i], "hf": round(hf[i],2), "hL": round(hm[i],2), "h_accesorio": round(hv,2) })
+      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"tipo": tp[i],"opciones": op[i],"estado":es[i], "caudal": round(Qi[i]*1000,2), "velocidad": round(v[i],2), "Re": round(Re[i],2), "f": f[i], "hf": round(hf[i],2), "hL": round(hm[i],2), "h_accesorio": round(hv,2) })
    d_red["tramos"]=tr
    d_red["signature"]="crcs-2022"
    d_red["timestamp"]=time.strftime("%c")
@@ -463,9 +465,9 @@ def imprime_reporte_csv():                       # pasar a f_io con valores de e
    for i in range(n):
       print(f"{nn[i+ns]:>3}, {e[i+ns]:7.2f},{q[i+ns]:7.2f},{fi[i]:6.2f}")
    print("Tramos")
-   print("T, desde, hasta, L, D, A, ks, kL, Estado, Op")
+   print("T, desde, hasta, L, D, A, ks, kL, tipo, Op")
    for i in range(t):
-      print(f"{nt[i]:>3}, {de[i]:>3}, {a[i]:>3}, {l[i]:7.0f}, {d[i]:5.0f}, {At[i]:7.4f}, {ks[i]:5.4f}, {km[i]:5.1f}, {es[i]:>3}, {op[i]}")
+      print(f"{nt[i]:>3}, {de[i]:>3}, {a[i]:>3}, {l[i]:7.0f}, {d[i]:5.0f}, {At[i]:7.4f}, {ks[i]:5.4f}, {km[i]:5.1f}, {tp[i]:>3}, {op[i]}")
    print("RESULTADOS")
    print("Nudos de carga fija")  
    print("N, Elevación, Carga, Nivel, Caudal")
@@ -478,9 +480,9 @@ def imprime_reporte_csv():                       # pasar a f_io con valores de e
    print("Tramos")
    print("T, desde, hasta, V, Q, hf, hL, hT, S")
    for i in range(t):
-       if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+       if "VR" in tp[i] or "VS" in tp[i] or "BO" in tp[i]:  # si hay un accesorio imprime la carga del accesorio
           hv =  f'{((A1[i,i]-A[i,i])*Qi[i]):.2f}'
-          hv = "H"+ es[i].strip() + "=" + hv
+          hv = "H"+ tp[i].strip() + "=" + hv
        else:
           hv=""
        print(f"{nt[i]:>3},{de[i]:>3}, {a[i]:>3}, {v[i]:6.2f}, {(Qi[i]*1000):6.2f}, {hf[i]:6.2f}, {hm[i]:6.2f}, {(hf[i]+hm[i]):6.2f}, {((hf[i]+hm[i])/l[i]):7.5f}, {hv}")
@@ -527,12 +529,12 @@ while dqT > imbalance and it < MaxIt:
   qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)      # calcula el caudal de los nudos de carga fija
   recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
   A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
-  A = hid.construir_A(A1,t,es,op,e,de,a,hf,hm,H,Q,modo,ns)  # vuelve a reconstruir la matriz alfa [A]   
+  A = hid.construir_A(A1,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns)  # vuelve a reconstruir la matriz alfa [A]   
   if modo == "-v":       # modo de impresión detallado
      print("")
      print(f"-----Iteración número: {it:3} -----")
      print("")
-     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t) 
+     io.imprime_hid(nt, de, a, l, d, ks, km, tp, op, At, v, Re, f, hf, hm, alfa,t) 
      io.imprime_matrices([A,A1,qfi*1000,Hi,Qi*1000,dq] , ["A","A1","qfi","Hi","Qi","dq"] ) # imprime las matrices que cambian en cada iteración
      print("")
      print(f"-----Fin iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
