@@ -189,13 +189,13 @@ def imprime_matrices_2(matrices,nombres):
       j=j+1
 
 #---------->>>>>>>>>> Imprimir lista de variables hidráulicas de los nudos
-def imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t):
+def imprime_hid(nt, de, a, l, d, ks, km, tp, op, At, v, Re, f, hf, hm, alfa,t):
    print("Variables hidráulicas de los tramos")   
    print("")
-   print("  N  De->A    L    D    ks    kL    Es    A      v       Re     f       hf    hL      alfa")
+   print("  N  De->A    L    D    ks    kL    tp    A      v       Re     f       hf    hL      alfa")
    print("-------------------------------------------------------------------------------------------")
    for i in range(t):
-       print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:5.0f} {d[i]:4.0f} {ks[i]:5.4f} {km[i]:4.1f} {es[i]:>3} {At[i]:7.4f} {v[i]:6.2f} {Re[i]:7.0f} {f[i]:6.5f} {hf[i]:6.2f} {hm[i]:5.2f} {alfa[i]:9.2f}" )
+       print(f"{nt[i]:>3} {de[i]:>3}{a[i]:>3} {l[i]:5.0f} {d[i]:4.0f} {ks[i]:5.4f} {km[i]:4.1f} {tp[i]:>3} {At[i]:7.4f} {v[i]:6.2f} {Re[i]:7.0f} {f[i]:6.5f} {hf[i]:6.2f} {hm[i]:5.2f} {alfa[i]:9.2f}" )
    print("-------------------------------------------------------------------------------------------")
 
 #---------->>>>>>>>>> Imprimir matrices para verificación
@@ -269,6 +269,7 @@ def crea_red():
    km= []   # coeficiente de perdidas locales del tramo
    es= []   # estado del tramo: TA abierto, TC cerrado, BO bomba, VRP válvula, etc
    tmp=[]   # temporal para guardar valores de las opciones del tramo
+   tp=[]  # tipo de tramo
    op= []   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
    fi= []   # factores de variación horaria de cada nudo de demanda
    print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
@@ -306,7 +307,7 @@ def crea_red():
       q.append(lista[1])
       fi.append(lista[2])
    t = int(input("Cantidad de tramos : "))
-   print ("Tramo de  a  L  D   Ks  KL Es Op") 
+   print ("Tramo de  a  L  D   Ks  KL Tp Op Es") 
    for i in range(t):
       cadena = input(f"{i}  :  ")
       lista = cadena.split()
@@ -317,8 +318,9 @@ def crea_red():
       d.append(lista[3])
       ks.append(lista[4])    
       km.append(lista[5])    
-      es.append(lista[6])    
+      es.append(lista[8])    
       op.append(lista[7])
+      tp.append(lista[6])
    # Saving the reference of the standard output
    original_stdout = sys.stdout    
    with open(fin, 'w') as arch:
@@ -334,7 +336,7 @@ def crea_red():
       for i in range(n):
          print(f"{nn[i+ns]}, {e[i+ns]}, {q[i+ns]}, {fi[i]} ")
       for i in range(t):
-         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]}, {d[i]}, {ks[i]}, {km[i]}, {es[i]}, {op[i]}")
+         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]}, {d[i]}, {ks[i]}, {km[i]}, {tp[i]}, {op[i]} {es[i]}")
       print("EOF - crcs-2022")            
       # Reset the standard output
       sys.stdout = original_stdout 

@@ -1,0 +1,137 @@
+{
+    "titulo": "Bombeo desde un tanque a otro",
+    "autor": "Carlos Camacho Soto",
+    "fecha": "15-set-2022",
+    "version": "15-set-2022",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 50,
+    "ecuacion": "C",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0,
+            "nivel": -10.0,
+            "caudal": -75.77
+        },
+        {
+            "id": 1,
+            "elevacion": 150.0,
+            "carga": 155.0,
+            "nivel": -5.0,
+            "caudal": 20.77
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 90.0,
+            "demanda": 10.0,
+            "factor": 1.0,
+            "demanda_neta": 10.0,
+            "altura_piezometrica": 98.61,
+            "presion": 8.61
+        },
+        {
+            "id": 3,
+            "elevacion": 90.0,
+            "demanda": 5.0,
+            "factor": 1.0,
+            "demanda_neta": 5.0,
+            "altura_piezometrica": 169.21,
+            "presion": 79.21
+        },
+        {
+            "id": 4,
+            "elevacion": 130.0,
+            "demanda": 40.0,
+            "factor": 1.0,
+            "demanda_neta": 40.0,
+            "altura_piezometrica": 150.87,
+            "presion": 20.87
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1,
+            "caudal": 75.77,
+            "velocidad": 2.41,
+            "Re": 479041.64,
+            "f": 0.013366790362241365,
+            "hf": 9.91,
+            "hL": 1.48,
+            "h_accesorio": 0
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 300.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "BO",
+            "opciones": "-3125.0 187.5 77.5",
+            "estado": 1,
+            "caudal": 65.77,
+            "velocidad": 2.09,
+            "Re": 415822.2,
+            "f": 0.013705516984463427,
+            "hf": 4.59,
+            "hL": 1.12,
+            "h_accesorio": 76.31
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 1,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1,
+            "caudal": 60.77,
+            "velocidad": 1.93,
+            "Re": 384212.48,
+            "f": 0.01390089706211505,
+            "hf": 13.26,
+            "hL": 0.95,
+            "h_accesorio": 0
+        },
+        {
+            "id": 3,
+            "desde": 1,
+            "hasta": 4,
+            "longitud": 600.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1,
+            "caudal": 40.0,
+            "velocidad": 1.27,
+            "Re": 252877.76,
+            "f": 0.015012925822467696,
+            "hf": 3.72,
+            "hL": 0.41,
+            "h_accesorio": 0
+        }
+    ],
+    "signature": "crcs-2022",
+    "timestamp": "Thu Sep 15 11:17:55 2022"
+}

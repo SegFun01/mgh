@@ -1,0 +1,95 @@
+{
+    "titulo": "Bombeo desde un tanque a otro",
+    "autor": "Carlos Camacho Soto",
+    "fecha": "15-set-2022",
+    "version": "15-set-2022",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 50,
+    "ecuacion": "C",
+    "tolerancia": 1.000E-6,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0
+        },
+        {
+            "id": 1,
+            "elevacion": 150.0,
+            "carga": 155.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 90.0,
+            "demanda": 10.0,
+            "factor": 1.0
+        },
+        {
+            "id": 3,
+            "elevacion": 90.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 130.0,
+            "demanda": 40.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 300.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "BO",
+            "opciones": "-3125.0 187.5 77.5",
+            "estado": 1
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 1,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
+        },
+        {
+            "id": 3,
+            "desde": 1,
+            "hasta": 4,
+            "longitud": 600.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": 1
+        }
+    ],
+    "signature": "#EOF- crcs-2022"
+}

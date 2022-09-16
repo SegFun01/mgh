@@ -1,0 +1,112 @@
+{
+    "titulo": "Red abierta con hidrante y fuente",
+    "autor": "Carlos Camacho Soto",
+    "fecha": "15-set-2022",
+    "version": "15-set-2022",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 50,
+    "ecuacion": "C",
+    "tolerancia": 1e-06,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0
+        },
+        {
+            "id": 1,
+            "elevacion": 110.0,
+            "carga": 115.0
+        },
+        {
+            "id": 2,
+            "elevacion": 50.0,
+            "carga": 50.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 3,
+            "elevacion": 80.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 65.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        },
+        {
+            "id": 5,
+            "elevacion": 50.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 1,
+            "hasta": 0,
+            "longitud": 200.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": "1"
+        },
+        {
+            "id": 1,
+            "desde": 0,
+            "hasta": 3,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": "1"
+        },
+        {
+            "id": 2,
+            "desde": 3,
+            "hasta": 4,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": "1"
+        },
+        {
+            "id": 3,
+            "desde": 4,
+            "hasta": 5,
+            "longitud": 1000.0,
+            "diametro": 200.0,
+            "ks": 0.0015,
+            "kL": 5.0,
+            "tipo": "TA",
+            "opciones": "-",
+            "estado": "1"
+        },
+        {
+            "id": 4,
+            "desde": 5,
+            "hasta": 2,
+            "longitud": 1.0,
+            "diametro": 75.0,
+            "ks": 0.0,
+            "kL": 10,
+            "tipo": "EM",
+            "opciones": "0.5",
+            "estado": "1"
+        }
+    ],
+    "signature": "#EOF- crcs-2022"
+}

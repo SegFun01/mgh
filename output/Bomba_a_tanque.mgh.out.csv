@@ -1,0 +1,44 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO v1.0.0-alpha
+Titulo, Bombeo desde un tanque a otro
+Autor, Carlos Camacho Soto
+Fecha, 15-set-2022
+Versión, 15-set-2022
+Viscosidad, 1.007e-06
+Desbalance, 1e-05
+Máximo iteraciones, 50
+Ecuación, Colebrook-White
+Factor global, 1.0
+DATOS DE ENTRADA
+Nudos de carga fija
+N, Elevación, Carga, Nivel
+  0,  100.00,  110.00,   10.00
+  1,  150.00,  155.00,    5.00
+Nudos de demanda
+N, Elevación, Demanda, FVH
+  2,   90.00,  10.00,  1.00
+  3,   90.00,   5.00,  1.00
+  4,  130.00,  40.00,  1.00
+Tramos
+T, desde, hasta, L, D, A, ks, kL, tipo, Op
+  0,   0,   2,     500,   200,  0.0314, 0.0015,   5.0,  TA, -
+  1,   2,   3,     300,   200,  0.0314, 0.0015,   5.0,  BO, -3125.0 187.5 77.5
+  2,   3,   1,    1000,   200,  0.0314, 0.0015,   5.0,  TA, -
+  3,   1,   4,     600,   200,  0.0314, 0.0015,   5.0,  TA, -
+RESULTADOS
+Nudos de carga fija
+N, Elevación, Carga, Nivel, Caudal
+  0,  100.00,  110.00,   10.00,  -75.77
+  1,  150.00,  155.00,    5.00,   20.77
+Nudos de demanda
+N, Elevación, Q Base, FVH, Q Neto, Carga, Presión
+  2,   90.00,   10.00,   1.00,   10.00,   98.61,    8.61
+  3,   90.00,    5.00,   1.00,    5.00,  169.21,   79.21
+  4,  130.00,   40.00,   1.00,   40.00,  150.87,   20.87
+Tramos
+T, desde, hasta, V, Q, hf, hL, hT, S
+  0,  0,   2,   2.41,  75.77,   9.91,   1.48,  11.39, 0.02278, 
+  1,  2,   3,   2.09,  65.77,   4.59,   1.12,   5.71, 0.01903, HBO=76.31
+  2,  3,   1,   1.93,  60.77,  13.26,   0.95,  14.21, 0.01421, 
+  3,  1,   4,   1.27,  40.00,   3.72,   0.41,   4.13, 0.00689, 
+timestamp,  Thu Sep 15 11:17:48 2022
+signature, crcs-2022

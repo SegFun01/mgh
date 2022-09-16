@@ -5,20 +5,21 @@ import json
 from lzma import FORMAT_AUTO
 import sys
 
-nn = []
-nt = []
+nn= []
+nt= []
 e = []
 q = []
-fi = []
+fi= []
 h = []
-de = []
+de= []
 a = []
 l = []
 d = []
-ks = []
-km = []
-es = []
-op = []
+ks= []
+km= []
+es= []
+op= []
+tp= []
 
 fin = "./input/default.mgh.json"
 fout = fin + ".out"
@@ -83,7 +84,7 @@ def crea_red(fin):
    miVar= input("Ecuación para f: C ó S    : ")
    d_red["ecuacion"]= miVar
    miVar= input("Tolerancia en cálculo de f:")
-   d_red["tolerancia"]= miVar
+   d_red["tolerancia"]= float(miVar)
    miVar = input("Factor global de demanda  : ")
    d_red["factor_demanda_global"]= float(miVar)
    print("----------------")
@@ -92,7 +93,7 @@ def crea_red(fin):
    nc=[] 
    for i in range(ns):
       cadena = input(f"{i}   :  ")
-      lista = cadena.split()
+      lista = cadena.split(",")
       nc.append({ "id": i, "elevacion": float(lista[0]), "carga":float(lista[1])})
       # print(nc)
    d_red["nudos_carga"]= nc
@@ -104,19 +105,19 @@ def crea_red(fin):
    print ("Nudo Elev Demanda Factor ") 
    for i in range(n):
       cadena = input(f"{i+ns} : ")
-      lista = cadena.split()
+      lista = cadena.split(",")
       nd.append({ "id": i+ns, "elevacion": float(lista[0]), "demanda": float(lista[1]), "factor": float(lista[2]) }) 
       # print(nd)
    d_red["nudos_demanda"]= nd 
    # print(d_red)
    # x = input("Pausa, pulse <enter>")
    t = int(input("Cantidad de tramos : "))
-   print ("Tramo de  a  L  D   Ks  KL Es Op") 
+   print ("Tramo de  a  L  D   Ks  KL Tp  Es Op") 
    tr =[]
    for i in range(t):
       cadena = input(f"{i}  :  ")
-      lista = cadena.split()
-      tr.append({ "id": i, "desde": int(lista[0]), "hasta": int(lista[1]), "longitud": float(lista[2]), "diametro": float(lista[3]), "ks":float(lista[4]), "kL": float(lista[5]), "estado": lista[6], "opciones": lista[7] })  
+      lista = cadena.split(",")
+      tr.append({ "id": i, "desde": int(lista[0]), "hasta": int(lista[1]), "longitud": float(lista[2]), "diametro": float(lista[3]), "ks":float(lista[4]), "kL": float(lista[5]), "tipo": lista[6], "opciones": lista[8], "estado":lista[7] })  
    d_red["tramos"]= tr
    d_red["signature"]="#EOF- crcs-2022"
    #print(d_red)
@@ -188,8 +189,9 @@ def leer_json(fin):
        d.append(i.get('diametro'))
        ks.append(i.get('ks'))
        km.append(i.get('kL'))
-       es.append(i.get('estado'))
+       tp.append(i.get('tipo'))
        op.append(i.get('opciones'))
+       es.append(i.get('estado'))
 
 def convertir_CSV_JSON(fin):
    d_red = {}
@@ -251,7 +253,7 @@ def convertir_CSV_JSON(fin):
    for i in range(0,t):
       linea = f.readline()
       valores = linea.split(",")
-      tr.append({ "id": int(valores[0]), "desde": int(valores[1]), "hasta": int(valores[2]), "longitud": float(valores[3]), "diametro": float(valores[4]),"ks": float(valores[5]),"kL": float(valores[6]),"estado": valores[7].strip(),"opciones": valores[8].strip() })
+      tr.append({ "id": int(valores[0]), "desde": int(valores[1]), "hasta": int(valores[2]), "longitud": float(valores[3]), "diametro": float(valores[4]),"ks": float(valores[5]),"kL": float(valores[6]),"tipo": valores[7].strip(),"opciones": valores[8].strip(),"estado": valores[9].strip() })
    d_red["tramos"]=tr
    d_red["signature"]="crcs-2022"
    f.close()  
@@ -287,11 +289,11 @@ def imprime_salida_json(fout,Qi,Hi,v,Re,f,hf,hm,qi,qfi,A,A1):
    #-----Leer los datos de los tramos
    tr=[]
    for i in range(0,t):
-      if "VR" in es[i] or "VS" in es[i] or "BO" in es[i]:  # si hay un accesorio imprime la carga del accesorio
+      if "VR" in tp[i] or "VS" in tp[i] or "BO" in tp[i]:  # si hay un accesorio imprime la carga del accesorio
           hv =  ((A1[i,i]-A[i,i])*Qi[i])
       else:
           hv=0
-      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"estado": es[i],"opciones": op[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
+      tr.append({ "id": nt[i], "desde": de[i], "hasta": a[i], "longitud": l[i], "diametro": d[i],"ks": ks[i],"kL": km[i],"tipo": tp[i],"opciones": op[i], "estado": es[i], "caudal": Qi[i]*1000, "velocidad": v[i], "Re": Re[i], "f": f[i], "hf": hf[i], "hL":hm[i], "h_accesorio": hv })
    d_red["tramos"]=tr
    d_red["signature"]="crcs-2022"
    

@@ -246,12 +246,15 @@ for i in range(0,ns):
 for i in range(ns,n+ns):
     qi[i-ns]=(q[i]/1000*factor*fi[i-ns]) # iniciar matriz demandas en nudos   
 for i in range(t):
+    if tp[i]=="EM":
+       N[i,i]=float(op[i])
     for j in range(ns):
         if de[i]==j and es[i]!="TC":
             C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
         if a[i]==j and es[i]!="TC":
             C[i,j]=1                   # iniciar matriz topológica de cargas fijas nudo de llegada =-1
     for j in range(ns,ns+n):
+      if es[i]==1:
         jj=j-ns
         if de[i]==j:
             B[i,jj]= -1.0            # iniciar matriz topológica nudo-tramo
@@ -267,7 +270,6 @@ for i in range(t):
 BT = np.transpose(B)                         # iniciar matriz B transpuesta
 A1= hid.construir_A1(alfa,Q,t)               #iniciar matriz A'
 A = hid.construir_A(A1,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns) # iniciar matriz A       
-
 #---------->>>>>>>>>> Check de matrices:   comentar
 #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
 
@@ -507,9 +509,9 @@ if modo == "-v":                                        # modo de impresión det
      print("")
      print("----- Iteración inicial -----")
      # imprime las matrices iniciales
-     io.imprime_matrices([q,Ho,qi*1000,B,C,Q*1000], ["q","Ho","qi","B","C","Q"] )
+     io.imprime_matrices([N,q,Ho,qi*1000,B,C,Q*1000], ["N","q","Ho","qi","B","C","Q"] )
      print("")
-     io.imprime_hid(nt, de, a, l, d, ks, km, es, op, At, v, Re, f, hf, hm, alfa,t)
+     io.imprime_hid(nt, de, a, l, d, ks, km, tp, op, At, v, Re, f, hf, hm, alfa,t)
      print("")
      io.imprime_matrices([A,A1], ["A","A1"] )
      print("----Inician las iteraciones----")
