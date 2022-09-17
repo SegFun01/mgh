@@ -27,7 +27,7 @@
 		{
 			"id": 2,
 			"elevacion": 90,
-			"demanda": -40,
+			"demanda": 40,
 			"factor": 1.0
 		},
 		{
