@@ -329,50 +329,34 @@ def calcula_Hi_Qi():
    # - paso 12
    Qi= np.subtract(M1,M2) # segundo resultado
 
-#---> reconstruir matriz B si se cierra un tubo
-def abreCierra_tramo(dqT):
-  global C, B, BT
+#---> verificar si hay un check y si q<0 cerrarlo
+def revisaChecks():
   cambio=False
   for i in range(t):
      if tp[i]=="CK" or tp[i]=="BO":
        if Qi[i]<0:
           es[i]=0
           cambio=True
-          print(f"{i} {es[i]}")
-       else:
-          es[i]=1
+          dqT=1
+  return cambio
+
+#---> reconstruir matriz B si se cierra un tubo
+def cierra_check():
+  global C, B, BT
+  for i in range(t):
      for j in range(ns):
-       if de[i]==j:
-         if es[i]==1:
-            C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
-         else:
-           C[i,j]=0   
-       if a[i]==j:
-         if es[i]==1:
-           C[i,j]=1
-         else:
-           C[i,j]=0                   # iniciar matriz topológica de cargas fijas nudo de llegada =-1
+       if de[i]==j and es[i]==0:
+            C[i,j]=0                  # reescribir en matriz topológica de cargas fijas nudo de salida=-1
+       if a[i]==j and es[i]==0:
+           C[i,j]=0
      for j in range(ns,ns+n):           # construye la matriz de topología de nudo a tramo
-       if es[i]==1:                     # solo asigna los nudos de entrada y salida si el tubo está abierto
          jj=j-ns
-         if de[i]==j:
-           if es[i]==1:
-             B[i,jj]= -1.0
-           else:
+         if de[i]==j and es[i]==0:
              B[i,jj]= 0
-             print(f"B[{i},{jj}] {B[i,jj]}")              # asigna el nudo de entrada a la tubería
-         if a[i]==j:
-           if es[i]==1:
-             B[i,jj]= 1.0
-           else:
+         if a[i]==j and es[i]==0:
              B[i,jj]= 0
-             print(f"B[{i},{jj}] {B[i,jj]}")
-  if cambio:           
-     BT = np.transpose(B)
-     dqT=0.1   
-  #print(B)
-  #x=input("Parada, pulse enter")
-  return dqT
+  BT = np.transpose(B)
+  
 
 #---> Impresión de reporte final
 def imprime_reporte():                       # pasar a f_io con valores de entrada 
@@ -569,7 +553,8 @@ if modo == "-v":                                        # modo de impresión det
 
 # Inicia el proceso de iteración
 #-------------------------------
-dqT, it = 1000, 0                                        # Se define dqT en 1000 e it en 0 para iniciar iteraciones
+dqT, it = 1000, 0  
+                                      # Se define dqT en 1000 e it en 0 para iniciar iteraciones
 while dqT > imbalance and it < MaxIt:
   calcula_Hi_Qi()
   dq= np.subtract(Qi,Q)                                  # determina vector de desbalances de caudales en los nodos
@@ -591,9 +576,11 @@ while dqT > imbalance and it < MaxIt:
      print("")
      print(f"-----Fin iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
      print("")
-  #if dqT < imbalance:
-  #   dqT=abreCierra_tramo(dqT)      SE ELIMINA ESTO PORQUE SE DEBE HACER DE NUEVO LA CORRIDA SI CAMBIA LA TOPOLOGIA
-  #   dqT=0
+  if dqT < imbalance:
+     if revisaChecks():
+       dqT=1
+       cierra_check()
+       
 
   #fin del while
 #----------
