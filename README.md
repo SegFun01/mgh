@@ -322,7 +322,8 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Algoritmo de cálculo de Hi y Qi por iteración &#10003;
 - Inclusión de accesorios especiales: 
    - Válvula Sostenedora `VS`, Válvula Reductora `VR`, Bomba `BO` &#10003; 
-   - Tubería Cerrada `TC`, Válvula de retención o Check `CK`, Válvula limitadora de caudal `VQ` &#10007;
+   - Tubería Cerrada `TC`, Válvula de retención o Check `CK` &#10003;
+   - Válvula limitadora de caudal `VQ` &#10007;
    - Nudos tipo Embalse o Reservorio `RE`, Tanque `TQ`, Emisor `EM`, Fuente `FU` &#128269;
    - Nudos de demanda con capacidad de "aportar" caudal para modelar nacientes o pozos &#10003;
 - Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
@@ -384,10 +385,15 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 | `mgh.py`                              |Programa en python con el método del gradiente hidráulico : **MGH**.                |
 | `f_hid.py`                            |Funciones hidráulicas requeridas en el cálculo de pérdidas de carga y caudales      |
 | `f_io.py`                             |Funciones de entrada y salida de datos: impresión de matrices, vectores y resultados|
-| `json_io.py`                          |Ejecutable para crear redes en formato .json y convertir CSV en json: rudimentario  |
+| `json_io.py`                          |Programa para crear redes en formato .json y convertir CSV en json: rudimentario    |
+| `tirante.py`                          |Programa para determinar si una tubería está a canal abierto o a presión            |
 | `LICENSE`                             |Texto de la licencia GPL-3                                                          |  
 | `README.md`                           |Este documento                                                                      |
-| `GradienteHidráulico.xlsx`            |Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación|
+| `docs`                                |Carpeta con documentos relativos al proyecto mgh                                    |
+|&nbsp;&#9493; `DeterminarCanalAbierto.ods` |Hoja elecctrónica para análisis de alcantarillas                                |
+|&nbsp;&#9493; `GradienteHidráulico.xlsx`  |Método del gradiente desarrollado en una hoja electrónica - ejercicio de comparación|
+|&nbsp;&#9493; `Temas pendientes....docx`  |Documento con discusión sobre temas pendientes e eideas                         |
+|&nbsp;&#9493; `Valores-Kv-Hidrantes.ods`  |Hoja electrónica para calcular la Kv de emisores                                |
 | `img`                                 |Carpeta que contiene las imágenes de este README y otras                            |
 | `input`                               |Carpeta para los archivos de entrada de los modelos de redes a correr:              |
 |&nbsp;&#9493; `default.mgh`            |Archivo de entrada de pruebas con una red simple                                    |
