@@ -1,0 +1,52 @@
+MÉTODO DEL GRADIENTE HIDRÁULICO v1.0.0-alpha
+Titulo, Ejemplo del libro de Saldariaga
+Autor, Carlos Camacho Soto
+Fecha, 28/01/2019
+Versión, v0.0.1
+Viscosidad, 1.007e-06
+Desbalance, 1e-05
+Máximo iteraciones, 40
+Ecuación,Swamee-Jain
+Factor global, 1.0
+DATOS DE ENTRADA
+Nudos de carga fija
+N, Elevación, Carga, Nivel
+  0,  100.00,  110.00,   10.00
+Nudos de demanda
+N, Elevación, Demanda, FVH
+  1,   90.00,  60.00,  1.00
+  2,   90.00,  40.00,  1.00
+  3,   90.00,  30.00,  1.00
+  4,   90.00,  30.00,  1.00
+  5,   90.00,  40.00,  1.00
+Tramos
+T, desde, hasta, L, D, A, ks, kL, tipo, Op
+  0,   0,   1,     500,   250,  0.0491, 0.0015,   0.0,  TA, -
+  1,   1,   2,     400,   150,  0.0177, 0.0015,  10.0,  TA, -
+  2,   3,   2,     200,   100,  0.0079, 0.0015,   0.0,  TA, -
+  3,   4,   3,     400,   150,  0.0177, 0.0015,   0.0,  TA, -
+  4,   1,   4,     200,   100,  0.0079, 0.0015,   0.0,  TA, -
+  5,   5,   4,     600,   200,  0.0314, 0.0015,   0.0,  TA, -
+  6,   0,   5,     300,   250,  0.0491, 0.0015,   0.0,  TA, -
+RESULTADOS
+Nudos de carga fija
+N, Elevación, Carga, Nivel, Caudal
+  0,  100.00,  110.00,   10.00, -200.00
+Nudos de demanda
+N, Elevación, Q Base, FVH, Q Neto, Carga, Presión
+  1,   90.00,   60.00,   1.00,   60.00,  103.74,   13.74
+  2,   90.00,   40.00,   1.00,   40.00,   93.21,    3.21
+  3,   90.00,   30.00,   1.00,   30.00,   93.65,    3.65
+  4,   90.00,   30.00,   1.00,   30.00,  100.81,   10.81
+  5,   90.00,   40.00,   1.00,   40.00,  107.05,   17.05
+Tramos
+T, desde, hasta, V, Q, hf, hL, hT, S
+  0,  0,   1,   2.17, 106.66,   6.26,   0.00,   6.26, 0.01253, 
+  1,  1,   2,   2.06,  36.48,   8.36,   2.17,  10.53, 0.02632, 
+  2,  3,   2,   0.45,   3.52,   0.44,   0.00,   0.44, 0.00219, 
+  3,  4,   3,   1.90,  33.52,   7.17,   0.00,   7.17, 0.01791, 
+  4,  1,   4,   1.30,  10.18,   2.92,   0.00,   2.92, 0.01462, 
+  5,  5,   4,   1.70,  53.34,   6.24,   0.00,   6.24, 0.01040, 
+  6,  0,   5,   1.90,  93.34,   2.95,   0.00,   2.95, 0.00982, 
+timestamp,  Sat Sep 17 10:54:44 2022
+signature, crcs-2022

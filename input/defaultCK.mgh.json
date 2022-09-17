@@ -1,0 +1,139 @@
+{
+	"titulo": "Ejemplo del libro de Saldariaga",
+	"autor": "Carlos Camacho Soto",
+	"fecha": "28/01/2019",
+	"version": "v0.0.1",
+	"descripcion": "Anotar datos sobre el modelo, corrida, objetivo, etc",
+	"viscosidad": 1.007E-6,
+	"imbalance": 1E-5,
+	"max_iteraciones": 40,
+	"ecuacion": "S",
+	"duracion": 24,
+	"tolerancia": 1.0E-5,
+	"factor_demanda_global": 1.0,
+	"nudos_carga": [{
+		"id": 0,
+		"elevacion": 100,
+		"carga": 110,
+		"base": 900,
+		"hmax": 5.45
+	}],
+	"nudos_demanda": [{
+			"id": 1,
+			"elevacion": 90,
+			"demanda": 60,
+			"factor": 1.0
+		},
+		{
+			"id": 2,
+			"elevacion": 90,
+			"demanda": 40,
+			"factor": 1.0
+		},
+		{
+			"id": 3,
+			"elevacion": 90,
+			"demanda": 30,
+			"factor": 1.0
+		},
+		{
+			"id": 4,
+			"elevacion": 90,
+			"demanda": 30,
+            "factor": 1.0
+		},
+		{
+			"id": 5,
+			"elevacion": 90,
+			"demanda": 40,
+			"factor": 1.0
+		}
+	],
+	"tramos": [{
+			"id": 0,
+			"desde": 0,
+			"hasta": 1,
+			"longitud": 500,
+			"diametro": 250,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 1,
+			"desde": 1,
+			"hasta": 2,
+			"longitud": 400,
+			"diametro": 150,
+			"ks": 0.0015,
+			"kL": 10,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 2,
+			"desde": 2,
+			"hasta": 3,
+			"longitud": 200,
+			"diametro": 100,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "CK",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 3,
+			"desde": 4,
+			"hasta": 3,
+			"longitud": 400,
+			"diametro": 150,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 4,
+			"desde": 1,
+			"hasta": 4,
+			"longitud": 200,
+			"diametro": 100,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 5,
+			"desde": 5,
+			"hasta": 4,
+			"longitud": 600,
+			"diametro": 200,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 6,
+			"desde": 0,
+			"hasta": 5,
+			"longitud": 300,
+			"diametro": 250,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TA",
+			"opciones": "-",
+			"estado": 1
+		}
+	]
+}
+
+

@@ -238,6 +238,11 @@ gama=np.zeros([t],dtype=float)     # valores gama de cada tramo para usar en A11
 Hi = np.zeros(n,dtype=float)       # cargas dinamicas en los nudos de la actual iteración
 Qi = np.zeros([t],dtype=float)     # caudales en los tramos [m3/s] en la actual iteración
 qfi = np.zeros(ns,dtype=float)     # caudales en los nudos de carga fija
+
+### AQUI SE DEBE INICIAR UN CICLO QUE ITERE EL CÁLCULO COMPLETO SI CAMBIA LA TOPOLOGÍA
+### DE LA RED O SI SE REALIZA UN ANÁLISIS EN TIEMPO EXTENDIDO
+### while ok:    ok se alcanza si la red no requiere cerrar check, o si se acabaron las iteraciones
+
 #---------->>>>>>>>>> Iniciar matrices: carga de los datos en las matrices a partir de los vectores de lectura
 Q.fill(0.1)                          # iniciar caudales en tramos
 np.fill_diagonal(N,2)                # iniciar matriz N con 2 en la diagonal
@@ -249,17 +254,17 @@ for i in range(t):
     if tp[i]=="EM":
        N[i,i]=float(op[i])
     for j in range(ns):
-        if de[i]==j and es[i]!="TC":
+        if de[i]==j and es[i]==1:
             C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
-        if a[i]==j and es[i]!="TC":
+        if a[i]==j and es[i]==1:
             C[i,j]=1                   # iniciar matriz topológica de cargas fijas nudo de llegada =-1
-    for j in range(ns,ns+n):
-      if es[i]==1:
+    for j in range(ns,ns+n):           # construye la matriz de topología de nudo a tramo
+      if es[i]==1:                     # solo asigna los nudos de entrada y salida si el tubo está abierto
         jj=j-ns
         if de[i]==j:
-            B[i,jj]= -1.0            # iniciar matriz topológica nudo-tramo
+            B[i,jj]= -1.0             # asigna el nudo de entrada a la tubería
         if a[i]==j:
-            B[i,jj]= 1.0              
+            B[i,jj]= 1.0              # asigna el nudo de sdalida a la tubería 
     At[i]=hid.area(d[i])             # iniciar matriz Areas de Tubos
     v[i]=hid.ve(Q[i],At[i])          # iniciar matriz de velocidades en tubos
     Re[i]=hid.reynolds(v[i],d[i],viscosidad) # iniciar matriz Reynolds
@@ -323,6 +328,51 @@ def calcula_Hi_Qi():
    M2= np.matmul(M3,M4)
    # - paso 12
    Qi= np.subtract(M1,M2) # segundo resultado
+
+#---> reconstruir matriz B si se cierra un tubo
+def abreCierra_tramo(dqT):
+  global C, B, BT
+  cambio=False
+  for i in range(t):
+     if tp[i]=="CK" or tp[i]=="BO":
+       if Qi[i]<0:
+          es[i]=0
+          cambio=True
+          print(f"{i} {es[i]}")
+       else:
+          es[i]=1
+     for j in range(ns):
+       if de[i]==j:
+         if es[i]==1:
+            C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
+         else:
+           C[i,j]=0   
+       if a[i]==j:
+         if es[i]==1:
+           C[i,j]=1
+         else:
+           C[i,j]=0                   # iniciar matriz topológica de cargas fijas nudo de llegada =-1
+     for j in range(ns,ns+n):           # construye la matriz de topología de nudo a tramo
+       if es[i]==1:                     # solo asigna los nudos de entrada y salida si el tubo está abierto
+         jj=j-ns
+         if de[i]==j:
+           if es[i]==1:
+             B[i,jj]= -1.0
+           else:
+             B[i,jj]= 0
+             print(f"B[{i},{jj}] {B[i,jj]}")              # asigna el nudo de entrada a la tubería
+         if a[i]==j:
+           if es[i]==1:
+             B[i,jj]= 1.0
+           else:
+             B[i,jj]= 0
+             print(f"B[{i},{jj}] {B[i,jj]}")
+  if cambio:           
+     BT = np.transpose(B)
+     dqT=0.1   
+  #print(B)
+  #x=input("Parada, pulse enter")
+  return dqT
 
 #---> Impresión de reporte final
 def imprime_reporte():                       # pasar a f_io con valores de entrada 
@@ -541,6 +591,10 @@ while dqT > imbalance and it < MaxIt:
      print("")
      print(f"-----Fin iteración: {it:>3}  Desbalance de caudales: {(1000*dqT):8.6F}")
      print("")
+  #if dqT < imbalance:
+  #   dqT=abreCierra_tramo(dqT)      SE ELIMINA ESTO PORQUE SE DEBE HACER DE NUEVO LA CORRIDA SI CAMBIA LA TOPOLOGIA
+  #   dqT=0
+
   #fin del while
 #----------
 
