@@ -115,10 +115,22 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
 
 ### Características
   
-- Utiliza un archivo de entrada en formato CSV, pero se trabaja en el uso de un archivo JSON para hacer los datos más legibles
--  Los resultados se obtienen por consola en un archivo tabulado, sin embargo se tiene pensado usar un archivo de salida en JSON
-- Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se usa Swamee-Jain 
-- Realiza la modelación en forma puntual, un solo cálculo.  No se hace modelación en tiempo extendido.  No se modela el vaciado o llenado de tanques.
+- Utiliza un archivo de entrada en formato JSON, para hacer los datos más legibles por humanos.
+-  Los resultados se obtienen por consola o por medio de archivo.  EL formato de salida puede ser escogido entre formato de tablas de texto TXT, por medio de formato de valores separados por comas CSV o por medio de formato de JSON
+- Para el cálculo de las pérdidas por fricción se usa la ecuación de Darcy-Weisbach.  En el cálculo del factor de fricción f, se puede escoger entre usar Swamee-Jain o la ecuación de Colebrook-White 
+- Realiza la modelación en forma puntual, un solo cálculo.  Se trabaja en la modelación en tiempo extendido y el modelado de vaciado o llenado de tanques
+- Los elementos tipo nudo se dividen en 2 tipos:
+    - Nudos de carga fija, en el que se modelan tanques, embalses y emisores
+    - NUdos de demanda en los que además de demandas en los nudos se pueden modelar fuentes de abastecimiento tipo manantial
+- Los elementos tipo línea o tramo permiten modelar varios tipos de accesorios, y con eluso de una variable de estado pueden estar abiertos/cerrados en caso de tubos y válvulas y encendidos/apagados en caso de bombas.  Los elementos modelados son:
+    - Todos los elementos tipo línea funcionan como válvula de corte, es decir se pueden abrir o cerrar completamente
+    - Tubería simple TS
+    - Tubería con válvula reductora de presión VR
+    - Tubería con válvula sostenedora de presión VS
+    - Tubería con bomba BO
+    - Tubería del tipo emisor (debe ser conectada a un nudo tipo emisor)
+    - Tubería con válvula reguladora de caudal VQ
+    - Tubería con válvula CHECK que se cierra si el caudal es negativo (contrario a la dirección asignada) CK.  Nota: Los tramos tipo bomba también funcionan como Check
 - El formato del archivo de entrada es el que sigue:
         
       {
@@ -126,7 +138,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       	"autor": "Carlos Camacho Soto",
       	"fecha": "28/01/2019",
       	"version": "v0.0.1",
-      	"descripcion": "Anotar datos sobre el modelo, corrida, objetivo, etc",
+      	"descripcion": "AnoTSr datos sobre el modelo, corrida, objetivo, etc",
       	"viscosidad": 1.007E-6,
       	"imbalance": 1E-5,
       	"max_iteraciones": 40,
@@ -180,7 +192,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 250,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -192,7 +204,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 150,
       			"ks": 0.0015,
       			"kL": 10,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -204,7 +216,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 100,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -216,7 +228,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 150,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -228,7 +240,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 100,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -240,7 +252,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 200,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		},
@@ -252,7 +264,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       			"diametro": 250,
       			"ks": 0.0015,
       			"kL": 0,
-      			"tipo": "TA",
+      			"tipo": "TS",
       			"opciones": "-",
       			"estado": 1
       		}
@@ -267,30 +279,31 @@ Se incluye en el contenido de la carpeta principal, un archivo con la solución 
 #### Descripción del formato del archivo de entrada
 El archivo está en formato JSON, por lo que su contenido es autoexplicativo, contiene las siguientes variables de entrada:
     
-    Título del archivo o nombre de la red o proyecto
-    Autor del modelo
-    Fecha de referencia de la modelación
-    Versión del modelo: puede usar números o texto: máxima demanda, mínimo nocturno, etc
-    Viscosidad cinemática en [m2/s] a usar en cálculos de pérdidas
-    Desbalance de caudales como presición de las iteraciones
-    Número de iteraciones permitidas para usar como parámetro de parada
-    Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
-    Factor de variación horaria global
-    Nudos de carga fija: Lista de nudos con: id, Elevación topográfica [m], Carga hidráulica [m], hmax [m], Volumen[m3]
-    Nudos de demanda: Lista de nudos con: id, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo, Ecuacion_emisor
-    Tramos: Lista de objetos tipo línea, con: id, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones, Estado 
-    Los tipos de tramo pueden ser: TB=tubo simple, BO=Bomba, VS=Válvula sostenedora, VR=Válvula reductora, CK=Válvula de retención
-    Curvas de demanda: una lista de los patrones de demanda a usar en la ejecución de tiempo extendido
+     - Título del archivo o nombre de la red o proyecto
+     - Autor del modelo
+     - Fecha de referencia de la modelación
+     - Versión del modelo: puede usar números o texto: máxima demanda, mínimo nocturno, etc
+     - Viscosidad cinemática en [m2/s] a usar en cálculos de pérdidas
+     - Desbalance de caudales como presición de las iteraciones
+     - Número de iteraciones permitidas para usar como parámetro de parada
+     - Ecuación a usar para f: S=Swamee-Jain  C=Colebrook-White
+     - Factor de variación horaria global
+     - Nudos de carga fija: Lista de nudos con: id, Elevación topográfica [m], Carga hidráulica [m], hmax [m], Volumen[m3]
+     - Nudos de demanda: Lista de nudos con: id, Elevación topográfica [m], Demanda [l/s], Factor de demanda del nudo, Ecuacion_emisor
+     - Tramos: Lista de objetos tipo línea, con: id, Desde nudo, Hasta nudo, Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo de tramo, Opciones, Estado 
+     - Los tipos de tramo pueden ser: TS=tubo simple, BO=Bomba, VS=Válvula sostenedora, VR=Válvula reductora, CK=Válvula de retención
+     - Curvas de demanda: una lista de los patrones de demanda a usar en la ejecución de tiempo extendido
 
 
 - Tipos de nudo: 
-  - NC: Nudos de carga fija. Representan tanques o embalses. Actualmente son indiferentes porque no hay corridas de tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (Tanque o Emisor) el tipo Emisor no está implementado. En el tipo Tanque hay que agregar las características: volumen,aŕea, altura
+  - NC: Nudos de carga fija. Representan tanques o embalses. La diferencia radica en que por su gran área, los embalses tienen una variación de nivel nula en el tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (Tanque o Emisor). En el tipo Tanque hay que agregar las características: volumen,aŕea, altura
   - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda, curva de demanda.  Este tipo de nudo se usa para representar fuentes de producción como toma, manantial, asignando una demanda negativa [l/S]
 <br>
 - Tipos de tramo: 
-  - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Estado TA= Tubería Abierta, TC= Tubería Cerrada, Opciones (no tiene)
-  - Válvula de control: Puede ser una válvula reductora de presión VR o una válvula sostenedora de presión VS. Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, Tipo VS= Válvula Sostenedora, VR= Válvula Reductora, Consigna [m] 
+  - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo TS= Tubería Simple , Opciones (no tiene), estado =1/0 
+  - Válvula de control: Puede ser una válvula reductora de presión VR, una válvula sostenedora de presión VS o una válvula reguladora de caudal VQ. Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, Tipo VS/ VR= Válvula Reductora VQ, Consigna [m] 
   - Bomba en un tramo de tubería: Los datos requeridos son: número de tramo, Desde y Hasta, Longitud de la cachera [m], Diámetro [mm], Ks [mm], KL, BO = Bomba, Coeficientes de la curva: alfa, beta, gama
+  - Tramos con válvula Check.  Requiere los mismos datos de una tubería normal.  La diferencia es que el tramo check se cierras o desconecta si el flujo va en la dirección contraria a la estipulada con los valores Desde y Hasta.
 <br>
 - Tipos de corrida:
   - quiet o silencioso: muestra únicamente los valores de las tablas de cargas en los nodos y los caudales en los tramos de la última iteración 
@@ -306,13 +319,14 @@ El archivo está en formato JSON, por lo que su contenido es autoexplicativo, co
 - Direccionamiento de la salida:
   - salida estandard a ternminal: STDOUT
   - salida a archivo, cuya extensión será de acuerdo al formato de salida elegido.  Por defecto la salida de archivos va dirigida a ./output/
+  - También es posible dirigir la salida a un archivo por medio de pipes
 <br>
 
 ### Estado Actual y en desarrollo
 El programa está siendo codificado en Python3 a partir de una implementación inicial hecha en PHP, ubicada en https://hid.segundafundacion.com/mgh/mgh.html <br>
-Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa de pruebas.<br>
+Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa de implementación y pruebas.<br>
   
-- Lectura de archivo de entrada tipo CSV &#10003;
+- Lectura de archivo de entrada tipo JSON (antes usaba CSV) &#10003;
 - Funciones hidráulicas: Áreas, velocidades, Reynolds, Pérdidas hf y hL  &#10003;
 - Cálculo de f por el método de Swamee-Jain &#10003;
 - Cálculo de f por el método de Colebrook-White &#10003;  
@@ -322,10 +336,11 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
 - Algoritmo de cálculo de Hi y Qi por iteración &#10003;
 - Inclusión de accesorios especiales: 
    - Válvula Sostenedora `VS`, Válvula Reductora `VR`, Bomba `BO` &#10003; 
-   - Tubería Cerrada `TC`, Válvula de retención o Check `CK` &#10003;
+   - Tubería Cerrada `estado=0`, Válvula de retención o Check `CK` &#10003;
    - Válvula limitadora de caudal `VQ` &#10007;
-   - Nudos tipo Embalse o Reservorio `RE`, Tanque `TQ`, Emisor `EM`, Fuente `FU` &#128269;
-   - Nudos de demanda con capacidad de "aportar" caudal para modelar nacientes o pozos &#10003;
+   - Tramo tipo emisor  Emisor `EM` &#10007;
+   - Nudos tipo Embalse o Reservorio `RE`, Tanque `TQ` &#128269;
+   - Nudos de demanda con capacidad de "aportar" caudal para modelar nacientes o pozos: Fuente `FU` &#10003;
 - Cálculo de caudal de entrada o salida en nodos de carga fija &#10003;
 - Cambio del campo `Estado` por `tipo` y agregar el espacio `estado` que contemple 1=ON 0=OFF para usarse en tuberías, válvulas y bombas &#10007;
 - Selección de ecuación a usar (S-J ó C-W): &#10003;

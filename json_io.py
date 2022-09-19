@@ -83,18 +83,18 @@ def crea_red(fin):
    d_red["max_iteraciones"]=int(miVar)
    miVar= input("Ecuación para f: C ó S    : ")
    d_red["ecuacion"]= miVar
-   miVar= input("Tolerancia en cálculo de f:")
+   miVar= input("Tolerancia en cálculo de f: ")
    d_red["tolerancia"]= float(miVar)
    miVar = input("Factor global de demanda  : ")
    d_red["factor_demanda_global"]= float(miVar)
    print("----------------")
    ns = int(input("Cantidad de nodos de carga fija : "))
-   print ("Nudo  Elev Carga ")
+   print ("Nudo: Elevación,Carga,Hmax,Volumen")
    nc=[] 
    for i in range(ns):
-      cadena = input(f"{i}   :  ")
+      cadena = input(f"{i} : ")
       lista = cadena.split(",")
-      nc.append({ "id": i, "elevacion": float(lista[0]), "carga":float(lista[1])})
+      nc.append({ "id": i, "elevacion": float(lista[0]), "carga":float(lista[1]), "altura":float(lista[2]), "volumen":float(lista[3])})
       # print(nc)
    d_red["nudos_carga"]= nc
    # print(d_red)
@@ -102,7 +102,7 @@ def crea_red(fin):
    # x = input("Pausa, pulse <enter>")
    print("----------------")
    n = int(input("Cantidad de nodos de demanda : "))
-   print ("Nudo Elev Demanda Factor ") 
+   print ("Nudo: Elevación,Demanda,Factor") 
    for i in range(n):
       cadena = input(f"{i+ns} : ")
       lista = cadena.split(",")
@@ -112,12 +112,12 @@ def crea_red(fin):
    # print(d_red)
    # x = input("Pausa, pulse <enter>")
    t = int(input("Cantidad de tramos : "))
-   print ("Tramo de  a  L  D   Ks  KL Tp  Es Op") 
+   print ("Tramo: de,a,L,D,Ks,KL,Tipo,Estado,Opciones") 
    tr =[]
    for i in range(t):
       cadena = input(f"{i}  :  ")
       lista = cadena.split(",")
-      tr.append({ "id": i, "desde": int(lista[0]), "hasta": int(lista[1]), "longitud": float(lista[2]), "diametro": float(lista[3]), "ks":float(lista[4]), "kL": float(lista[5]), "tipo": lista[6], "opciones": lista[8], "estado":lista[7] })  
+      tr.append({ "id": i, "desde": int(lista[0]), "hasta": int(lista[1]), "longitud": float(lista[2]), "diametro": float(lista[3]), "ks":float(lista[4]), "kL": float(lista[5]), "tipo": lista[6], "opciones": lista[8], "estado":int(lista[7]) })  
    d_red["tramos"]= tr
    d_red["signature"]="#EOF- crcs-2022"
    #print(d_red)

@@ -101,12 +101,16 @@ def reA11(a,q,t):
     return mat
     
 ##### estas funciones están en edición
-def construir_A1(alfa,q,t):
+def construir_A1(alfa,q,t,tp,op):
    # devuelve una nueva matriz A11I -> sin los valores beta y gama
    m=np.zeros([t,t],dtype=float)
    for i in range(t):
        m[i,i]=alfa[i]*q[i]
        #print("m[i,i],alfa[i],Q[i] ",m[i,i],alfa[i],q[i])
+       if tp[i]=="EM":
+          valores=op[i].split()
+          kv=float(valores[0])
+          m[i,i]=m[i,i]+(1/kv**2)*q[i]
    return m
 
 def construir_A(a11,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns):  

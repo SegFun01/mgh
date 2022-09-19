@@ -251,8 +251,8 @@ for i in range(0,ns):
 for i in range(ns,n+ns):
     qi[i-ns]=(q[i]/1000*factor*fi[i-ns]) # iniciar matriz demandas en nudos   
 for i in range(t):
-    if tp[i]=="EM":
-       N[i,i]=float(op[i])
+    #if tp[i]=="EM":
+    #   N[i,i]=float(op[i])  op tiene 2 valores Kv y gama, hay que hacer un split 
     for j in range(ns):
         if de[i]==j and es[i]==1:
             C[i,j]=-1                  # iniciar matriz topológica de cargas fijas nudo de salida=-1
@@ -273,7 +273,7 @@ for i in range(t):
     hm[i]=hid.hme(km[i],v[i])                # iniciar matriz pérdidas locales 
     alfa[i]=hid.alf(hf[i]+hm[i],Q[i])        # Iniciar matriz de alfas
 BT = np.transpose(B)                         # iniciar matriz B transpuesta
-A1= hid.construir_A1(alfa,Q,t)               #iniciar matriz A'
+A1= hid.construir_A1(alfa,Q,t,tp,op)               #iniciar matriz A'
 A = hid.construir_A(A1,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns) # iniciar matriz A       
 #---------->>>>>>>>>> Check de matrices:   comentar
 #io.matrices_check(Ho,qi,H,Q,B,BT,C,I,N,At,v,Re,f,hf,hm,alfa,A,A1)
@@ -553,8 +553,7 @@ if modo == "-v":                                        # modo de impresión det
 
 # Inicia el proceso de iteración
 #-------------------------------
-dqT, it = 1000, 0  
-                                      # Se define dqT en 1000 e it en 0 para iniciar iteraciones
+dqT, it = 1000, 0                                       # Se define dqT en 1000 e it en 0 para iniciar iteraciones
 while dqT > imbalance and it < MaxIt:
   calcula_Hi_Qi()
   dq= np.subtract(Qi,Q)                                  # determina vector de desbalances de caudales en los nodos
@@ -565,7 +564,7 @@ while dqT > imbalance and it < MaxIt:
   H = Hi
   qfi = hid.caudal_nudos_carga_fija(Q,nn,de,a,ns,t)      # calcula el caudal de los nudos de carga fija
   recalcular_alfa()                                      # con los nuevos Q vuelve a calcular v, Re, f, hf, hm y alfa
-  A1= hid.construir_A1(alfa,Q,t)                         # vuelve a reconstruir la matriz alfa [A']   
+  A1= hid.construir_A1(alfa,Q,t,tp,op)                         # vuelve a reconstruir la matriz alfa [A']   
   A = hid.construir_A(A1,t,tp,op,e,de,a,hf,hm,H,Q,modo,ns)  # vuelve a reconstruir la matriz alfa [A]   
   if modo == "-v":       # modo de impresión detallado
      print("")

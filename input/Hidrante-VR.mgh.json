@@ -1,0 +1,117 @@
+{
+    "titulo": "Red con hidrante y reductora",
+    "autor": "Carlos Camacho Soto",
+    "fecha": "19-SET-2022",
+    "version": "19-SET-2022",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 40,
+    "ecuacion": "C",
+    "tolerancia": 1e-05,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 120.0,
+            "carga": 130.0,
+            "altura": 10.0,
+            "volumen": 5000.0
+        },
+        {
+            "id": 1,
+            "elevacion": 55.0,
+            "carga": 55.0,
+            "altura": 0.0,
+            "volumen": 0.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 55.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        },
+        {
+            "id": 3,
+            "elevacion": 5.0,
+            "demanda": 7.5,
+            "factor": 1.0
+        },
+        {
+            "id": 4,
+            "elevacion": 5.0,
+            "demanda": 7.5,
+            "factor": 1.0
+        },
+        {
+            "id": 5,
+            "elevacion": 5.0,
+            "demanda": 5.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 500.0,
+            "diametro": 150.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "tipo": "TS",
+            "opciones": "-",
+            "estado": 1
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 1,
+            "longitud": 2.0,
+            "diametro": 75.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "tipo": "EM",
+            "opciones": "5.741E-3 0.5",
+            "estado": 1
+        },
+        {
+            "id": 2,
+            "desde": 2,
+            "hasta": 3,
+            "longitud": 500.0,
+            "diametro": 150.0,
+            "ks": 0.0015,
+            "kL": 2.0,
+            "tipo": "VR",
+            "opciones": "30",
+            "estado": 1
+        },
+        {
+            "id": 3,
+            "desde": 3,
+            "hasta": 5,
+            "longitud": 200.0,
+            "diametro": 100.0,
+            "ks": 0.045,
+            "kL": 2.0,
+            "tipo": "TS",
+            "opciones": "-",
+            "estado": 1
+        },
+        {
+            "id": 4,
+            "desde": 3,
+            "hasta": 4,
+            "longitud": 200.0,
+            "diametro": 100.0,
+            "ks": 0.045,
+            "kL": 2.0,
+            "tipo": "TS",
+            "opciones": "-",
+            "estado": 1
+        }
+    ],
+    "signature": "#EOF- crcs-2022"
+}

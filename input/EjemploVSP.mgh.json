@@ -20,13 +20,13 @@
         {
             "id": 1,
             "elevacion": 70.0,
-            "demanda": 20.0,
+            "demanda": 10.0,
             "factor": 1.0
         },
         {
             "id": 2,
             "elevacion": 70.0,
-            "demanda": 20.0,
+            "demanda": 10.0,
             "factor": 1.0
         },
         {
@@ -38,19 +38,19 @@
         {
             "id": 4,
             "elevacion": 40.0,
-            "demanda": 30.0,
+            "demanda": 40.0,
             "factor": 1.0
         },
         {
             "id": 5,
             "elevacion": 40.0,
-            "demanda": 20.0,
+            "demanda": 40.0,
             "factor": 1.0
         },
         {
             "id": 6,
             "elevacion": 40.0,
-            "demanda": 10.0,
+            "demanda": 50.0,
             "factor": 1.0
         }
     ],
