@@ -272,73 +272,76 @@ def crea_red():
    tp=[]  # tipo de tramo
    op= []   # opciones del tramo: presión de ajuste, alfa,beta,gama de la bomba
    fi= []   # factores de variación horaria de cada nudo de demanda
+
+   d_red = {}
    print("------> METODO DEL GRADIENTE HIDRÁULICO <-------")
    print("     Construcción de red en modo interactivo")
    print("-------------------------------------------------")
    fin = input("Escriba el nombre del archivo de entrada a crear: ")
    fin = input_check(fin)
+   fin=fin+".json"
    print("-----")
-   titulo = input("Título de la red a modelar: ")
-   autor  = input("Autor del modelo          : ")
-   fecha  = input("Fecha                     : ")
+   miVar = input("Título de la red a modelar: ")
+   d_red["titulo"]=miVar
+   miVar  = input("Autor del modelo          : ")
+   d_red["autor"]=miVar
+   miVar  = input("Fecha                     : ")
+   d_red["fecha"]=miVar
    version = input("Versión de corrida        : ")
-   viscosidad = input("Viscosidad cinemática     : ")
-   imbalance = input("Desbalance de Q aceptado  : ")
-   MaxIt = input("Iteraciones permitidas    : ")
-   ecuacion= input("Ecuación para f: C ó S    : ")
-   factor_global = input("Factor global de demanda  : ")
+   d_red["version"]= miVar
+   miVar = input("Viscosidad cinemática     : ")
+   d_red["viscosidad"]=float(miVar)
+   miVar = input("Desbalance de Q aceptado  : ")
+   d_red["imbalance"]=float(miVar)
+   miVar = input("Iteraciones permitidas    : ")
+   d_red["max_iteraciones"]=int(miVar)
+   miVar= input("Ecuación para f: C ó S    : ")
+   d_red["ecuacion"]= miVar
+   miVar= input("Tolerancia en cálculo de f: ")
+   d_red["tolerancia"]= float(miVar)
+   miVar = input("Factor global de demanda  : ")
+   d_red["factor_demanda_global"]= float(miVar)
    print("----------------")
    ns = int(input("Cantidad de nodos de carga fija : "))
-   print ("Nudo  Elev Carga ") 
+   print ("Nudo: Elevación,Carga,Hmax,Volumen")
+   nc=[] 
    for i in range(ns):
-      cadena = input(f"{i}   :  ")
-      lista = cadena.split()
-      nn.append(i)
-      e.append(lista[0])
-      q.append(lista[1])
+      cadena = input(f"{i} : ")
+      lista = cadena.split(",")
+      nc.append({ "id": i, "elevacion": float(lista[0]), "carga":float(lista[1]), "altura":float(lista[2]), "volumen":float(lista[3])})
+      # print(nc)
+   d_red["nudos_carga"]= nc
+   # print(d_red)
+   nd = []
+   # x = input("Pausa, pulse <enter>")
    print("----------------")
    n = int(input("Cantidad de nodos de demanda : "))
-   print ("Nudo Elev Demanda Factor ") 
+   print ("Nudo: Elevación,Demanda,Factor") 
    for i in range(n):
       cadena = input(f"{i+ns} : ")
-      lista = cadena.split()
-      nn.append(i+ns)
-      e.append(lista[0])
-      q.append(lista[1])
-      fi.append(lista[2])
+      lista = cadena.split(",")
+      nd.append({ "id": i+ns, "elevacion": float(lista[0]), "demanda": float(lista[1]), "factor": float(lista[2]) }) 
+      # print(nd)
+   d_red["nudos_demanda"]= nd 
+   # print(d_red)
+   # x = input("Pausa, pulse <enter>")
    t = int(input("Cantidad de tramos : "))
-   print ("Tramo de  a  L  D   Ks  KL Tp Op Es") 
+   print ("Tramo: de,a,L,D,Ks,KL,Tipo,Estado,Opciones") 
+   tr =[]
    for i in range(t):
       cadena = input(f"{i}  :  ")
-      lista = cadena.split()
-      nt.append(i)
-      de.append(lista[0])
-      a.append(lista[1])
-      l.append(lista[2])
-      d.append(lista[3])
-      ks.append(lista[4])    
-      km.append(lista[5])    
-      es.append(lista[8])    
-      op.append(lista[7])
-      tp.append(lista[6])
-   # Saving the reference of the standard output
-   original_stdout = sys.stdout    
-   with open(fin, 'w') as arch:
-      sys.stdout = arch 
-      print(f"{titulo}")
-      print(f"{autor}")
-      print(f"{fecha}")
-      print(f"{version}")
-      print(f"{viscosidad}, {imbalance}, {MaxIt}, {ecuacion}")
-      print(f"{ns}, {n}, {t}, {factor_global} ")
-      for i in range(ns):
-         print(f"{nn[i]}, {e[i]}, {q[i]}, * ")
-      for i in range(n):
-         print(f"{nn[i+ns]}, {e[i+ns]}, {q[i+ns]}, {fi[i]} ")
-      for i in range(t):
-         print(f"{nt[i]}, {de[i]}, {a[i]}, {l[i]}, {d[i]}, {ks[i]}, {km[i]}, {tp[i]}, {op[i]} {es[i]}")
-      print("EOF - crcs-2022")            
-      # Reset the standard output
-      sys.stdout = original_stdout 
+      lista = cadena.split(",")
+      tr.append({ "id": i, "desde": int(lista[0]), "hasta": int(lista[1]), "longitud": float(lista[2]), "diametro": float(lista[3]), "ks":float(lista[4]), "kL": float(lista[5]), "tipo": lista[6], "opciones": lista[8], "estado":int(lista[7]) })  
+   d_red["tramos"]= tr
+   d_red["signature"]="#EOF- crcs-2022"
+   #print(d_red)
+   print("")
+   # Serializing json
+   json_red = json.dumps(d_red, indent=4)
+   # x = input("Pausa, pulse <enter>")
+   # print(json_red)
+   # Writing to sample.json
+   with open(fin, "w") as outfile:
+      outfile.write(json_red)
    return fin
 

@@ -1,0 +1,63 @@
+{
+    "titulo": "Borrar",
+    "autor": "yo",
+    "fecha": "1",
+    "version": "1",
+    "viscosidad": 1.007e-06,
+    "imbalance": 1e-05,
+    "max_iteraciones": 50,
+    "ecuacion": "S",
+    "tolerancia": 1e-05,
+    "factor_demanda_global": 1.0,
+    "nudos_carga": [
+        {
+            "id": 0,
+            "elevacion": 100.0,
+            "carga": 110.0,
+            "altura": 10.0,
+            "volumen": 5000.0
+        },
+        {
+            "id": 1,
+            "elevacion": 50.0,
+            "carga": 50.0,
+            "altura": 0.0,
+            "volumen": 0.0
+        }
+    ],
+    "nudos_demanda": [
+        {
+            "id": 2,
+            "elevacion": 50.0,
+            "demanda": 20.0,
+            "factor": 1.0
+        }
+    ],
+    "tramos": [
+        {
+            "id": 0,
+            "desde": 0,
+            "hasta": 2,
+            "longitud": 500.0,
+            "diametro": 200.0,
+            "ks": 0.045,
+            "kL": 5.0,
+            "tipo": "TS",
+            "opciones": "-",
+            "estado": 1
+        },
+        {
+            "id": 1,
+            "desde": 2,
+            "hasta": 1,
+            "longitud": 1.0,
+            "diametro": 100.0,
+            "ks": 0.0015,
+            "kL": 0.0,
+            "tipo": "EM",
+            "opciones": "5.741E-3 0.5",
+            "estado": 1
+        }
+    ],
+    "signature": "#EOF- crcs-2022"
+}

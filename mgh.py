@@ -121,7 +121,7 @@ def leer_json(fin):
        tp.append(i.get('tipo'))
 
 #---------->>>>>>>>>> Carga de datos desde archivo JSON,    CSV deprecado
-def asigna_modo(opcn):
+def asigna_modo(opcn):     # función para definir el modo de ejecución del programa 
    if "q" in opcn:
       modo="-q"
    elif "v" in opcn:
@@ -130,7 +130,7 @@ def asigna_modo(opcn):
       modo="-n"
    return modo
 
-def asigna_fmt(opcn):
+def asigna_fmt(opcn):      # función para definir el formato de salida: JSON, CSV ó TXT
    if "j" in opcn:
       fmt="-j"
    elif "c" in opcn:
@@ -139,14 +139,14 @@ def asigna_fmt(opcn):
       fmt="-t"
    return fmt
 
-def asigna_dstn(opcn):
+def asigna_dstn(opcn):     # escoger el medio de salida: terminal o archivo
    if "f" in opcn:
       dstn="-f"
    else:
       dstn="-s"
    return dstn
 
-def asigna_inter(opcn):
+def asigna_inter(opcn):    # define si se ingresa en modo interactivo
    if "i" in opcn:
       inter=True
    else:

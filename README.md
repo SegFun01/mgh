@@ -138,7 +138,7 @@ El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la f
       	"autor": "Carlos Camacho Soto",
       	"fecha": "28/01/2019",
       	"version": "v0.0.1",
-      	"descripcion": "AnoTSr datos sobre el modelo, corrida, objetivo, etc",
+      	"descripcion": "Anotar datos sobre el modelo, corrida, objetivo, etc",
       	"viscosidad": 1.007E-6,
       	"imbalance": 1E-5,
       	"max_iteraciones": 40,
