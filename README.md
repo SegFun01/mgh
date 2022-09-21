@@ -296,8 +296,11 @@ El archivo está en formato JSON, por lo que su contenido es autoexplicativo, co
 
 
 - Tipos de nudo: 
-  - NC: Nudos de carga fija. Representan tanques o embalses. La diferencia radica en que por su gran área, los embalses tienen una variación de nivel nula en el tiempo extendido. Los datos requeridos son: número de nudo, elevación [m], carga [m], tipo (Tanque o Emisor). En el tipo Tanque hay que agregar las características: volumen,aŕea, altura
-  - ND: Nudos de demanda. Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda, curva de demanda.  Este tipo de nudo se usa para representar fuentes de producción como toma, manantial, asignando una demanda negativa [l/S]
+  - **Nudos de carga fija**: Representan tanques o embalses y salidas de los emisores. La diferencia entre un tanque y un embalse es su área, por su gran área los embalses tienen una variación de nivel nula en el tiempo extendido.  Los datos requeridos en cada tipo de nudo de carga fija se listan seguidamente:    
+  		- Tanque:  Los datos requeridos son: número de nudo, elevación [m], carga [m], altura [m] (esta altura corresponde al nivel de rebalse del tanque), volumen [m3]    
+		- Embalse:  Los datos son los mismos del nudo tipo tanque, sin embargo, en el espacio de volumen se debe consignar un valor muy grande de modo que la variación de nivel en tiempo extendido sea nula, como por ejemplo: { "altura": 1, "volumen": 1.0E9 }    
+  		- Emisor:  Un nudo tipo emisor deberá tener una carga igual a la altura topográfica, de modo que la presión sea cero. Además no requiere los valores de altura y volumen, por congruencia en las matrices puede asignar cualquier valor, preferiblemente un volumen muy grande y una altura muy pequeña, como por ejemplo: { "altura": 1, "volumen": 1.0E9 }   
+  - **Nudos de demanda**: Representan puntos de la red donde hay consumo y por lo tanto presión dependiente de la demanda. Los datos requeridos son: número de nudo, elevación [m], demanda [l/s], factor de demanda, curva de demanda.  Este tipo de nudo se usa para representar fuentes de producción como toma, manantial, asignando una demanda negativa [l/S]
 <br>
 - Tipos de tramo: 
   - Tramo de tubería: Representan un tramo normal de tubo que puede estar cerrado o abierto. Los datos requeridos son: número de tramo, Desde y Hasta (topología de red), Longitud [m], Diámetro [mm], Ks [mm], KL, Tipo TS= Tubería Simple , Opciones (no tiene), estado =1/0 
@@ -459,7 +462,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
       python3 mgh.py default.mgh -vf
       python3 mgh.py default -nts  
       python3 mgh.py ./input/default.mgh.json -qc
-      python3 mgh.py -i
+      python3 mgh.py NombreArchivo -i
     
     
 
