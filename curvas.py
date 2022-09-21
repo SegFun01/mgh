@@ -1,8 +1,13 @@
 ###### LEER LOS DATOS DEL LA RED DESDE UN ARCHIVO DE JSON 
 import json
 
+duracion=24
+hora=8
+dow=3
+mes=3
 curvas=[]
-
+q0=[10.0,15.0,10.0,15.0,10.0,15.0]
+qi=[10.0,15.0,10.0,15.0,10.0,15.0]
 def get_curva():
     m_curva=[]
     with open('./input/curvas.json','r') as curvas:
@@ -14,7 +19,17 @@ def get_curva():
     return m_curva
     
 curvas=get_curva()
-print("Curvas")
-print(curvas)
-for i in range(len(curvas)):
-   print(f"{i} {curvas[i]}")
+
+for i in range(duracion):
+   fvh = curvas[0][hora]
+   fdow = curvas[4][dow]
+   fm = curvas[5][mes]
+   for j in range(len(q0)):
+      qi[j]=round(fvh*fdow*fm*q0[j],2)
+   print(f"{i} hora:{hora} dow:{dow}  q:{qi}")
+   hora = (hora + 1) % 24
+   if hora==0:
+      dow = (dow +1) % 7    
+   
+   
+   
