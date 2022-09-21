@@ -16,4 +16,5 @@ def get_curva():
 curvas=get_curva()
 print("Curvas")
 print(curvas)
-
+for i in len(curvas):
+   print(f"{i} {curvas[i]}")
