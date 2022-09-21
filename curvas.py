@@ -7,7 +7,7 @@ def get_curva(c_id):
     curva=[]
     with open('./input/curvas.json','r') as curvas:
        j_curvas = json.load(curvas)
-    curva=i.get(c_id)
+    curva=j_curvas.get(c_id)
     return curva
     
 x=input("Seleccione el id de la curva: ")
