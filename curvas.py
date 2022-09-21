@@ -1,20 +1,18 @@
 ###### LEER LOS DATOS DEL LA RED DESDE UN ARCHIVO DE JSON 
 import json
 
-curva1=[]
+curvas=[]
 
-def get_curva(c_id):
-    curva=[]
+def get_curva():
+    m_curva=[]
     with open('./input/curvas.json','r') as curvas:
        j_curvas = json.load(curvas)
     d_curvas=j_curvas.get('curvas')
-    curva= d_curvas.get(c_id)
-    return curva
+    for i in d_curvas:   
+      m_curva.append(d_curvas.get(c_id))
+    return m_curva
     
-x=input("Seleccione el id de la curva: ")
-curva1=get_curva(x)
-print("Curva 1")
-print(curva1)
-print("")
-print(f"Un sdolo dato, en [5]: f={curva1[5]}")
+curvas=get_curva()
+print("Curvas")
+print(curvas)
 
