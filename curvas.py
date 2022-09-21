@@ -5,7 +5,7 @@ curva1=[]
 
 def get_curva(c_id):
     curva=[]
-    with open('curvas.json','r') as curvas:
+    with open('./input/curvas.json','r') as curvas:
        j_curvas = json.load(curvas)
     curva=i.get(c_id)
     return curva
