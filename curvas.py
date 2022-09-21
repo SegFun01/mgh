@@ -8,8 +8,9 @@ def get_curva():
     with open('./input/curvas.json','r') as curvas:
        j_curvas = json.load(curvas)
     d_curvas=j_curvas.get('curvas')
-    for i in d_curvas:   
-      m_curva.append(d_curvas.get(c_id))
+    for i in d_curvas.keys(): 
+      x=d_curvas.get(i)  
+      m_curva.append(x)
     return m_curva
     
 curvas=get_curva()
