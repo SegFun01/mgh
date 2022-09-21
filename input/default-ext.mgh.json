@@ -1,0 +1,185 @@
+{
+	"titulo": "Ejemplo de libro para pruebas de tiempo extendido",
+	"autor": "Carlos Camacho Soto",
+	"fecha": "28/01/2019",
+	"version": "v0.0.1",
+	"descripcion": "Combinar esta red con VR, BO, EM, CK, VS",
+	"viscosidad": 1.007E-6,
+	"imbalance": 1.00E-5,
+	"max_iteraciones": 40,
+	"ecuacion": "S",
+	"tolerancia": 1.0E-5,
+	"factor_demanda_global": 1.0,
+	"duracion": 24,
+	"mes": 9,
+	"dia": 1,
+	"dow": 1,
+	"hora": 8,
+	"nudos_carga": [{
+		"id": 0,
+		"elevacion": 100,
+		"carga": 110,
+		"volumen": 5000,
+		"altura": 5.45
+	}],
+	"nudos_demanda": [{
+			"id": 1,
+			"elevacion": 90,
+			"demanda": 60,
+			"factor": 1.0,
+			"curvas": {"a": 1, "b":4, "c": 1, "d":7}
+		},
+		{
+			"id": 2,
+			"elevacion": 90,
+			"demanda": 40,
+			"factor": 1.0,
+			"curvas": {"a": 1, "b":4, "c": 1, "d":7}
+		},
+		{
+			"id": 3,
+			"elevacion": 90,
+			"demanda": 30,
+			"factor": 1.0,
+			"curvas": {"a": 1, "b":4, "c": 1, "d":7}
+		},
+		{
+			"id": 4,
+			"elevacion": 90,
+			"demanda": 30,
+            "factor": 1.0,
+			"curvas": {"a": 1, "b":4, "c": 1, "d":7}
+		},
+		{
+			"id": 5,
+			"elevacion": 90,
+			"demanda": 40,
+			"factor": 1.0,
+			"curvas": {"a": 1, "b":4, "c": 1, "d":7}
+		}
+	],
+	"tramos": [{
+			"id": 0,
+			"desde": 0,
+			"hasta": 1,
+			"longitud": 500,
+			"diametro": 250,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 1,
+			"desde": 1,
+			"hasta": 2,
+			"longitud": 400,
+			"diametro": 150,
+			"ks": 0.0015,
+			"kL": 10,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 2,
+			"desde": 3,
+			"hasta": 2,
+			"longitud": 200,
+			"diametro": 100,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 3,
+			"desde": 4,
+			"hasta": 3,
+			"longitud": 400,
+			"diametro": 150,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 4,
+			"desde": 1,
+			"hasta": 4,
+			"longitud": 200,
+			"diametro": 100,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 5,
+			"desde": 5,
+			"hasta": 4,
+			"longitud": 600,
+			"diametro": 200,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		},
+		{
+			"id": 6,
+			"desde": 0,
+			"hasta": 5,
+			"longitud": 300,
+			"diametro": 250,
+			"ks": 0.0015,
+			"kL": 0,
+			"tipo": "TS",
+			"opciones": "-",
+			"estado": 1
+		}
+	],
+	"curvas": [
+		{
+			"id": 1,
+			"nombre": "Curva de demanda genérica 1",
+			"curva": [0.53,	0.56, 0.59, 0.62, 0.66, 0.74, 1.06, 1.38, 1.53, 1.68, 1.48, 1.29, 1.21, 1.14, 1.11, 1.09, 1.07, 1.04, 1.01, 0.99, 0.94, 0.89, 0.76, 0.63]
+		},
+		{
+			"id": 2,
+			"nombre": "Curva de demanda genérica 2",
+			"curva": [0.56, 0.59, 0.62, 0.66, 0.74, 1.06, 1.38, 1.53, 1.68, 1.48, 1.29, 1.21, 1.14, 1.11, 1.09, 1.07, 1.04, 1.01, 0.99, 0.94, 0.89, 0.76, 0.63, 0.53]
+		},
+		{
+			"id": 3,
+			"nombre": "Curva de demanda genérica 3",
+			"curva": [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,1.87,1.87,1.87, 1.87, 1.87, 1.87, 1.87, 1.87, 1.87, 1.87, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]	
+		},
+		{
+			"id": 4,
+			"nombre": "Curva de variacion de producción según estado operativo",
+			"curva": [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+		},
+		{
+		    "id": 5,
+		    "nombre": "Curva de variacion según dia de la semana",
+		    "curva": [0.95, 1.0, 1.05, 1.0, 0.9, 1.10, 1.0 ]
+	    },
+		{
+		    "id": 6,
+		    "nombre": "Curva de variacion según mes del año",
+		    "curva": [0.95, 1.05, 1.15, 1.2, 1.1, 1.0, 1.0, 0.95, 0.9, 0.85, 0.9, 0.95]
+	    },
+		{
+		    "id": 7,
+		    "nombre": "Curva de variacion constante o nula",
+		    "curva": [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.1, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+	    }
+    ]
+}
+
+
