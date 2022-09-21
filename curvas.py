@@ -14,5 +14,5 @@ x=input("Seleccione el id de la curva: ")
 curva1=get_curva(x)
 print("Curva 1")
 print(curva1)
-print(f"Un sdolo dato, en [5]: f={curva1[5]}")
+# print(f"Un sdolo dato, en [5]: f={curva1[5]}")
 
