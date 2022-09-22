@@ -1,4 +1,4 @@
-###### LEER LOS DATOS DEL LA RED DESDE UN ARCHIVO DE JSON 
+###### leer los datos de las curvas y usarlos para calcular caudales
 import json
 
 duracion=24
@@ -26,7 +26,8 @@ for i in range(duracion):
    fm = curvas[5][mes]
    for j in range(len(q0)):
       qi[j]=round(fvh*fdow*fm*q0[j],2)
-   print(f"{i} hora:{hora} dow:{dow}  q:{qi}")
+   print(f"{qi}")
+   #print(f"{i} hora:{hora} dow:{dow} fvh:{fvh} fdow:{fdow} fvm:{fm} q:{qi}")
    hora = (hora + 1) % 24
    if hora==0:
       dow = (dow +1) % 7    
