@@ -27,7 +27,7 @@ Se puede descargar directamente de GitHub, mediante:<br>
 `git clone https://github.com/SegFun01/mgh.git`
 
 Además, puede obtener un archivo comprimido desde: <br>
-`https://github.com/SegFun01/mgh/archive/refs/heads/main.zip`
+<https://github.com/SegFun01/mgh/archive/refs/heads/main.zip>
 
 ### Requerimientos
 - python3

@@ -12,7 +12,7 @@
 	"factor_demanda_global": 1.0,
 	"duracion": 24,
 	"mes": 9,
-	"dia": 1,
+	"dia": 5,
 	"dow": 1,
 	"hora": 8,
 	"nudos_carga": [{
