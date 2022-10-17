@@ -44,18 +44,24 @@ Requiere de:<br>
 ### Descripción
 
 Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
-El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:
+El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:<br>
+
 $$ \sum_{i=}^{NT_i}Q_{Di}-Q_{ei} = 0 $$
 
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
+
 $$ Q = -2 \frac{\sqrt{2gDh_f} }{\sqrt{l}} A \log \big( \frac{k_s}{3.7D}+\frac{2.51\nu\sqrt{l}}{\sqrt{2gD^3h_f}} \big)$$
 
-En cada tramo toda la energía se consume en pérdidas:
+En cada tramo toda la energía se consume en pérdidas:<br>
+
 $$H_T = h_f +\sum h_L $$
 
 Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:
+
 $$ H_T = \alpha Q^2 + \beta Q + \gamma $$
+
 Por lo tanto &alpha; será:
+
 $$\alpha = \frac{ \big( f \frac{l}{D} + \sum k_L \big) } {2gA^2} $$
 
 ### Definición de variables y matrices
