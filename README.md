@@ -100,7 +100,7 @@ $$ [B^T][Q] = q $$
 
 Estas dos ecuaciones que se requiere resolver en el método, pueden escribirse como:<br>
 
-$$\Big[ \begin{matrix} [A] & [B] \\ [B^T] & [0] \end{matrix} \Big] \Big[ \begin{matrix} [Q] \\ [H] \end{matrix}\Big] = \Big[ \begin{matrix} -[A][H_0] \\  [q] \end{matrix} \Big] $$
+$$ \begin{bmatrix} [A] & [B] \\ [B^T] & [0] \end{bmatrix}  \begin{bmatrix} [Q] \\ [H] \end{bmatrix} =  \begin{bmatrix} -[A][H_0] \\  [q] \end{bmatrix}  $$
 
 La anterior ecuación es no-lineal y debe resolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
@@ -116,7 +116,7 @@ $$ [dH]=[H_{i+1}]-[H_i]$$
 
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
 
-$$\Big[ \begin{matrix} [dQ]\\ [dH] \end{matrix} \Big]= \Big[ \begin{matrix} [N][A] & [B]\\ [B^T] & [0] \end{matrix}\Big]^{-1} \Big[ \begin{matrix} [dE] \\  [dq] \end{matrix} \Big] $$
+$$ \begin{bmatrix} [dQ]\\ [dH] \end{bmatrix} = \begin{bmatrix} [N][A] & [B]\\ [B^T] & [0] \end{bmatrix}^{-1} \begin{bmatrix} [dE] \\  [dq] \end{bmatrix}  $$
 
 Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, las cuales deben resolverse de forma iterativa. De modo que las matrices [H<sub>i+1</sub>] y [Q<sub>i+1</sub>] cuando coverjan tendrán los valores de Caudales en los tramos y Alturas piezométricas en los nodos<br>
 
