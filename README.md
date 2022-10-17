@@ -44,16 +44,16 @@ Requiere de:<br>
 ### Descripción
 
 Inicialmente se asume que la red cumple con una topología de nudo-tramo de forma que toda la demanda se consume en los nudos.  En los tramos el caudal en constante a lo largo de su longitud. Los tanques y embalses tienen carga fija y conocida. Los nudos tienen demanda conocida pero carga desconocida.  El caudal en los tramos es desconocido.<br>
-El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:<br>
-<table border="0"><tr><td><img src="./img/f01.png"></td><td>(1)</td></tr></table><br>
+El método se basa en que existe flujo permanente y se cumple la conservación de energía en los nudos:
+$$ \sum_{i=}^{NT_i}Q_{Di}-Q_{ei} = 0 $$
 Hay una relación no-lineal entre las pérdidas y el caudal en cada tramo, dado por:<br>
-<table border="0"><tr><td><img src="./img/f02.png"></td><td>(2)</td></tr></table><br>
-En cada tramo toda la energía se consume en pérdidas:<br>
-<table border="0"><tr><td><img src="./img/f03.png"></td><td>(3)</td></tr></table><br>
-Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:<br>
-<table border="0"><tr><td><img src="./img/f04.png"></td><td>(4)</td></tr></table><br>
-Por lo tanto &alpha; será:<br>
-<table border="0"><tr><td><img src="./img/f05.png"></td><td>(5)</td></tr></table><br><br>
+$$ Q = -2 \frac{\sqrt{2gDh_f} }{\sqrt{l}} A \log \big( \frac{k_s}{3.7D}+\frac{2.51\nu\sqrt{l}}{\sqrt{2gD^3h_f}} \big)$$
+En cada tramo toda la energía se consume en pérdidas:
+$$H_T = h_f +\sum h_L $$
+Si se consideran las pérdidas locales, bombas o elementos especiales la ecuación de energía de cada tramo se puede escribir como:
+$$ H_T = \alpha Q^2 + \beta Q + \gamma $$
+Por lo tanto &alpha; será:
+$$\alpha = \frac{ \big( f \frac{l}{D} + \sum k_L \big) } {2gA^2} $$
 
 ### Definición de variables y matrices
 
@@ -80,26 +80,39 @@ Por lo tanto &alpha; será:<br>
 - [Qi]: Caudales en los tramos de la iteración actual
   
 <br>
+
 La pérdida de carga en cada tramo de la red, correspondiente a la ecuación de conservación de la energía, es:<br>
-<table border="0"><tr><td><img src="./img/f06.png"></td><td>(6)</td></tr></table>
+$$ [A][Q]+[B][H]= [C][H_0] $$
+
 La ecuación de continuidad de caudal en los nodos está dada por:<br>
-<table border="0"><tr><td><img src="./img/f07.png"> </td><td>(7)</td></tr></table>
+$$ [B^T][Q] = q $$
+
 Las ecuaciones (6) y (7) que se deben resolver en el método, pueden escribirse como:<br>
-<table border="0"><tr><td><img src="./img/f08.png"></td><td>(8)</td></tr></table>
+
+$$\Big[ \begin{matrix} [A] & [B] \\ [B^T] & [0] \end{matrix} \Big] \Big[ \begin{matrix} [Q] \\ [H] \end{matrix}\Big] = \Big[ \begin{matrix} -[A][H_0] \\  [q] \end{matrix} \Big] $$
+
 La anterior ecuación es no-lineal y debe resolverse por medio de un algoritmo de iteración. <br>
 En cada iteración se debe tratar de hacer converger [dE] y [dq] a cero, es decir que el desbalance de energía y de caudal en cada nodo debe converger a cero. [dE] y [dq] están dados por:<br>
-<table border="0"><tr><td><img src="./img/f09.png"></td><td>(9)</td></tr>
-<tr><td><img src="img/f10.png"></td><td>(10)</td></tr></table>
+
+$$ [dE]= [A][Q] + [B][H] + [C][H_0]$$
+$$ [dq] = [B^T][Q]-[q]$$
+
 En los tramos y nudos, la variación del caudal en el tramo y la carga en el nudo entre 2 iteraciones sucesivas está dado por:<br>
-<table border="0"><tr><td><img src="./img/f11.png"></td><td>(11)</td></tr>
-<tr><td><img src="img/f12.png"></td><td>(12)</td></tr></table>
+
+$$ [dQ]=[Q_{i+1}]-[Q_i]$$
+$$ [dH]=[H_{i+1}]-[H_i]$$
+
 Posteriormente, la solución de cada iteración de la red se puede calcularse resolviendo el siguiente sistema de ecuaciones:<br>
-<table border="0"><tr><td><img src="./img/f13.png"></td><td>(13)</td></tr></table>
+
+$$\Big[ \begin{matrix} [dQ]\\ [dH] \end{matrix} \Big]= \Big[ \begin{matrix} [N][A] & [B]\\ [B^T] & [0] \end{matrix}\Big]^{-1} \Big[ \begin{matrix} [dE] \\  [dq] \end{matrix} \Big] $$
+
 Para finalizar, recurriendo a algebra de matrices, la solución a la ecuación (13) está dada por el siguiente par de ecuaciones, las cuales deben resolverse de forma iterativa. De modo que las matrices [H<sub>i+1</sub>] y [Q<sub>i+1</sub>] cuando coverjan tendrán los valores de Caudales en los tramos y Alturas piezométricas en los nodos<br>
-<table border="0"><tr><td><img src="./img/f14.png"></td><td>(14)</td></tr>
-<tr><td><img src="./img/f15.png"></td><td>(15)</td></tr></table>
+
+$$[H_{i+1}]= - \{ [B^T]\big( [N][A1]\big)^{-1}[B]\}^{-1} \times \{ [B^T]\big( [N][A1]\big)^{-1}\big([A][Q_i]+[C][H_0]\big)-\big([B^T][Q_i]-[q]\big)\} $$
+$$[Q_{i+1}]= \{[I]- \big( [N][A1]\big)^{-1}[A]\}[Q_i]-\{ \big( [N][A1]\big)^{-1}\big([B][H_{i+1}]+[C][H_0]\big)\} $$
+
 <br>
-El método iterativo para resolver las ecuaciones (14) y (15) se ilustra en la figura siguiente:  
+El método iterativo para resolver estas dos últimas ecuaciones se ilustra en la figura siguiente:  
    
 - Primero, con los datos del archivo de entrada se construyen las matrices topológicas: [B], [B<sup>T</sup>] y [C]
 - Se asumen valores arbitrarios para la matriz [Q] caudales en los tramos: 0.1 l/s, por ejemplo
