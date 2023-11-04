@@ -99,19 +99,21 @@ def ynormalC(q,d,n,S):
 
   
 """---- PROGRAMA PRINCIPAL ----"""
-
-print("Cálculo de yCrítica y yNormal")
-print("---")
-tipo=input("Seleccione tipo de canal T= Trapezoidal C=Circular : ? ")
+print("---------------------------------------")
+print("     Cálculo de yCrítica y yNormal")
+print("---------------------------------------")
+print("Tipo de canal: ")
+tipo=input("T/t= Trapezoidal C/c=Circular : ? ")
+print("---------------------------------------")
 if tipo.lower()=="c" :
-  print(">>>>>>> Canal Circular <<<<<<<")
+  print(">>>>>>>> Canal Circular <<<<<<<<")
   q= float(input("Caudal [m3/s]  : "))
   d= float(input("Diámetro [m]   : "))
   n= float(input("n de Manning   : "))
   S= float(input("Pendiente [m/m]: "))
   print("---")
-  print(f"yCrítica [m] :{ycriticaC(q,d)}")
-  print(f"yNormal [m]  :{ynormalC(q,d,n,S)}")  
+  print(f"y Crítica [m] :{ycriticaC(q,d)}")
+  print(f"y Normal [m]  :{ynormalC(q,d,n,S)}")  
 else : 
   print(">>>>>>> Canal Trapezoidal <<<<<<<")
   q= float(input("Caudal [m3/s]  : "))
@@ -119,10 +121,10 @@ else :
   z= float(input("Talud (Z)      : "))
   n= float(input("n de Manning   : "))
   S= float(input("Pendiente [m/m]: "))
-  print("---")
-  print(f"yCrítica [m] :{ycriticaT(q,b,z)}")
-  print(f"yNormal [m]  :{ynormalT(q,b,z,n,S)}")
+  print("---------------------------------------")
+  print(f"y Crítica [m] : {ycriticaT(q,b,z)}")
+  print(f"y Normal [m]  : {ynormalT(q,b,z,n,S)}")
 
-print("-----")
+print("---------------------------------------")
 
 #EOF  crcs2023
