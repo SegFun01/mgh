@@ -19,7 +19,7 @@ def funcion_ycT(b,z,y,q):
   return y1
   
 def funcion_ynT(b,z,y,q,n,S):
-  y1=((b*y+z*(y**2))**(5/3))/((b+2*y*(1+z**2))**(2/3))-q*n/(S**0.5)
+  y1=((b*y+z*(y**2))**(5/3))/((b+2*y*(1+z**2)**0.5)**(2/3))-q*n/(S**0.5)
   return y1
 
 def funcion_ycC(d,O,q):
@@ -102,8 +102,8 @@ def ynormalC(q,d,n,S):
 print("---------------------------------------")
 print("     Cálculo de yCrítica y yNormal")
 print("---------------------------------------")
-print("Seleccione tipo de canal ")
-tipo=input("T= Trapezoidal C=Circular : ? ")
+print("Tipo de canal: ")
+tipo=input("T/t= Trapezoidal C/c=Circular : ? ")
 print("---------------------------------------")
 if tipo.lower()=="c" :
   print(">>>>>>>> Canal Circular <<<<<<<<")
