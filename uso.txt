@@ -1,0 +1,24 @@
+                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022             
+-------------------------------------------------------------------------- 
+
+Modo de uso:  python mgh.py nombre_archivo opcion
+                                                                          
+Opciones:                                               
+-n: modo normal, imprime tablas de datos de entrada y salida (DEFAULT)
+-q: modo silencioso, solo imprime los vectores H y Q finales
+-v: modo detallado, imprime tablas de datos de entrada y salida, los vec-
+    tores y matrices y los resultados de cada iteración en TXT 
+-j: formato de salida JSON
+-c: formato de salida CSV
+-t: formato de salida tabular en TXT (DEFAULT)
+-s: direccionamiento de salida a terminal o stdout (DEFAULT)
+-f: direcionamiento de salida a archivo por defecto
+-i: modo interactivo, permite construir y correr la red                                         
+
+Ejemplos:
+  python3 mgh.py ./input/default -njf          
+  python3 mgh.py default.mgh -vf
+  python3 mgh.py default -nts  
+  python3 mgh.py ./input/default.mgh.json -qc
+  python3 mgh.py NombreArchivo -i
+  

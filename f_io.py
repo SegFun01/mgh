@@ -28,6 +28,8 @@ import json
 
 #---------->>>>>>>>> Función que imprime el modo de uso
 def uso():
+   archivo_uso=open("uso.txt")
+   print(archivo_uso.read())
    print("")
    print("                    METODO DEL GRADIENTE HIDRÁULICO              crcs 2022")
    print("--------------------------------------------------------------------------")
@@ -52,6 +54,7 @@ def uso():
    print("  python3 mgh.py ./input/default.mgh -q")
    print("  python3 mgh.py -i")
    print("-------------------------------------------------------------------------")
+
 #----------Fin de uso()
 
 #---------->>>>>>>>>> Función para imprimir los datos de salida en modo quiet
