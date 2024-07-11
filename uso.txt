@@ -12,7 +12,7 @@ Opciones:
 -c: formato de salida CSV
 -t: formato de salida tabular en TXT (DEFAULT)
 -s: direccionamiento de salida a terminal o stdout (DEFAULT)
--f: direcionamiento de salida a archivo por defecto
+-f: direccionamiento de salida a archivo por defecto
 -i: modo interactivo, permite construir y correr la red                                         
 
 Ejemplos:
@@ -21,4 +21,3 @@ Ejemplos:
   python3 mgh.py default -nts  
   python3 mgh.py ./input/default.mgh.json -qc
   python3 mgh.py NombreArchivo -i
-  

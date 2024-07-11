@@ -480,7 +480,7 @@ Actualmente se trabaja en la codificación de ciertas rutinas. Estamos en etapa 
     -c: formato de salida CSV
     -t: formato de salida tabular en TXT (DEFAULT)
     -s: direccionamiento de salida a terminal o stdout (DEFAULT)
-    -f: direcionamiento de salida a archivo por defecto
+    -f: direccionamiento de salida a archivo por defecto
     -i: modo interactivo, permite construir y correr la red                                         
     
     Ejemplos:
